@@ -4,13 +4,17 @@
  */
 
 import Window from './Window'
-import {createContext} from 'vm'
+import {createContext, runInContext} from 'vm'
 
 export default class Browser {
-  _sandbox: Window
+  _sandbox: vm$Context
+  window: Window
 
   constructor() {
-    const sandbox = new Window()
+    const window = new Window()
+
+    // $FlowFixMe - Flow doesn't like the casting type here
+    const sandbox: vm$Context = {window}
 
     createContext(sandbox)
 
@@ -19,5 +23,17 @@ export default class Browser {
       value: sandbox,
       writable: false,
     })
+
+    Object.defineProperty(this, 'window', {
+      enumerable: false,
+      value: window,
+      writable: false,
+    })
+  }
+
+  eval(script: string) {
+    // TODO: figure out how to get return value of script and return it
+    // (wrap script in IIFE that captures return value?)
+    runInContext(script, this._sandbox)
   }
 }
