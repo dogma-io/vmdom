@@ -4,6 +4,19 @@ Lightweight browser implementation for Node's VM.
 
 ## Installation
 
+**npm**
+
+```bash
+npm install vmdom
+```
+
+**yarn**
+
+```bash
+yarn add vmdom
+```
+
+
 ## Usage
 
 ```js
