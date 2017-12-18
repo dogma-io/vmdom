@@ -4,7 +4,7 @@
  */
 
 import Window from './Window'
-import {createContext, runInContext} from 'vm'
+import {createContext, runInContext, Script} from 'vm'
 
 export default class Browser {
   _sandbox: vm$Context
@@ -31,9 +31,14 @@ export default class Browser {
     })
   }
 
-  eval(script: string) {
+  eval(script: string | vm$Script) {
     // TODO: figure out how to get return value of script and return it
     // (wrap script in IIFE that captures return value?)
-    runInContext(script, this._sandbox)
+
+    if (script instanceof Script) {
+      script.runInContext(this._sandbox)
+    } else {
+      runInContext(script, this._sandbox)
+    }
   }
 }

@@ -1,5 +1,6 @@
 import Browser from '../Browser'
 import Window from '../Window'
+import {Script} from 'vm'
 
 describe('Browser', () => {
   let instance
@@ -27,8 +28,14 @@ describe('Browser', () => {
   })
 
   describe('eval()', () => {
-    it('should execute Javascript against sandbox', () => {
+    it('should execute Javascript string against sandbox', () => {
       expect(instance.eval("window.foo = 'bar'")).toBe(undefined)
+      expect(instance.window.foo).toBe('bar')
+    })
+
+    it('should execute vm Script against sandbox', () => {
+      const script = new Script("window.foo = 'bar'")
+      expect(instance.eval(script)).toBe(undefined)
       expect(instance.window.foo).toBe('bar')
     })
   })
