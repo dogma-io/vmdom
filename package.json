@@ -1,0 +1,64 @@
+{
+  "name": "vmdom",
+  "version": "0.0.3",
+  "description": "Lightweight browser implementation for Node's VM.",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "flow && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dogma-io/vmdom.git"
+  },
+  "keywords": [
+    "document",
+    "dom",
+    "machine",
+    "virtual",
+    "vm",
+    "window"
+  ],
+  "author": "Matthew Dahl <https://github.com/dogma-io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dogma-io/vmdom/issues"
+  },
+  "homepage": "https://github.com/dogma-io/vmdom#readme",
+  "devDependencies": {
+    "@babel/core": "7.0.0-beta.35",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.35",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.35",
+    "@babel/preset-env": "7.0.0-beta.35",
+    "@babel/preset-flow": "7.0.0-beta.35",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "21.2.0",
+    "flow-bin": "0.61.0",
+    "jest": "21.2.1"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageReporters": [
+      "json-summary",
+      "lcov"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/jest-setup.js",
+    "testRegex": "/__tests__/.*-test\\.js$"
+  },
+  "dependencies": {
+    "node-fetch": "^1.7.3"
+  }
+}
