@@ -3,6 +3,8 @@
  * @flow
  */
 
+/* global vm$Context, vm$Script */
+
 import Window from './Window'
 import {createContext, runInContext, Script} from 'vm'
 

@@ -4,7 +4,10 @@ import windowOrWorkerGlobalScopeMixin from '../WindowOrWorkerGlobalScope'
 import fetch from 'node-fetch'
 
 class Superclass {}
-const WindowOrWorkerGlobalScopeClass = windowOrWorkerGlobalScopeMixin(Superclass)
+
+const WindowOrWorkerGlobalScopeClass = windowOrWorkerGlobalScopeMixin(
+  Superclass,
+)
 
 const BTOA_TESTS = [
   ['', ''],
@@ -59,13 +62,13 @@ describe('WindowOrWorkerGlobalScope', () => {
       expect(() => {
         instance.btoa('עברית')
       }).toThrowError(
-        "DOMException: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range."
+        "DOMException: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.",
       )
     })
 
     it('throws an error when input is a symbol', () => {
       expect(() => {
-        instance.btoa(Symbol())
+        instance.btoa(Symbol('foobar'))
       }).toThrowError(TypeError)
     })
   })

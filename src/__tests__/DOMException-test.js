@@ -44,17 +44,17 @@ describe('DOMException', () => {
     })
 
     it('should not allow code property to be overwritten', () => {
-      expect(exception.code = 'foobar').toBe('foobar')
+      expect((exception.code = 'foobar')).toBe('foobar')
       expect(exception.code).toBe(0)
     })
 
     it('should not allow message property to be overwritten', () => {
-      expect(exception.message = 'foobar').toBe('foobar')
+      expect((exception.message = 'foobar')).toBe('foobar')
       expect(exception.message).toBe('DOMException: ')
     })
 
     it('should not allow name property to be overwritten', () => {
-      expect(exception.name = 'foobar').toBe('foobar')
+      expect((exception.name = 'foobar')).toBe('foobar')
       expect(exception.name).toBe('Error')
     })
   })

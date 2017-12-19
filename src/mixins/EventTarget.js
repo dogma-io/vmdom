@@ -4,6 +4,8 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
  */
 
+/* global Event, EventListener */
+
 export default (Klass: *) => {
   return class EventTarget extends Klass {
     _listeners: {[type: string]: EventListener[]}

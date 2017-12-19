@@ -8,8 +8,9 @@ export {default as Window} from './Window'
 // Mixins
 export {default as eventTargetMixin} from './mixins/EventTarget'
 export {default as nodeMixin} from './mixins/Node'
-export {default as windowOrWorkerGlobalScopeMixin} from './mixins/WindowOrWorkerGlobalScope'
-
+export {
+  default as windowOrWorkerGlobalScopeMixin,
+} from './mixins/WindowOrWorkerGlobalScope'
 
 // Utils
 export {lazilyLoadProp} from './utils'

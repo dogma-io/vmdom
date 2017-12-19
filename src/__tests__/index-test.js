@@ -42,7 +42,9 @@ describe('vmdom', () => {
     })
 
     it('exports windowOrWorkerGlobalScopeMixin', () => {
-      expect(exports.windowOrWorkerGlobalScopeMixin).toBe(windowOrWorkerGlobalScopeMixin)
+      expect(exports.windowOrWorkerGlobalScopeMixin).toBe(
+        windowOrWorkerGlobalScopeMixin,
+      )
     })
   })
 

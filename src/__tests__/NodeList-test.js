@@ -18,7 +18,7 @@ describe('NodeList', () => {
     })
 
     it('should not allow length property to be overwritten', () => {
-      expect(instance.length = 5).toBe(5)
+      expect((instance.length = 5)).toBe(5)
       expect(instance.length).toBe(0)
     })
   })
@@ -34,7 +34,7 @@ describe('NodeList', () => {
     })
 
     it('should not allow length property to be overwritten', () => {
-      expect(instance.length = 5).toBe(5)
+      expect((instance.length = 5)).toBe(5)
       expect(instance.length).toBe(1)
     })
   })
@@ -50,7 +50,7 @@ describe('NodeList', () => {
     })
 
     it('should not allow length property to be overwritten', () => {
-      expect(instance.length = 5).toBe(5)
+      expect((instance.length = 5)).toBe(5)
       expect(instance.length).toBe(2)
     })
   })

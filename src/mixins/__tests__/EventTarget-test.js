@@ -47,7 +47,7 @@ describe('EventTarget', () => {
 
     it('should throw when listener is a symbol', () => {
       expect(() => {
-        instance.addEventListener('click', Symbol())
+        instance.addEventListener('click', Symbol('foobar'))
       }).toThrowError(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
     })
 
@@ -63,14 +63,18 @@ describe('EventTarget', () => {
           })
 
           it('should return undefined and not add listener to listeners object', () => {
-            expect(instance.addEventListener('click', fnListener)).toBe(undefined)
+            expect(instance.addEventListener('click', fnListener)).toBe(
+              undefined,
+            )
             expect(instance._listeners).toEqual({click: [fnListener]})
           })
         })
 
         describe('when listener is not in listeners object for event type', () => {
           it('should return undefined and add listener to listeners object', () => {
-            expect(instance.addEventListener('click', fnListener)).toBe(undefined)
+            expect(instance.addEventListener('click', fnListener)).toBe(
+              undefined,
+            )
             expect(instance._listeners).toEqual({click: [fnListener]})
           })
         })
@@ -96,14 +100,18 @@ describe('EventTarget', () => {
           })
 
           it('should return undefined and not add listener to listeners object', () => {
-            expect(instance.addEventListener('click', objListener)).toBe(undefined)
+            expect(instance.addEventListener('click', objListener)).toBe(
+              undefined,
+            )
             expect(instance._listeners).toEqual({click: [objListener]})
           })
         })
 
         describe('when listener is not in listeners object for event type', () => {
           it('should return undefined and add listener to listeners object', () => {
-            expect(instance.addEventListener('click', objListener)).toBe(undefined)
+            expect(instance.addEventListener('click', objListener)).toBe(
+              undefined,
+            )
             expect(instance._listeners).toEqual({click: [objListener]})
           })
         })
@@ -111,7 +119,9 @@ describe('EventTarget', () => {
 
       describe('when event type is not in listeners object', () => {
         it('should return undefined and add listener to listeners object', () => {
-          expect(instance.addEventListener('click', objListener)).toBe(undefined)
+          expect(instance.addEventListener('click', objListener)).toBe(
+            undefined,
+          )
           expect(instance._listeners).toEqual({click: [objListener]})
         })
       })
@@ -244,21 +254,27 @@ describe('EventTarget', () => {
         })
 
         it('should return undefined and stop listening', () => {
-          expect(instance.removeEventListener('click', fnListener)).toBe(undefined)
+          expect(instance.removeEventListener('click', fnListener)).toBe(
+            undefined,
+          )
           expect(instance._listeners).toEqual({click: []})
         })
       })
 
       describe('when listener is not listening to event', () => {
         it('should return undefined', () => {
-          expect(instance.removeEventListener('click', fnListener)).toBe(undefined)
+          expect(instance.removeEventListener('click', fnListener)).toBe(
+            undefined,
+          )
         })
       })
     })
 
     describe('when event type is not in listeners object', () => {
       it('should return undefined', () => {
-        expect(instance.removeEventListener('click', fnListener)).toBe(undefined)
+        expect(instance.removeEventListener('click', fnListener)).toBe(
+          undefined,
+        )
       })
     })
   })

@@ -27,7 +27,7 @@ describe('Window', () => {
     })
 
     it('should destroy document when document has been accessed', () => {
-      let tmp = instance.document
+      let tmp = instance.document // eslint-disable-line
       Window.destroy(instance)
       expect(Document.destroy).toHaveBeenCalledTimes(1)
       expect(Document.destroy).toHaveBeenCalledWith(instance.document)

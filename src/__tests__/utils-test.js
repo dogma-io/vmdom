@@ -15,7 +15,7 @@ describe('utils', () => {
     })
 
     describe('when prop should be class instance without initialization arguments', () => {
-      let args, foo
+      let foo
 
       beforeEach(() => {
         class Foo {
@@ -33,7 +33,7 @@ describe('utils', () => {
       })
 
       it('should not allow lazily loaded property to be overwritten', () => {
-        expect(foo.bar = 'baz').toBe('baz')
+        expect((foo.bar = 'baz')).toBe('baz')
         expect(foo.bar).not.toBe('baz')
       })
 
@@ -76,7 +76,7 @@ describe('utils', () => {
       })
 
       it('should not allow lazily loaded property to be overwritten', () => {
-        expect(foo.bar = 'baz').toBe('baz')
+        expect((foo.bar = 'baz')).toBe('baz')
         expect(foo.bar).not.toBe('baz')
       })
 

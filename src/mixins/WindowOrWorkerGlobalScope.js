@@ -50,7 +50,7 @@ export default (Klass: *) => {
       for (let i = string.length - 1; i >= 0; i--) {
         if (string.charCodeAt(i) > 255) {
           throw new DOMException(
-            "Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range."
+            "Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.",
           )
         }
       }
@@ -70,6 +70,8 @@ export default (Klass: *) => {
 
     // TODO: implement createImageBitmap()
 
+    // TODO: come up with way to track incomplete fetch requests that can be
+    // cancelled when instance of class is destroyed
     fetch() {
       return fetch(...arguments)
     }

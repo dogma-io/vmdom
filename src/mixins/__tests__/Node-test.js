@@ -33,7 +33,7 @@ describe('EventTarget', () => {
   })
 
   it('should not allow childNodes property to be overwritten', () => {
-    expect(instance.childNodes = 'foobar').toBe('foobar')
+    expect((instance.childNodes = 'foobar')).toBe('foobar')
     expect(instance.childNodes).not.toBe('foobar')
   })
 

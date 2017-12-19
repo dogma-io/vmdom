@@ -55,8 +55,6 @@ export default (Klass: *) => {
     }
 
     appendChild(child: Node) {
-      const index = this._childNodes.indexOf(child)
-
       // TODO: if child is already in the document tree, remove it from it's
       // current location
 
