@@ -22,10 +22,14 @@ yarn add vmdom
 ```js
 import {Browser} from 'vmdom'
 
-const {eval, window} = new Browser()
+const browser = new Browser()
+const {eval, window} = browser
 
 // Execute arbitrary JavaScript using eval
 eval("window.foo = 'bar'")
 
 console.log(window.foo) // logs "bar" to console
+
+// When you are done make sure all timers, event handlers, etc are cleaned up
+Browser.destroy(browser)
 ```

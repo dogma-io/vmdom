@@ -9,6 +9,36 @@ import fetch from 'node-fetch'
 
 export default (Klass: *) => {
   return class WindowOrWorkerGlobalScope extends Klass {
+    constructor() {
+      super(...arguments)
+
+      Object.defineProperty(this, '_intervalIds', {
+        enumerable: false,
+        value: new Set(),
+        writable: false,
+      })
+
+      Object.defineProperty(this, '_timeoutIds', {
+        enumerable: false,
+        value: new Set(),
+        writable: false,
+      })
+    }
+
+    static destroy(instance: *) {
+      instance._intervalIds.forEach((intervalId: number) => {
+        instance.clearInterval(intervalId)
+      })
+
+      instance._timeoutIds.forEach((timeoutId: number) => {
+        instance.clearTimeout(timeoutId)
+      })
+
+      if (typeof Klass.destroy === 'function') {
+        Klass.destroy(instance)
+      }
+    }
+
     atob(encodedData: string) {
       return Buffer.from(encodedData, 'base64').toString('binary')
     }
@@ -28,11 +58,13 @@ export default (Klass: *) => {
       return Buffer.from(string, 'binary').toString('base64')
     }
 
-    clearInterval() {
+    clearInterval(intervalId: number) {
+      this._intervalIds.delete(intervalId)
       return clearInterval(...arguments)
     }
 
-    clearTimeout() {
+    clearTimeout(timeoutId: number) {
+      this._timeoutIds.delete(timeoutId)
       return clearTimeout(...arguments)
     }
 
@@ -43,11 +75,15 @@ export default (Klass: *) => {
     }
 
     setInterval() {
-      return setInterval(...arguments)
+      const id = setInterval(...arguments)
+      this._intervalIds.add(id)
+      return id
     }
 
     setTimeout() {
-      return setTimeout(...arguments)
+      const id = setTimeout(...arguments)
+      this._timeoutIds.add(id)
+      return id
     }
   }
 }

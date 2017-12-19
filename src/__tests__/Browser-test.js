@@ -27,6 +27,13 @@ describe('Browser', () => {
     }).toThrowError(TypeError)
   })
 
+  it('destroy() should destroy window', () => {
+    jest.spyOn(Window, 'destroy')
+    Browser.destroy(instance)
+    expect(Window.destroy).toHaveBeenCalledTimes(1)
+    expect(Window.destroy).toHaveBeenCalledWith(instance.window)
+  })
+
   describe('eval()', () => {
     it('should execute Javascript string against sandbox', () => {
       expect(instance.eval("window.foo = 'bar'")).toBe(undefined)

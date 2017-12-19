@@ -118,6 +118,12 @@ describe('EventTarget', () => {
     })
   })
 
+  it('destroy() removes event listeners', () => {
+    instance._listeners.click = [fnListener, objListener]
+    EventTargetClass.destroy(instance)
+    expect(instance._listeners.click).toHaveLength(0)
+  })
+
   describe('dispatchEvent()', () => {
     let e
 

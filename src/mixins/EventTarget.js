@@ -18,6 +18,20 @@ export default (Klass: *) => {
       })
     }
 
+    static destroy(instance: *) {
+      const listeners = instance._listeners
+
+      Object.keys(listeners).forEach((type: string) => {
+        for (let i = listeners[type].length - 1; i >= 0; i--) {
+          instance.removeEventListener(type, listeners[type][i])
+        }
+      })
+
+      if (typeof Klass.destroy === 'function') {
+        Klass.destroy(instance)
+      }
+    }
+
     // TODO: add support for options/useCapture argument
     addEventListener(type: string, listener: EventListener): void {
       if (!Array.isArray(this._listeners[type])) {
@@ -58,10 +72,10 @@ export default (Klass: *) => {
     }
 
     // TODO: add support for options/useCapture argument
-    removeEventListener(type: string, callback: EventListener): void {
+    removeEventListener(type: string, listener: EventListener): void {
       if (type in this._listeners) {
         const stack = this._listeners[type]
-        const index = stack.indexOf(callback)
+        const index = stack.indexOf(listener)
 
         if (index !== -1) {
           stack.splice(index, 1)

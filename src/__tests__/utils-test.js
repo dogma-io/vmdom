@@ -14,13 +14,14 @@ describe('utils', () => {
       }
     })
 
-    describe('when prop shoul be class instance without initialization arguments', () => {
+    describe('when prop should be class instance without initialization arguments', () => {
       let args, foo
 
       beforeEach(() => {
         class Foo {
           constructor() {
             lazilyLoadProp(this, 'bar', Baz)
+            lazilyLoadProp(this, 'baz', Baz) // tests _isLoaded already exists check
           }
         }
 
@@ -55,7 +56,7 @@ describe('utils', () => {
       })
     })
 
-    describe('when prop shoul be class instance with initialization arguments', () => {
+    describe('when prop should be class instance with initialization arguments', () => {
       let args, foo
 
       beforeEach(() => {

@@ -41,6 +41,19 @@ export default (Klass: *) => {
       })
     }
 
+    static destroy(instance: *) {
+      for (let i = instance._childNodes.length - 1; i >= 0; i--) {
+        const child = instance._childNodes[i]
+        child.constructor.destroy(child)
+      }
+
+      instance._childNodes.splice(0)
+
+      if (typeof Klass.destroy === 'function') {
+        Klass.destroy(instance)
+      }
+    }
+
     appendChild(child: Node) {
       const index = this._childNodes.indexOf(child)
 

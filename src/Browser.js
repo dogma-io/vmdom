@@ -31,6 +31,10 @@ export default class Browser {
     })
   }
 
+  static destroy(instance: Browser) {
+    Window.destroy(instance.window)
+  }
+
   eval(script: string | vm$Script) {
     // TODO: figure out how to get return value of script and return it
     // (wrap script in IIFE that captures return value?)
