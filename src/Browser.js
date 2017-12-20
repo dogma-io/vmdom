@@ -18,6 +18,13 @@ export default class Browser {
 
     // $FlowFixMe - Flow doesn't like the casting type here
     const sandbox: vm$Context = new Proxy(this, {
+      get(target: Browser, property: string) {
+        if (['global', 'window'].indexOf(property) !== -1) {
+          return target.window
+        } else {
+          return target.window[property]
+        }
+      },
       set(target: Browser, property: string, value: any) {
         if (['global', 'window'].indexOf(property) !== -1) {
           target.window = value

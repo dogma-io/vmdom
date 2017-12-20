@@ -80,5 +80,10 @@ describe('Browser', () => {
         instance.eval("window = 'foo'")
       }).toThrowError(TypeError)
     })
+
+    it('should allow access of window properties via global reference', () => {
+      instance.window.foo = 'bar'
+      expect(instance.eval('foo')).toBe('bar')
+    })
   })
 })

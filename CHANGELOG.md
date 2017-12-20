@@ -1,3 +1,7 @@
+# 0.0.5
+
+* Allow referencing window properties via global scope.
+
 # 0.0.4
 
 *   Get browser to allow globally defining properties and keeping global scope, global property, and window property to reference the same thing.
