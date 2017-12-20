@@ -12,8 +12,8 @@ export default (Klass: *) => {
     _childNodes: Array<Node>
     childNodes: NodeList
 
-    constructor() {
-      super(...arguments)
+    constructor(...args: any) {
+      super(...args)
 
       let nodeList
 

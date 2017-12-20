@@ -7,14 +7,21 @@
 import Document from './Document'
 import eventTargetMixin from './mixins/EventTarget'
 import windowOrWorkerGlobalScopeMixin from './mixins/WindowOrWorkerGlobalScope'
+import Navigator from './Navigator'
 import {lazilyLoadProp} from './utils'
+
+type WindowOptions = {
+  userAgent?: string,
+}
 
 class Window {
   _isLoaded: {[property: string]: boolean} // used by lazilyLoadProp
   document: Document
+  navigator: Navigator
 
-  constructor() {
+  constructor({userAgent}: WindowOptions) {
     lazilyLoadProp(this, 'document', Document)
+    lazilyLoadProp(this, 'navigator', Navigator, [userAgent])
   }
 
   static destroy(instance: Document) {

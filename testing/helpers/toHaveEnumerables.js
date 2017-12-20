@@ -8,15 +8,17 @@ module.exports = function toHaveEnumerables(received, expected) {
   actual.sort()
   expected.sort()
 
-  const pass = expected.every((key, index) => key === actual[index])
+  const pass = actual.length === expected.length &&
+    expected.every((key, index) => key === actual[index])
 
   return {
     message: () => {
+      const actualString = actual.join(', ')
       const expectedString = expected.join(', ')
 
       return pass
-        ? `expected not to have enumerables: ${expectedString}`
-        : `expected to have enumerables: ${expectedString}`
+        ? `expected not to have enumerables:\n\n\t${expectedString}`
+        : `expected to have enumerables:\n\n\t${expectedString}\n\nbut instead received:\n\n\t${actualString}`
     },
     pass,
   }

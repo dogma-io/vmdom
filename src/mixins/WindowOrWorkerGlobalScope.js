@@ -9,8 +9,8 @@ import fetch from 'node-fetch'
 
 export default (Klass: *) => {
   return class WindowOrWorkerGlobalScope extends Klass {
-    constructor() {
-      super(...arguments)
+    constructor(...args: any) {
+      super(...args)
 
       Object.defineProperties(this, {
         _intervalIds: {

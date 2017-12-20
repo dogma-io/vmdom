@@ -1,6 +1,18 @@
+jest.mock('../Window')
+
 import Browser from '../Browser'
 import Window from '../Window'
+import {readFileSync} from 'fs'
+import {join} from 'path'
 import {Script} from 'vm'
+
+function getDefaultBrowser() {
+  const {version} = JSON.parse(
+    readFileSync(join(__dirname, '..', '..', 'package.json'), 'utf8'),
+  )
+
+  return `vmdom/${version}`
+}
 
 describe('Browser', () => {
   let instance
@@ -11,6 +23,8 @@ describe('Browser', () => {
 
   it('should instantiate sandbox and have expected enumerables', () => {
     expect(instance._sandbox).toBeInstanceOf(Browser)
+    expect(Window).toHaveBeenCalledTimes(1)
+    expect(Window).toHaveBeenCalledWith({userAgent: getDefaultBrowser()})
     expect(instance.window).toBeInstanceOf(Window)
     expect(instance).toHaveEnumerables([])
   })

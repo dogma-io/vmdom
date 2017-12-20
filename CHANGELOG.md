@@ -1,3 +1,7 @@
+# 0.0.6
+
+*   Implement more API including most of Element, HTMLElement, GlobalEventHandlers, and TouchEventHandlers.
+
 # 0.0.5
 
 * Allow referencing window properties via global scope.

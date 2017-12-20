@@ -6,15 +6,34 @@
 /* global vm$Context, vm$Script */
 
 import Window from './Window'
+import {readFileSync} from 'fs'
+import {join} from 'path'
 import {createContext, runInContext, Script} from 'vm'
+
+type BrowserOptions = {
+  userAgent?: string,
+}
+
+function getVersion() {
+  const path = join(__dirname, '..', 'package.json')
+  const contents = readFileSync(path, 'utf8')
+  const data = JSON.parse(contents)
+  return data.version
+}
 
 export default class Browser {
   _sandbox: vm$Context
   global: Window
   window: Window
 
-  constructor() {
-    const window = new Window()
+  constructor(options?: BrowserOptions) {
+    options = options || {}
+
+    const {userAgent} = options
+
+    const window = new Window({
+      userAgent: userAgent || `vmdom/${getVersion()}`,
+    })
 
     // $FlowFixMe - Flow doesn't like the casting type here
     const sandbox: vm$Context = new Proxy(this, {

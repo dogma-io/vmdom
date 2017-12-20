@@ -10,8 +10,8 @@ export default (Klass: *) => {
   return class EventTarget extends Klass {
     _listeners: {[type: string]: EventListener[]}
 
-    constructor() {
-      super(...arguments)
+    constructor(...args: any) {
+      super(...args)
 
       Object.defineProperty(this, '_listeners', {
         enumerable: false,
