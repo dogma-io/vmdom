@@ -17,26 +17,27 @@ export default (Klass: *) => {
 
       let nodeList
 
-      Object.defineProperty(this, '_childNodes', {
-        enumerable: false,
-        value: [],
-        writable: false,
-      })
-
-      // $FlowFixMe
-      Object.defineProperty(this, 'childNodes', {
-        enumerable: false,
-
-        get() {
-          if (!nodeList) {
-            nodeList = new NodeList(this._childNodes)
-          }
-
-          return nodeList
+      // $FlowFixMe - Flow seems to hate getters/setters over value property
+      Object.defineProperties(this, {
+        _childNodes: {
+          enumerable: false,
+          value: [],
+          writable: false,
         },
+        childNodes: {
+          enumerable: false,
 
-        set(newValue) {
-          return newValue
+          get() {
+            if (!nodeList) {
+              nodeList = new NodeList(this._childNodes)
+            }
+
+            return nodeList
+          },
+
+          set(newValue) {
+            return newValue
+          },
         },
       })
     }

@@ -12,16 +12,17 @@ export default (Klass: *) => {
     constructor() {
       super(...arguments)
 
-      Object.defineProperty(this, '_intervalIds', {
-        enumerable: false,
-        value: new Set(),
-        writable: false,
-      })
-
-      Object.defineProperty(this, '_timeoutIds', {
-        enumerable: false,
-        value: new Set(),
-        writable: false,
+      Object.defineProperties(this, {
+        _intervalIds: {
+          enumerable: false,
+          value: new Set(),
+          writable: false,
+        },
+        _timeoutIds: {
+          enumerable: false,
+          value: new Set(),
+          writable: false,
+        },
       })
     }
 

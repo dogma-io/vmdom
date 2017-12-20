@@ -42,42 +42,40 @@ export default class DOMException extends Error {
 
     message = `DOMException: ${message || ''}`
 
-    // $FlowFixMe
-    Object.defineProperty(this, 'code', {
-      enumerable: false,
+    // $FlowFixMe - Flow seems to hate getters/setters over value property
+    Object.defineProperties(this, {
+      code: {
+        enumerable: false,
 
-      get() {
-        return name ? LEGACY_ERROR_NAMES_TO_CODES[name] || 0 : 0
+        get() {
+          return name ? LEGACY_ERROR_NAMES_TO_CODES[name] || 0 : 0
+        },
+
+        set(newValue) {
+          return newValue
+        },
       },
+      message: {
+        enumerable: false,
 
-      set(newValue) {
-        return newValue
+        get() {
+          return message
+        },
+
+        set(newValue) {
+          return newValue
+        },
       },
-    })
+      name: {
+        enumerable: false,
 
-    // $FlowFixMe
-    Object.defineProperty(this, 'message', {
-      enumerable: false,
+        get() {
+          return name || 'Error'
+        },
 
-      get() {
-        return message
-      },
-
-      set(newValue) {
-        return newValue
-      },
-    })
-
-    // $FlowFixMe
-    Object.defineProperty(this, 'name', {
-      enumerable: false,
-
-      get() {
-        return name || 'Error'
-      },
-
-      set(newValue) {
-        return newValue
+        set(newValue) {
+          return newValue
+        },
       },
     })
 
