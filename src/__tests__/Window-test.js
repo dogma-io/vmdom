@@ -13,7 +13,11 @@ describe('Window', () => {
 
   beforeEach(() => {
     Document.mockReset()
-    instance = new Window({userAgent: UA})
+    instance = new Window({
+      includeBody: true,
+      includeHead: true,
+      userAgent: UA,
+    })
   })
 
   it('should implement expected interfaces and has correct enumerables', () => {
@@ -54,6 +58,10 @@ describe('Window', () => {
 
     it('should instantiate document property', () => {
       expect(Document).toHaveBeenCalledTimes(1)
+      expect(Document).toHaveBeenCalledWith({
+        includeBody: true,
+        includeHead: true,
+      })
       expect(doc).toBeInstanceOf(Document)
     })
   })

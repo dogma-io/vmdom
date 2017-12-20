@@ -21,6 +21,12 @@ describe('NodeList', () => {
       expect((instance.length = 5)).toBe(5)
       expect(instance.length).toBe(0)
     })
+
+    it('should return undefined for unknown properties', () => {
+      expect(instance.foo).toBe(undefined)
+      expect(instance[true]).toBe(undefined)
+      expect(instance[Symbol('foo')]).toBe(undefined)
+    })
   })
 
   describe('when instantiated with one node', () => {

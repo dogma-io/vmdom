@@ -11,10 +11,16 @@ import {defineEventHandlers} from './utils'
 
 export const HTML_ELEMENT_EVENT_HANDLERS = ['oncopy', 'oncut', 'onpaste']
 
+type HTMLElementOptions = {
+  tagName?: string,
+}
+
 class HTMLElement extends Element {
-  constructor() {
+  constructor(options: HTMLElementOptions) {
+    options = options || {}
+
     super({
-      tagName: 'html',
+      tagName: 'tagName' in options ? options.tagName : 'html',
     })
 
     defineEventHandlers(this, HTML_ELEMENT_EVENT_HANDLERS)

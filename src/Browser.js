@@ -11,6 +11,21 @@ import {join} from 'path'
 import {createContext, runInContext, Script} from 'vm'
 
 type BrowserOptions = {
+  /**
+   * Whether or not to insert a HTMLHeadElement in document.documentElement
+   */
+  includeBody?: boolean,
+
+  /**
+   * Whether or not to insert a HTMLHeadElement in document.documentElement
+   */
+  includeHead?: boolean,
+
+  /**
+   * What user agent to pretend we are. The default value when this property is
+   * omitted is "vmdom/<version>", where version will be the actual version of
+   * this package, such as "0.0.5".
+   */
   userAgent?: string,
 }
 
@@ -32,6 +47,8 @@ export default class Browser {
     const {userAgent} = options
 
     const window = new Window({
+      includeBody: 'includeBody' in options ? options.includeBody : true,
+      includeHead: 'includeHead' in options ? options.includeHead : true,
       userAgent: userAgent || `vmdom/${getVersion()}`,
     })
 

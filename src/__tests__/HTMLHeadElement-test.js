@@ -1,13 +1,14 @@
 import {ELEMENT_EVENT_HANDLERS} from '../Element'
-import HTMLElement, {HTML_ELEMENT_EVENT_HANDLERS} from '../HTMLElement'
+import {HTML_ELEMENT_EVENT_HANDLERS} from '../HTMLElement'
+import HTMLHeadElement from '../HTMLHeadElement'
 import {GLOBAL_EVENT_HANDLERS} from '../mixins/GlobalEventHandlers'
 import {TOUCH_EVENT_HANDLERS} from '../mixins/TouchEventHandlers'
 
-describe('HTMLElement', () => {
+describe('HTMLHeadElement', () => {
   let instance
 
   beforeEach(() => {
-    instance = new HTMLElement()
+    instance = new HTMLHeadElement()
   })
 
   it('should implement expected interfaces and has correct enumerables', () => {
@@ -21,8 +22,8 @@ describe('HTMLElement', () => {
     )
   })
 
-  it('should return html for tagName', () => {
-    expect(instance.tagName).toBe('html')
+  it('should return head for tagName', () => {
+    expect(instance.tagName).toBe('head')
   })
 
   it('should not allow tagName property to be overwritten', () => {

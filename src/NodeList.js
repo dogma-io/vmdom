@@ -5,19 +5,18 @@
  */
 
 export default class NodeList {
-  length: number
-
   constructor(nodes: Array<*>) {
-    // $FlowFixMe
-    Object.defineProperty(this, 'length', {
-      enumerable: false,
+    return new Proxy(this, {
+      get(target, property) {
+        if (property === 'length') {
+          return nodes.length
+        }
 
-      get() {
-        return nodes.length
-      },
+        if (typeof property === 'string' && /^(\d+)$/.test(property)) {
+          return nodes[parseInt(property)]
+        }
 
-      set(newValue) {
-        return newValue
+        return undefined
       },
     })
   }

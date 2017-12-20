@@ -1,3 +1,7 @@
+# 0.0.7
+
+*   Include body and head elements by default with options to not include them.
+
 # 0.0.6
 
 *   Implement more API including most of Element, HTMLElement, GlobalEventHandlers, and TouchEventHandlers.
