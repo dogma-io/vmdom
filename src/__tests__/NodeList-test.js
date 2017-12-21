@@ -27,6 +27,11 @@ describe('NodeList', () => {
       expect(instance[true]).toBe(undefined)
       expect(instance[Symbol('foo')]).toBe(undefined)
     })
+
+    it('should allow adding additional properties', () => {
+      expect((instance.foo = 'bar')).toBe('bar')
+      expect(instance.foo).toBe('bar')
+    })
   })
 
   describe('when instantiated with one node', () => {

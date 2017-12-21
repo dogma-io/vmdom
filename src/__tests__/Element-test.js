@@ -17,7 +17,7 @@ describe('Element', () => {
     expect(instance).toHaveEnumerables(ELEMENT_EVENT_HANDLERS)
   })
 
-  it('should return passed in tagName for tagName property', () => {
+  it('should return correct tagName property', () => {
     expect(instance.tagName).toBe(TAG_NAME)
   })
 

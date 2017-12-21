@@ -9,7 +9,7 @@ module.exports = function toImplementNode(received) {
     received,
     [
       'appendChild',
-      // TODO: comment out once implemented
+      // TODO: uncomment once implemented
       // 'cloneNode',
       // 'compareDocumentPosition',
       // 'contains',

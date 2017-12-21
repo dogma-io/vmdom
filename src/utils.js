@@ -25,7 +25,7 @@ export function defineEventHandlers(target: *, properties: Array<string>) {
   })
 }
 
-export function lazilyLoadProp(
+export function lazilyLoadInstanceAsProp(
   target: *,
   property: string,
   Klass: *,
@@ -55,6 +55,24 @@ export function lazilyLoadProp(
       }
 
       return instance
+    },
+
+    set(newValue) {
+      return newValue
+    },
+  })
+}
+
+export function lazilyLoadModuleAsProp(
+  target: *,
+  property: string,
+  modulePath: string,
+  require: (modulePath: string) => any,
+) {
+  Object.defineProperty(target, property, {
+    get() {
+      // $FlowFixMe - Flow doesn't like dynamic require statements
+      return require(modulePath)
     },
 
     set(newValue) {

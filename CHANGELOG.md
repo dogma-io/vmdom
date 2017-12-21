@@ -1,3 +1,7 @@
+# 0.0.8
+
+*   Added incomplete classes for all HTML elements in Window.
+
 # 0.0.7
 
 *   Include body and head elements by default with options to not include them.

@@ -1,7 +1,7 @@
-import {lazilyLoadProp} from '../utils'
+import {lazilyLoadInstanceAsProp, lazilyLoadModuleAsProp} from '../utils'
 
 describe('utils', () => {
-  describe('lazilyLoadProp', () => {
+  describe('lazilyLoadInstanceAsProp()', () => {
     let Baz, init
 
     beforeEach(() => {
@@ -20,8 +20,8 @@ describe('utils', () => {
       beforeEach(() => {
         class Foo {
           constructor() {
-            lazilyLoadProp(this, 'bar', Baz)
-            lazilyLoadProp(this, 'baz', Baz) // tests _isLoaded already exists check
+            lazilyLoadInstanceAsProp(this, 'bar', Baz)
+            lazilyLoadInstanceAsProp(this, 'baz', Baz) // tests _isLoaded already exists check
           }
         }
 
@@ -64,7 +64,7 @@ describe('utils', () => {
 
         class Foo {
           constructor() {
-            lazilyLoadProp(this, 'bar', Baz, args)
+            lazilyLoadInstanceAsProp(this, 'bar', Baz, args)
           }
         }
 
@@ -97,6 +97,38 @@ describe('utils', () => {
           expect(foo.bar).toBe(value)
         })
       })
+    })
+  })
+
+  describe('lazilyLoadModuleAsProp()', () => {
+    let baz, foo, requireStub
+
+    beforeEach(() => {
+      baz = jest.fn()
+      requireStub = jest.fn().mockReturnValue(baz) // eslint-disable-line
+
+      class Foo {
+        constructor() {
+          lazilyLoadModuleAsProp(this, 'bar', './baz', requireStub)
+        }
+      }
+
+      foo = new Foo()
+    })
+
+    it('should not require module before property is accessed', () => {
+      expect(requireStub).not.toHaveBeenCalled()
+    })
+
+    it('should not allow property to be overwritten', () => {
+      expect((foo.bar = 'baz')).toBe('baz')
+      expect(foo.bar).not.toBe('baz')
+    })
+
+    it('should require module when property is accessed and return as property value', () => {
+      expect(foo.bar).toBe(baz)
+      expect(requireStub).toHaveBeenCalledTimes(1)
+      expect(requireStub).toHaveBeenCalledWith('./baz')
     })
   })
 })

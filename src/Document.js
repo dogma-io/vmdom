@@ -5,7 +5,7 @@
  */
 
 import HTMLBodyElement from './HTMLBodyElement'
-import HTMLElement from './HTMLElement'
+import HTMLHtmlElement from './HTMLHtmlElement'
 import HTMLHeadElement from './HTMLHeadElement'
 import nodeMixin from './mixins/Node'
 
@@ -22,7 +22,7 @@ type DocumentOptions = {|
 |}
 
 class Document {
-  documentElement: HTMLElement
+  documentElement: HTMLHtmlElement
 
   constructor({includeBody, includeHead}: DocumentOptions) {
     let documentElement
@@ -33,7 +33,7 @@ class Document {
         enumerable: false,
         get() {
           if (!documentElement) {
-            documentElement = new HTMLElement()
+            documentElement = new HTMLHtmlElement()
 
             if (includeHead) {
               documentElement.appendChild(new HTMLHeadElement())

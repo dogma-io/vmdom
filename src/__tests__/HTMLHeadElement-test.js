@@ -22,7 +22,7 @@ describe('HTMLHeadElement', () => {
     )
   })
 
-  it('should return head for tagName', () => {
+  it('should return correct tagName', () => {
     expect(instance.tagName).toBe('head')
   })
 

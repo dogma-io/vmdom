@@ -22,7 +22,7 @@ describe('HTMLBodyElement', () => {
     )
   })
 
-  it('should return body for tagName', () => {
+  it('should return correct tagName', () => {
     expect(instance.tagName).toBe('body')
   })
 

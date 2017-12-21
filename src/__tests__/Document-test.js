@@ -1,15 +1,15 @@
 import Document from '../Document'
 import HTMLBodyElement from '../HTMLBodyElement'
-import UnmockedHTMLElement from '../HTMLElement'
+import UnmockedHTMLHtmlElement from '../HTMLHtmlElement'
 import HTMLHeadElement from '../HTMLHeadElement'
 
-jest.doMock('../HTMLElement', () => {
+jest.doMock('../HTMLHtmlElement', () => {
   return jest.fn((...args) => {
-    return UnmockedHTMLElement(...args)
+    return UnmockedHTMLHtmlElement(...args)
   })
 })
 
-const HTMLElement = require('../HTMLElement')
+const HTMLHtmlElement = require('../HTMLHtmlElement')
 
 describe('Document', () => {
   let instance
@@ -30,7 +30,7 @@ describe('Document', () => {
       })
 
       it('should not instantiate classes for lazily load properties', () => {
-        expect(HTMLElement).not.toHaveBeenCalled()
+        expect(HTMLHtmlElement).not.toHaveBeenCalled()
       })
 
       describe('when documentElement property accessed', () => {
@@ -41,7 +41,7 @@ describe('Document', () => {
         })
 
         it('should instantiate document property', () => {
-          expect(documentElement).toBeInstanceOf(UnmockedHTMLElement)
+          expect(documentElement).toBeInstanceOf(UnmockedHTMLHtmlElement)
           expect(documentElement.childNodes).toHaveLength(2)
           expect(documentElement.childNodes[0]).toBeInstanceOf(HTMLHeadElement)
           expect(documentElement.childNodes[1]).toBeInstanceOf(HTMLBodyElement)
@@ -68,7 +68,7 @@ describe('Document', () => {
       })
 
       it('should not instantiate classes for lazily load properties', () => {
-        expect(HTMLElement).not.toHaveBeenCalled()
+        expect(HTMLHtmlElement).not.toHaveBeenCalled()
       })
 
       describe('when documentElement property accessed', () => {
@@ -79,7 +79,7 @@ describe('Document', () => {
         })
 
         it('should instantiate document property', () => {
-          expect(documentElement).toBeInstanceOf(UnmockedHTMLElement)
+          expect(documentElement).toBeInstanceOf(UnmockedHTMLHtmlElement)
           expect(documentElement.childNodes).toHaveLength(1)
           expect(documentElement.childNodes[0]).toBeInstanceOf(HTMLBodyElement)
         })
@@ -107,7 +107,7 @@ describe('Document', () => {
       })
 
       it('should not instantiate classes for lazily load properties', () => {
-        expect(HTMLElement).not.toHaveBeenCalled()
+        expect(HTMLHtmlElement).not.toHaveBeenCalled()
       })
 
       describe('when documentElement property accessed', () => {
@@ -118,7 +118,7 @@ describe('Document', () => {
         })
 
         it('should instantiate document property', () => {
-          expect(documentElement).toBeInstanceOf(UnmockedHTMLElement)
+          expect(documentElement).toBeInstanceOf(UnmockedHTMLHtmlElement)
           expect(documentElement.childNodes).toHaveLength(1)
           expect(documentElement.childNodes[0]).toBeInstanceOf(HTMLHeadElement)
         })
@@ -144,7 +144,7 @@ describe('Document', () => {
       })
 
       it('should not instantiate classes for lazily load properties', () => {
-        expect(HTMLElement).not.toHaveBeenCalled()
+        expect(HTMLHtmlElement).not.toHaveBeenCalled()
       })
 
       describe('when documentElement property accessed', () => {
@@ -155,7 +155,7 @@ describe('Document', () => {
         })
 
         it('should instantiate document property', () => {
-          expect(documentElement).toBeInstanceOf(UnmockedHTMLElement)
+          expect(documentElement).toBeInstanceOf(UnmockedHTMLHtmlElement)
           expect(documentElement.childNodes).toHaveLength(0)
         })
 

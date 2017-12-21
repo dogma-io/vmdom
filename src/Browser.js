@@ -98,9 +98,6 @@ export default class Browser {
   }
 
   eval(script: string | vm$Script) {
-    // TODO: figure out how to get return value of script and return it
-    // (wrap script in IIFE that captures return value?)
-
     if (script instanceof Script) {
       return script.runInContext(this._sandbox)
     }

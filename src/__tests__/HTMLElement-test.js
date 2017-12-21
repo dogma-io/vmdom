@@ -7,7 +7,7 @@ describe('HTMLElement', () => {
   let instance
 
   beforeEach(() => {
-    instance = new HTMLElement()
+    instance = new HTMLElement({tagName: 'html'})
   })
 
   it('should implement expected interfaces and has correct enumerables', () => {
@@ -21,7 +21,7 @@ describe('HTMLElement', () => {
     )
   })
 
-  it('should return html for tagName', () => {
+  it('should return correct tagName', () => {
     expect(instance.tagName).toBe('html')
   })
 

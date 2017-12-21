@@ -14,7 +14,7 @@ module.exports = function toImplementWindowOrWorkerGlobalScope(received) {
       'btoa',
       'clearInterval',
       'clearTimeout',
-      // TODO: comment out once implemented
+      // TODO: uncomment once implemented
       // 'createImageBitmap',
       'fetch',
       'setInterval',
