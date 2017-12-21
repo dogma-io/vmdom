@@ -1,3 +1,7 @@
+# 0.0.9
+
+*   Implement document.createElement().
+
 # 0.0.8
 
 *   Added incomplete classes for all HTML elements in Window.

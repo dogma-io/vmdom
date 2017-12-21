@@ -76,6 +76,7 @@ const MODULE_PROPERTIES = [
   'HTMLTableColElement',
   'HTMLTableRowElement',
   'HTMLTableSectionElement',
+  'HTMLTemplateElement',
   'HTMLTextAreaElement',
   'HTMLTimeElement',
   'HTMLTitleElement',

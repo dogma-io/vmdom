@@ -6,7 +6,7 @@
 
 import HTMLElement from './HTMLElement'
 
-export default class HTMLBodyElement extends HTMLElement {
+export default class HTMLHtmlElement extends HTMLElement {
   constructor() {
     super({tagName: 'html'})
     // TODO: implement version property
