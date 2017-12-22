@@ -1,3 +1,7 @@
+# 0.0.10
+
+*   Implement more HTML elements.
+
 # 0.0.9
 
 *   Implement document.createElement().
