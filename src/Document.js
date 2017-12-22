@@ -186,12 +186,12 @@ class Document {
       case 'string': {
         // $FlowFixMe - Flow doesn't like dynamic require statements
         const ElementClass = require(join(__dirname, definition)).default
-        return new ElementClass({tagName, ...options})
+        return new ElementClass(Object.assign({tagName}, options))
       }
 
       default: {
         const HTMLUnknownElement = require('./HTMLUnknownElement').default
-        return new HTMLUnknownElement({tagName, ...options})
+        return new HTMLUnknownElement(Object.assign({tagName}, options))
       }
     }
   }
