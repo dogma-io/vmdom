@@ -1,4 +1,5 @@
 import Element, {ELEMENT_EVENT_HANDLERS} from '../Element'
+import {itShouldBeAnElement} from './Element.utils'
 
 const TAG_NAME = 'html'
 
@@ -11,19 +12,9 @@ describe('Element', () => {
     })
   })
 
-  it('should implement expected interfaces and has correct enumerables', () => {
-    expect(instance).toImplementEventTarget()
-    expect(instance).toImplementNode()
+  itShouldBeAnElement(() => instance, TAG_NAME)
+
+  it('should hae correct enumerables', () => {
     expect(instance).toHaveEnumerables(ELEMENT_EVENT_HANDLERS)
-  })
-
-  it('should return correct tagName property', () => {
-    expect(instance.tagName).toBe(TAG_NAME)
-  })
-
-  it('should not allow tagName property to be overwritten', () => {
-    expect(() => {
-      instance.tagName = 'div'
-    }).toThrowError(TypeError)
   })
 })
