@@ -14,11 +14,6 @@ export function itShouldBeAnElement(getInstance, tagName) {
       instance = getInstance()
     })
 
-    it('should implement expected interfaces', () => {
-      expect(instance).toImplementEventTarget()
-      expect(instance).toImplementNode()
-    })
-
     it('should return correct tagName property', () => {
       expect(instance.tagName).toBe(tagName)
     })

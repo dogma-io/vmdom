@@ -145,9 +145,7 @@ describe('Document', () => {
 
       itShouldImplementNodeInterface(() => instance)
 
-      it('should implement expected interfaces and has correct enumerables', () => {
-        expect(instance).toImplementEventTarget()
-        expect(instance).toImplementNode()
+      it('should have correct enumerables', () => {
         expect(instance).toHaveEnumerables([])
       })
 
@@ -185,9 +183,7 @@ describe('Document', () => {
 
       itShouldImplementNodeInterface(() => instance)
 
-      it('should implement expected interfaces and has correct enumerables', () => {
-        expect(instance).toImplementEventTarget()
-        expect(instance).toImplementNode()
+      it('should have correct enumerables', () => {
         expect(instance).toHaveEnumerables([])
       })
 
@@ -226,9 +222,7 @@ describe('Document', () => {
 
       itShouldImplementNodeInterface(() => instance)
 
-      it('should implement expected interfaces and has correct enumerables', () => {
-        expect(instance).toImplementEventTarget()
-        expect(instance).toImplementNode()
+      it('should have correct enumerables', () => {
         expect(instance).toHaveEnumerables([])
       })
 
@@ -265,9 +259,7 @@ describe('Document', () => {
 
       itShouldImplementNodeInterface(() => instance)
 
-      it('should implement expected interfaces and has correct enumerables', () => {
-        expect(instance).toImplementEventTarget()
-        expect(instance).toImplementNode()
+      it('should have correct enumerables', () => {
         expect(instance).toHaveEnumerables([])
       })
 

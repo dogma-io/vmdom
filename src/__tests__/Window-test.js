@@ -2,6 +2,7 @@ jest.mock('../Document')
 jest.mock('../MediaQueryList')
 jest.mock('../Navigator')
 jest.mock('../Storage')
+jest.mock('node-fetch')
 
 import Document from '../Document'
 import MediaQueryList from '../MediaQueryList'
@@ -9,6 +10,7 @@ import Navigator from '../Navigator'
 import Storage from '../Storage'
 import Window from '../Window'
 import {itShouldImplementEventTargetInterface} from '../mixins/__tests__/EventTarget.utils'
+import {itShouldImplementWindowOrWorkerGlobalScopeInterface} from '../mixins/__tests__/WindowOrWorkerGlobalScope.utils'
 import {join} from 'path'
 
 const UA =
@@ -108,10 +110,9 @@ describe('Window', () => {
   })
 
   itShouldImplementEventTargetInterface(() => instance)
+  itShouldImplementWindowOrWorkerGlobalScopeInterface(() => instance)
 
-  it('should implement expected interfaces and has correct enumerables', () => {
-    expect(instance).toImplementEventTarget()
-    expect(instance).toImplementWindowOrWorkerGlobalScope()
+  it('should have correct enumerables', () => {
     expect(instance).toHaveEnumerables([
       'document',
       'localStorage',

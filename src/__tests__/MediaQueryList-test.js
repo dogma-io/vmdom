@@ -14,8 +14,7 @@ describe('MediaQueryList', () => {
 
   itShouldImplementEventTargetInterface(() => instance)
 
-  it('should implement expected interfaces and has correct enumerables', () => {
-    expect(instance).toImplementEventTarget()
+  it('should have correct enumerables', () => {
     expect(instance).toHaveEnumerables(MEDIA_QUERY_LIST_EVENT_HANDLERS)
   })
 

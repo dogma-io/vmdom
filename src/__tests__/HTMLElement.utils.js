@@ -2,22 +2,20 @@
  * @format
  */
 
-import {itShoulImplementGlobalEventHandlersInterface} from '../mixins/__tests__/GlobalEventHandlers.utils'
+import {itShouldImplementGlobalEventHandlersInterface} from '../mixins/__tests__/GlobalEventHandlers.utils'
+import {itShouldImplementTouchEventHandlersInterface} from '../mixins/__tests__/TouchEventHandlers.utils'
 import {itShouldBeAnElement} from './Element.utils'
 
 export function itShouldBeAnHTMLElement(getInstance, tagName) {
   itShouldBeAnElement(getInstance, tagName)
-  itShoulImplementGlobalEventHandlersInterface(getInstance)
+  itShouldImplementGlobalEventHandlersInterface(getInstance)
+  itShouldImplementTouchEventHandlersInterface(getInstance)
 
   describe('HTMLElement interface', () => {
     let instance
 
     beforeEach(() => {
       instance = getInstance()
-    })
-
-    it('should implement expected interfaces', () => {
-      expect(instance).toImplementGlobalEventHandlers()
     })
 
     describe('blur()', () => {

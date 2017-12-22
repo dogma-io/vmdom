@@ -4,7 +4,7 @@
 
 import globalEventHandlersMixin from '../GlobalEventHandlers'
 import {
-  itShoulImplementGlobalEventHandlersInterface,
+  itShouldImplementGlobalEventHandlersInterface,
   PROPERTIES,
 } from './GlobalEventHandlers.utils'
 
@@ -18,7 +18,7 @@ describe('GlobalEventHandlers', () => {
     instance = new GlobalEventHandlersClass()
   })
 
-  itShoulImplementGlobalEventHandlersInterface(() => instance)
+  itShouldImplementGlobalEventHandlersInterface(() => instance)
 
   it('should have expected enumerables', () => {
     expect(instance).toHaveEnumerables(PROPERTIES)
