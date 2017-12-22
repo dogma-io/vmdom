@@ -8,6 +8,7 @@ import MediaQueryList from '../MediaQueryList'
 import Navigator from '../Navigator'
 import Storage from '../Storage'
 import Window from '../Window'
+import {itShouldImplementEventTargetInterface} from '../mixins/__tests__/EventTarget.utils'
 import {join} from 'path'
 
 const UA =
@@ -105,6 +106,8 @@ describe('Window', () => {
       userAgent: UA,
     })
   })
+
+  itShouldImplementEventTargetInterface(() => instance)
 
   it('should implement expected interfaces and has correct enumerables', () => {
     expect(instance).toImplementEventTarget()

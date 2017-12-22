@@ -2,10 +2,12 @@
  * @format
  */
 
+import {itShoulImplementGlobalEventHandlersInterface} from '../mixins/__tests__/GlobalEventHandlers.utils'
 import {itShouldBeAnElement} from './Element.utils'
 
 export function itShouldBeAnHTMLElement(getInstance, tagName) {
   itShouldBeAnElement(getInstance, tagName)
+  itShoulImplementGlobalEventHandlersInterface(getInstance)
 
   describe('HTMLElement interface', () => {
     let instance

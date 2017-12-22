@@ -3,6 +3,7 @@ import HTMLBodyElement from '../HTMLBodyElement'
 import UnmockedHTMLHtmlElement from '../HTMLHtmlElement'
 import HTMLHeadElement from '../HTMLHeadElement'
 import HTMLUnknownElement from '../HTMLUnknownElement'
+import {itShouldImplementNodeInterface} from '../mixins/__tests__/Node.utils'
 import {join} from 'path'
 
 jest.doMock('../HTMLHtmlElement', () => {
@@ -142,6 +143,8 @@ describe('Document', () => {
         })
       })
 
+      itShouldImplementNodeInterface(() => instance)
+
       it('should implement expected interfaces and has correct enumerables', () => {
         expect(instance).toImplementEventTarget()
         expect(instance).toImplementNode()
@@ -179,6 +182,8 @@ describe('Document', () => {
           includeHead: false,
         })
       })
+
+      itShouldImplementNodeInterface(() => instance)
 
       it('should implement expected interfaces and has correct enumerables', () => {
         expect(instance).toImplementEventTarget()
@@ -219,6 +224,8 @@ describe('Document', () => {
         })
       })
 
+      itShouldImplementNodeInterface(() => instance)
+
       it('should implement expected interfaces and has correct enumerables', () => {
         expect(instance).toImplementEventTarget()
         expect(instance).toImplementNode()
@@ -255,6 +262,8 @@ describe('Document', () => {
           includeHead: false,
         })
       })
+
+      itShouldImplementNodeInterface(() => instance)
 
       it('should implement expected interfaces and has correct enumerables', () => {
         expect(instance).toImplementEventTarget()

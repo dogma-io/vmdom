@@ -1,6 +1,7 @@
 import MediaQueryList, {
   MEDIA_QUERY_LIST_EVENT_HANDLERS,
 } from '../MediaQueryList'
+import {itShouldImplementEventTargetInterface} from '../mixins/__tests__/EventTarget.utils'
 
 const MEDIA = 'foo'
 
@@ -10,6 +11,8 @@ describe('MediaQueryList', () => {
   beforeEach(() => {
     instance = new MediaQueryList(MEDIA)
   })
+
+  itShouldImplementEventTargetInterface(() => instance)
 
   it('should implement expected interfaces and has correct enumerables', () => {
     expect(instance).toImplementEventTarget()

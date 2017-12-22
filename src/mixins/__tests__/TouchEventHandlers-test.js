@@ -1,3 +1,7 @@
+/**
+ * @format
+ */
+
 import touchEventHandlersMixin from '../TouchEventHandlers'
 
 const PROPERTIES = [

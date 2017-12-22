@@ -1,3 +1,7 @@
+/**
+ * @format
+ */
+
 jest.mock('node-fetch')
 
 import windowOrWorkerGlobalScopeMixin from '../WindowOrWorkerGlobalScope'

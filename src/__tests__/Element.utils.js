@@ -2,7 +2,11 @@
  * @format
  */
 
+import {itShouldImplementNodeInterface} from '../mixins/__tests__/Node.utils'
+
 export function itShouldBeAnElement(getInstance, tagName) {
+  itShouldImplementNodeInterface(getInstance)
+
   describe('Element interface', () => {
     let instance
 
