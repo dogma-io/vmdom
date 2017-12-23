@@ -196,6 +196,11 @@ class Document {
     }
   }
 
+  createTextNode(data: *) {
+    const Text = require('./Text').default
+    return new Text(`${data}`)
+  }
+
   // TODO: implement remaining methods
 }
 

@@ -18,9 +18,9 @@ describe('TouchEventHandlers', () => {
     instance = new TouchEventHandlersClass()
   })
 
+  itShouldImplementTouchEventHandlersInterface(() => instance)
+
   it('should have expected enumerables', () => {
     expect(instance).toHaveEnumerables(PROPERTIES)
   })
-
-  itShouldImplementTouchEventHandlersInterface(() => instance)
 })

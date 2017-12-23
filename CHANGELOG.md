@@ -1,3 +1,7 @@
+# 0.0.12
+
+*   Implement text node.
+
 # 0.0.11
 
 *   Fix bad publish.

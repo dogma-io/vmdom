@@ -3,6 +3,7 @@ import HTMLBodyElement from '../HTMLBodyElement'
 import UnmockedHTMLHtmlElement from '../HTMLHtmlElement'
 import HTMLHeadElement from '../HTMLHeadElement'
 import HTMLUnknownElement from '../HTMLUnknownElement'
+import Text from '../Text'
 import {itShouldImplementNodeInterface} from '../mixins/__tests__/Node.utils'
 import {join} from 'path'
 
@@ -283,33 +284,64 @@ describe('Document', () => {
           expect(instance.documentElement).toBe(documentElement)
         })
       })
-    })
-  })
 
-  describe('createElement()', () => {
-    beforeAll(() => {
-      instance = new Document({
-        includeHead: false,
-        includeBody: false,
+      describe('createElement()', () => {
+        Object.keys(TAG_NAME_DEFINITIONS).forEach(tagName => {
+          const className = TAG_NAME_DEFINITIONS[tagName]
+          const desc = `should return instance of ${className} for tag name "${
+            tagName
+          }"`
+
+          it(desc, () => {
+            const Class = require(join(__dirname, '..', className)).default
+            expect(instance.createElement(tagName)).toBeInstanceOf(Class)
+          })
+        })
+
+        it('should return instance of HTMLUnknownElement for unknown tag name', () => {
+          expect(instance.createElement('does-not-exist')).toBeInstanceOf(
+            HTMLUnknownElement,
+          )
+        })
       })
-    })
 
-    Object.keys(TAG_NAME_DEFINITIONS).forEach(tagName => {
-      const className = TAG_NAME_DEFINITIONS[tagName]
-      const desc = `should return instance of ${className} for tag name "${
-        tagName
-      }"`
+      describe('createTextNode()', () => {
+        it('should return instance of Text for boolean data', () => {
+          const textNode = instance.createTextNode(true)
+          expect(textNode).toBeInstanceOf(Text)
+          expect(textNode.data).toBe('true')
+        })
 
-      it(desc, () => {
-        const Class = require(join(__dirname, '..', className)).default
-        expect(instance.createElement(tagName)).toBeInstanceOf(Class)
+        it('should return instance of Text for null data', () => {
+          const textNode = instance.createTextNode(null)
+          expect(textNode).toBeInstanceOf(Text)
+          expect(textNode.data).toBe('null')
+        })
+
+        it('should return instance of Text for numeric data', () => {
+          const textNode = instance.createTextNode(2)
+          expect(textNode).toBeInstanceOf(Text)
+          expect(textNode.data).toBe('2')
+        })
+
+        it('should return instance of Text for string data', () => {
+          const textNode = instance.createTextNode('foo')
+          expect(textNode).toBeInstanceOf(Text)
+          expect(textNode.data).toBe('foo')
+        })
+
+        it('should throw for symbol data', () => {
+          expect(() => {
+            instance.createTextNode(Symbol('foo'))
+          }).toThrowError(TypeError)
+        })
+
+        it('should return instance of Text for undefined data', () => {
+          const textNode = instance.createTextNode(undefined)
+          expect(textNode).toBeInstanceOf(Text)
+          expect(textNode.data).toBe('undefined')
+        })
       })
-    })
-
-    it('should return instance of HTMLUnknownElement for unknown tag name', () => {
-      expect(instance.createElement('does-not-exist')).toBeInstanceOf(
-        HTMLUnknownElement,
-      )
     })
   })
 })
