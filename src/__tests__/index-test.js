@@ -1,5 +1,8 @@
 import Browser from '../Browser'
+import CharacterData from '../CharacterData'
+import Comment from '../Comment'
 import Document from '../Document'
+import DocumentFragment from '../DocumentFragment'
 import DOMException from '../DOMException'
 import Element from '../Element'
 import HTMLBodyElement from '../HTMLBodyElement'
@@ -16,6 +19,7 @@ import windowOrWorkerGlobalScopeMixin from '../mixins/WindowOrWorkerGlobalScope'
 import Navigator from '../Navigator'
 import NodeList from '../NodeList'
 import Storage from '../Storage'
+import Text from '../Text'
 import {
   defineEventHandlers,
   lazilyLoadInstanceAsProp,
@@ -29,8 +33,20 @@ describe('vmdom', () => {
       expect(exports.Browser).toBe(Browser)
     })
 
+    it('exports CharacterData', () => {
+      expect(exports.CharacterData).toBe(CharacterData)
+    })
+
+    it('exports Comment', () => {
+      expect(exports.Comment).toBe(Comment)
+    })
+
     it('exports Document', () => {
       expect(exports.Document).toBe(Document)
+    })
+
+    it('exports DocumentFragment', () => {
+      expect(exports.DocumentFragment).toBe(DocumentFragment)
     })
 
     it('exports DOMException', () => {
@@ -71,6 +87,10 @@ describe('vmdom', () => {
 
     it('exports Storage', () => {
       expect(exports.Storage).toBe(Storage)
+    })
+
+    it('exports Text', () => {
+      expect(exports.Text).toBe(Text)
     })
 
     it('exports Window', () => {

@@ -1,5 +1,8 @@
+import Comment from '../Comment'
 import Document from '../Document'
+import DocumentFragment from '../DocumentFragment'
 import HTMLBodyElement from '../HTMLBodyElement'
+import HTMLFrameSetElement from '../HTMLFrameSetElement'
 import UnmockedHTMLHtmlElement from '../HTMLHtmlElement'
 import HTMLHeadElement from '../HTMLHeadElement'
 import HTMLUnknownElement from '../HTMLUnknownElement'
@@ -154,6 +157,16 @@ describe('Document', () => {
         expect(HTMLHtmlElement).not.toHaveBeenCalled()
       })
 
+      it('should return head element for head property', () => {
+        expect(instance.head).toBeInstanceOf(HTMLHeadElement)
+        expect(instance.head).toBe(instance.documentElement.childNodes[0])
+      })
+
+      it('should return body element for body property', () => {
+        expect(instance.body).toBeInstanceOf(HTMLBodyElement)
+        expect(instance.body).toBe(instance.documentElement.childNodes[1])
+      })
+
       describe('when documentElement property accessed', () => {
         let documentElement
 
@@ -190,6 +203,15 @@ describe('Document', () => {
 
       it('should not instantiate classes for lazily load properties', () => {
         expect(HTMLHtmlElement).not.toHaveBeenCalled()
+      })
+
+      it('should return null for head property', () => {
+        expect(instance.head).toBe(null)
+      })
+
+      it('should return body element for body property', () => {
+        expect(instance.body).toBeInstanceOf(HTMLBodyElement)
+        expect(instance.body).toBe(instance.documentElement.childNodes[0])
       })
 
       describe('when documentElement property accessed', () => {
@@ -231,6 +253,21 @@ describe('Document', () => {
         expect(HTMLHtmlElement).not.toHaveBeenCalled()
       })
 
+      it('should return head element for head property', () => {
+        expect(instance.head).toBeInstanceOf(HTMLHeadElement)
+        expect(instance.head).toBe(instance.documentElement.childNodes[0])
+      })
+
+      it('should return null for body property', () => {
+        expect(instance.body).toBe(null)
+      })
+
+      it('should return frame set element for body when frame set added to document', () => {
+        instance.documentElement.appendChild(new HTMLFrameSetElement())
+        expect(instance.body).toBeInstanceOf(HTMLFrameSetElement)
+        expect(instance.body).toBe(instance.documentElement.childNodes[1])
+      })
+
       describe('when documentElement property accessed', () => {
         let documentElement
 
@@ -268,6 +305,20 @@ describe('Document', () => {
         expect(HTMLHtmlElement).not.toHaveBeenCalled()
       })
 
+      it('should return null for head property', () => {
+        expect(instance.head).toBe(null)
+      })
+
+      it('should return null for body property', () => {
+        expect(instance.body).toBe(null)
+      })
+
+      it('should return frame set element for body when frame set added to document', () => {
+        instance.documentElement.appendChild(new HTMLFrameSetElement())
+        expect(instance.body).toBeInstanceOf(HTMLFrameSetElement)
+        expect(instance.body).toBe(instance.documentElement.childNodes[0])
+      })
+
       describe('when documentElement property accessed', () => {
         let documentElement
 
@@ -283,6 +334,50 @@ describe('Document', () => {
         it('should return same instance when accessed a second time', () => {
           expect(instance.documentElement).toBe(documentElement)
         })
+      })
+
+      describe('createComment()', () => {
+        it('should return instance of Comment for boolean data', () => {
+          const textNode = instance.createComment(true)
+          expect(textNode).toBeInstanceOf(Comment)
+          expect(textNode.data).toBe('true')
+        })
+
+        it('should return instance of Comment for null data', () => {
+          const textNode = instance.createComment(null)
+          expect(textNode).toBeInstanceOf(Comment)
+          expect(textNode.data).toBe('null')
+        })
+
+        it('should return instance of Comment for numeric data', () => {
+          const textNode = instance.createComment(2)
+          expect(textNode).toBeInstanceOf(Comment)
+          expect(textNode.data).toBe('2')
+        })
+
+        it('should return instance of Comment for string data', () => {
+          const textNode = instance.createComment('foo')
+          expect(textNode).toBeInstanceOf(Comment)
+          expect(textNode.data).toBe('foo')
+        })
+
+        it('should throw for symbol data', () => {
+          expect(() => {
+            instance.createComment(Symbol('foo'))
+          }).toThrowError(TypeError)
+        })
+
+        it('should return instance of Comment for undefined data', () => {
+          const textNode = instance.createComment(undefined)
+          expect(textNode).toBeInstanceOf(Comment)
+          expect(textNode.data).toBe('undefined')
+        })
+      })
+
+      it('createDocumentFragment() should return a new document fragment', () => {
+        expect(instance.createDocumentFragment()).toBeInstanceOf(
+          DocumentFragment,
+        )
       })
 
       describe('createElement()', () => {

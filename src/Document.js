@@ -149,13 +149,37 @@ const TAG_NAME_DEFINITIONS = {
 }
 
 class Document {
+  body: ?HTMLBodyElement
   documentElement: HTMLHtmlElement
 
   constructor({includeBody, includeHead}: DocumentOptions) {
-    let documentElement
+    let body, documentElement, head
 
     // $FlowFixMe - Flow seems to hate getters/setters over value property
     Object.defineProperties(this, {
+      body: {
+        enumerable: false,
+        get() {
+          if (body === undefined) {
+            const HTMLFrameSetElement = require('./HTMLFrameSetElement').default
+            const {childNodes} = this.documentElement
+
+            for (let i = childNodes.length; i >= 0; i--) {
+              const node = childNodes[i]
+
+              if (
+                node instanceof HTMLBodyElement ||
+                node instanceof HTMLFrameSetElement
+              ) {
+                body = node
+                break
+              }
+            }
+          }
+
+          return body || null
+        },
+      },
       documentElement: {
         enumerable: false,
         get() {
@@ -174,9 +198,38 @@ class Document {
           return documentElement
         },
       },
+      head: {
+        enumerable: false,
+        get() {
+          if (head === undefined) {
+            const {childNodes} = this.documentElement
+
+            for (let i = 0, len = childNodes.length; i < len; i++) {
+              const node = childNodes[i]
+
+              if (node instanceof HTMLHeadElement) {
+                head = node
+                break
+              }
+            }
+          }
+
+          return head || null
+        },
+      },
     })
 
     // TODO: implement remaining properties
+  }
+
+  createComment(data: *) {
+    const Comment = require('./Comment').default
+    return new Comment(`${data}`)
+  }
+
+  createDocumentFragment() {
+    const DocumentFragment = require('./DocumentFragment').default
+    return new DocumentFragment()
   }
 
   createElement(tagName: string, options: *) {

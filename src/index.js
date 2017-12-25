@@ -1,6 +1,9 @@
 // Classes
 export {default as Browser} from './Browser'
+export {default as CharacterData} from './CharacterData'
+export {default as Comment} from './Comment'
 export {default as Document} from './Document'
+export {default as DocumentFragment} from './DocumentFragment'
 export {default as DOMException} from './DOMException'
 export {default as Element} from './Element'
 export {default as HTMLBodyElement} from './HTMLBodyElement'
@@ -11,6 +14,7 @@ export {default as MediaQueryList} from './MediaQueryList'
 export {default as Navigator} from './Navigator'
 export {default as NodeList} from './NodeList'
 export {default as Storage} from './Storage'
+export {default as Text} from './Text'
 export {default as Window} from './Window'
 
 // Mixins

@@ -1,3 +1,7 @@
+# 0.0.13
+
+*   Added support for comments, document fragments, document.body, and document.head.
+
 # 0.0.12
 
 *   Implement text node.
