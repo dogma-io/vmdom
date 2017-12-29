@@ -2,22 +2,19 @@
  * @format
  */
 
-import nodeMixin from '../Node'
+import Node from '../Node'
 import {itShouldImplementNodeInterface} from './Node.utils'
 
-class Superclass {}
-const NodeClass = nodeMixin(Superclass)
-
-describe('EventTarget', () => {
+describe('Node', () => {
   let instance
 
   beforeEach(() => {
-    instance = new NodeClass()
+    instance = new Node()
   })
 
   itShouldImplementNodeInterface(() => instance)
 
-  it('should have correct enumerables', () => {
+  it('should have expected enumerables', () => {
     expect(instance).toHaveEnumerables([])
   })
 })

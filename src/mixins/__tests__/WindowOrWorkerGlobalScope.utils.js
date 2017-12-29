@@ -58,7 +58,7 @@ export function itShouldImplementWindowOrWorkerGlobalScopeInterface(
       it('throws an error when input is non-latin1 string', () => {
         expect(() => {
           instance.btoa('עברית')
-        }).toThrowError(
+        }).toThrow(
           "DOMException: Failed to execute 'btoa' on 'Window': The string to be encoded contains characters outside of the Latin1 range.",
         )
       })
@@ -66,7 +66,7 @@ export function itShouldImplementWindowOrWorkerGlobalScopeInterface(
       it('throws an error when input is a symbol', () => {
         expect(() => {
           instance.btoa(Symbol('foobar'))
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
     })
 

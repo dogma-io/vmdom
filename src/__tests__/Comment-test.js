@@ -33,6 +33,6 @@ describe('Comment', () => {
   it('should throw when data is a symbol', () => {
     expect(() => {
       new Comment(Symbol('foo')) // eslint-disable-line
-    }).toThrowError(TypeError)
+    }).toThrow(TypeError)
   })
 })

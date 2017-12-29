@@ -4,16 +4,18 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Document
  */
 
-import nodeMixin from './mixins/Node'
+import Node from './Node'
 
 // TODO: implement NonDocumentTypeChildNode interface
 
-class CharacterData {
+export default class CharacterData extends Node {
   _data: string
   data: string
   length: number
 
   constructor(data: *) {
+    super()
+
     // $FlowFixMe - Flow seems to hate getters/setters over value property
     Object.defineProperties(this, {
       _data: {
@@ -63,5 +65,3 @@ class CharacterData {
     return this.data.substr(start, end)
   }
 }
-
-export default nodeMixin(CharacterData)

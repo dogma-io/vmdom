@@ -112,7 +112,7 @@ describe('Window', () => {
   itShouldImplementEventTargetInterface(() => instance)
   itShouldImplementWindowOrWorkerGlobalScopeInterface(() => instance)
 
-  it('should have correct enumerables', () => {
+  it('should have expected enumerables', () => {
     expect(instance).toHaveEnumerables([
       'document',
       'localStorage',

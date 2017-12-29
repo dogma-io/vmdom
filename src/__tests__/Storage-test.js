@@ -7,14 +7,14 @@ describe('Storage', () => {
     instance = new Storage()
   })
 
-  it('should have correct enumerables', () => {
+  it('should have expected enumerables', () => {
     expect(instance).toHaveEnumerables([])
   })
 
   it('should not allow _items property to be overwritten', () => {
     expect(() => {
       instance._items = 'foo'
-    }).toThrowError(TypeError)
+    }).toThrow(TypeError)
   })
 
   it('should not allow length property to be overwritten', () => {
@@ -57,7 +57,7 @@ describe('Storage', () => {
     it('should throw when trying to get item by symbol key', () => {
       expect(() => {
         instance.getItem(Symbol('foo'))
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     it('should get item by undefined key', () => {

@@ -44,19 +44,19 @@ describe('Browser', () => {
     it('should not allow _sandbox property to be overwritten', () => {
       expect(() => {
         instance._sandbox = 'foobar'
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     it('should not allow global property to be overwritten', () => {
       expect(() => {
         instance.global = 'foobar'
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     it('should not allow window property to be overwritten', () => {
       expect(() => {
         instance.window = 'foobar'
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     it('destroy() should destroy window', () => {
@@ -98,13 +98,13 @@ describe('Browser', () => {
       it('should not allow reassignment of global', () => {
         expect(() => {
           instance.eval("global = 'foo'")
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should not allow reassignment of window', () => {
         expect(() => {
           instance.eval("window = 'foo'")
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should allow access of window properties via global reference', () => {

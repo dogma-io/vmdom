@@ -33,6 +33,6 @@ describe('CharacterData', () => {
   it('should throw when data is a symbol', () => {
     expect(() => {
       new CharacterData(Symbol('foo')) // eslint-disable-line
-    }).toThrowError(TypeError)
+    }).toThrow(TypeError)
   })
 })

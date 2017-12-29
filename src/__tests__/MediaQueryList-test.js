@@ -14,7 +14,7 @@ describe('MediaQueryList', () => {
 
   itShouldImplementEventTargetInterface(() => instance)
 
-  it('should have correct enumerables', () => {
+  it('should have expected enumerables', () => {
     expect(instance).toHaveEnumerables(MEDIA_QUERY_LIST_EVENT_HANDLERS)
   })
 
@@ -25,7 +25,7 @@ describe('MediaQueryList', () => {
   it('should not allow matches property to be overwritten', () => {
     expect(() => {
       instance.matches = true
-    }).toThrowError(TypeError)
+    }).toThrow(TypeError)
   })
 
   it('should return passed in media for media property', () => {
@@ -35,6 +35,6 @@ describe('MediaQueryList', () => {
   it('should not allow media property to be overwritten', () => {
     expect(() => {
       instance.media = 'bar'
-    }).toThrowError(TypeError)
+    }).toThrow(TypeError)
   })
 })

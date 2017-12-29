@@ -7,7 +7,7 @@
 import HTMLBodyElement from './HTMLBodyElement'
 import HTMLHtmlElement from './HTMLHtmlElement'
 import HTMLHeadElement from './HTMLHeadElement'
-import nodeMixin from './mixins/Node'
+import Node from './Node'
 import {join} from 'path'
 
 type DocumentOptions = {|
@@ -148,36 +148,38 @@ const TAG_NAME_DEFINITIONS = {
   // xmp
 }
 
-class Document {
+export default class Document extends Node {
   body: ?HTMLBodyElement
   documentElement: HTMLHtmlElement
 
   constructor({includeBody, includeHead}: DocumentOptions) {
-    let body, documentElement, head
+    super()
+
+    let documentElement
 
     // $FlowFixMe - Flow seems to hate getters/setters over value property
     Object.defineProperties(this, {
       body: {
         enumerable: false,
         get() {
-          if (body === undefined) {
-            const HTMLFrameSetElement = require('./HTMLFrameSetElement').default
-            const {childNodes} = this.documentElement
+          // TODO: cache result so we don't have to lookup every time and use
+          // MutationObserver to determine if/when body is removed from DOM
+          // so cached result remains accurate
+          const HTMLFrameSetElement = require('./HTMLFrameSetElement').default
+          const {childNodes} = this.documentElement
 
-            for (let i = childNodes.length; i >= 0; i--) {
-              const node = childNodes[i]
+          for (let i = childNodes.length; i >= 0; i--) {
+            const node = childNodes[i]
 
-              if (
-                node instanceof HTMLBodyElement ||
-                node instanceof HTMLFrameSetElement
-              ) {
-                body = node
-                break
-              }
+            if (
+              node instanceof HTMLBodyElement ||
+              node instanceof HTMLFrameSetElement
+            ) {
+              return node
             }
           }
 
-          return body || null
+          return null
         },
       },
       documentElement: {
@@ -201,20 +203,20 @@ class Document {
       head: {
         enumerable: false,
         get() {
-          if (head === undefined) {
-            const {childNodes} = this.documentElement
+          // TODO: cache result so we don't have to lookup every time and use
+          // MutationObserver to determine if/when body is removed from DOM
+          // so cached result remains accurate
+          const {childNodes} = this.documentElement
 
-            for (let i = 0, len = childNodes.length; i < len; i++) {
-              const node = childNodes[i]
+          for (let i = 0, len = childNodes.length; i < len; i++) {
+            const node = childNodes[i]
 
-              if (node instanceof HTMLHeadElement) {
-                head = node
-                break
-              }
+            if (node instanceof HTMLHeadElement) {
+              return node
             }
           }
 
-          return head || null
+          return null
         },
       },
     })
@@ -256,5 +258,3 @@ class Document {
 
   // TODO: implement remaining methods
 }
-
-export default nodeMixin(Document)

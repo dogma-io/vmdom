@@ -57,7 +57,7 @@ export function toBeCharacterData(getInstance, data) {
       it('should throw when appending symbol', () => {
         expect(() => {
           instance.appendData(Symbol('bar'))
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should append undefined data', () => {
@@ -107,7 +107,7 @@ export function toBeCharacterData(getInstance, data) {
       it('should throw when inserting symbol', () => {
         expect(() => {
           instance.insertData(1, Symbol('bar'))
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should insert undefined data', () => {
@@ -150,7 +150,7 @@ export function toBeCharacterData(getInstance, data) {
       it('should throw when replacing data with symbol', () => {
         expect(() => {
           instance.replaceData(1, 2, Symbol('bar'))
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should replace data with undefined', () => {

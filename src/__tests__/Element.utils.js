@@ -2,7 +2,7 @@
  * @format
  */
 
-import {itShouldImplementNodeInterface} from '../mixins/__tests__/Node.utils'
+import {itShouldImplementNodeInterface} from './Node.utils'
 
 export function itShouldBeAnElement(getInstance, tagName) {
   itShouldImplementNodeInterface(getInstance)
@@ -26,19 +26,19 @@ export function itShouldBeAnElement(getInstance, tagName) {
     it('should not allow _attributes property to be overwritten', () => {
       expect(() => {
         instance._attributes = 'foobar'
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     it('should not allow _namespaceAttributes property to be overwritten', () => {
       expect(() => {
         instance._namespaceAttributes = 'foobar'
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     it('should not allow tagName property to be overwritten', () => {
       expect(() => {
         instance.tagName = 'foobar'
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     describe('getAttribute()', () => {
@@ -69,7 +69,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
       it('should throw for symbol attribute', () => {
         expect(() => {
           instance.getAttribute(Symbol('foo'))
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should get undefined attribute', () => {
@@ -255,7 +255,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
         it('should throw for symbol attribute', () => {
           expect(() => {
             instance.getAttributeNS('dogma', Symbol('foo'))
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should get undefined attribute', () => {
@@ -296,7 +296,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
       it('should throw when symbol attribute', () => {
         expect(() => {
           instance.hasAttribute(Symbol('foo'))
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should return true for present undefined attribute', () => {
@@ -326,7 +326,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
         it('should throw when symbol attribute', () => {
           expect(() => {
             instance.hasAttributeNS('dogma', Symbol('foo'))
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should return false for non-present undefined attribute', () => {
@@ -369,7 +369,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
         it('should throw when symbol attribute', () => {
           expect(() => {
             instance.hasAttributeNS('dogma', Symbol('foo'))
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should return true for present undefined attribute', () => {
@@ -449,7 +449,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
       it('should throw when symbol attribute', () => {
         expect(() => {
           instance.removeAttribute(Symbol('foo'))
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should remove undefined attribute', () => {
@@ -500,7 +500,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
         it('should throw when symbol attribute', () => {
           expect(() => {
             instance.removeAttributeNS('dogma', Symbol('foo'))
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should remove undefined attribute', () => {
@@ -559,7 +559,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
       it('should throw when adding a symbol attribute', () => {
         expect(() => {
           instance.setAttribute(Symbol('foo'), 'bar')
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should add undefined attribute when not already present', () => {
@@ -591,7 +591,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
       it('should throw when using a symbol value', () => {
         expect(() => {
           instance.setAttribute('foo', Symbol('bar'))
-        }).toThrowError(TypeError)
+        }).toThrow(TypeError)
       })
 
       it('should convert undefined value into string', () => {
@@ -625,7 +625,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
         it('should throw when adding a symbol attribute', () => {
           expect(() => {
             instance.setAttributeNS('dogma', Symbol('foo'), 'bar')
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should add undefined attribute when not already present', () => {
@@ -653,7 +653,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
         it('should throw when using a symbol value', () => {
           expect(() => {
             instance.setAttributeNS('dogma', 'foo', Symbol('bar'))
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should convert undefined value into string', () => {
@@ -716,7 +716,7 @@ export function itShouldBeAnElement(getInstance, tagName) {
         it('should throw when adding a symbol attribute', () => {
           expect(() => {
             instance.setAttributeNS('dogma', Symbol('foo'), 'bar')
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should add undefined attribute when not already present', () => {

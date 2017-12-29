@@ -4,7 +4,7 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Element
  */
 
-import nodeMixin from './mixins/Node'
+import Node from './Node'
 import {defineEventHandlers} from './utils'
 
 type ElementAttributes = {[key: string]: string}
@@ -18,12 +18,14 @@ export const ELEMENT_EVENT_HANDLERS = [
   'onlostpointercapture',
 ]
 
-class Element {
+export default class Element extends Node {
   _attributes: ElementAttributes
   _namespaceAttributes: {[key: string]: ElementAttributes}
   tagName: string
 
   constructor({tagName}: ElementOptions) {
+    super()
+
     Object.defineProperties(this, {
       _attributes: {
         enumerable: false,
@@ -144,5 +146,3 @@ class Element {
   // TODO: implement setcapture
   // TODO: implement setPointerCapture
 }
-
-export default nodeMixin(Element)

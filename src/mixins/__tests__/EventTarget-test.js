@@ -17,7 +17,7 @@ describe('EventTarget', () => {
 
   itShouldImplementEventTargetInterface(() => instance)
 
-  it('should have correct enumerables', () => {
+  it('should have expected enumerables', () => {
     expect(instance).toHaveEnumerables([])
   })
 })

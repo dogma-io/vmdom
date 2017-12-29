@@ -1,3 +1,9 @@
+# 0.0.14
+
+*   Added MutationObserver and MutationRecord.
+*   Added missing HTML element class exports to index.
+*   Changed Node from a mixin to a class.
+
 # 0.0.13
 
 *   Added support for comments, document fragments, document.body, and document.head.

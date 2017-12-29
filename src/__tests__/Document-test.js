@@ -7,7 +7,7 @@ import UnmockedHTMLHtmlElement from '../HTMLHtmlElement'
 import HTMLHeadElement from '../HTMLHeadElement'
 import HTMLUnknownElement from '../HTMLUnknownElement'
 import Text from '../Text'
-import {itShouldImplementNodeInterface} from '../mixins/__tests__/Node.utils'
+import {itShouldImplementNodeInterface} from './Node.utils'
 import {join} from 'path'
 
 jest.doMock('../HTMLHtmlElement', () => {
@@ -149,7 +149,7 @@ describe('Document', () => {
 
       itShouldImplementNodeInterface(() => instance)
 
-      it('should have correct enumerables', () => {
+      it('should have expected enumerables', () => {
         expect(instance).toHaveEnumerables([])
       })
 
@@ -162,9 +162,19 @@ describe('Document', () => {
         expect(instance.head).toBe(instance.documentElement.childNodes[0])
       })
 
+      it('should return null for head when head is removed from document', () => {
+        instance.documentElement.removeChild(instance.head)
+        expect(instance.head).toBe(null)
+      })
+
       it('should return body element for body property', () => {
         expect(instance.body).toBeInstanceOf(HTMLBodyElement)
         expect(instance.body).toBe(instance.documentElement.childNodes[1])
+      })
+
+      it('should return null for body when body is removed from document', () => {
+        instance.documentElement.removeChild(instance.body)
+        expect(instance.body).toBe(null)
       })
 
       describe('when documentElement property accessed', () => {
@@ -197,7 +207,7 @@ describe('Document', () => {
 
       itShouldImplementNodeInterface(() => instance)
 
-      it('should have correct enumerables', () => {
+      it('should have expected enumerables', () => {
         expect(instance).toHaveEnumerables([])
       })
 
@@ -212,6 +222,11 @@ describe('Document', () => {
       it('should return body element for body property', () => {
         expect(instance.body).toBeInstanceOf(HTMLBodyElement)
         expect(instance.body).toBe(instance.documentElement.childNodes[0])
+      })
+
+      it('should return null for body when body is removed from document', () => {
+        instance.documentElement.removeChild(instance.body)
+        expect(instance.body).toBe(null)
       })
 
       describe('when documentElement property accessed', () => {
@@ -245,7 +260,7 @@ describe('Document', () => {
 
       itShouldImplementNodeInterface(() => instance)
 
-      it('should have correct enumerables', () => {
+      it('should have expected enumerables', () => {
         expect(instance).toHaveEnumerables([])
       })
 
@@ -256,6 +271,11 @@ describe('Document', () => {
       it('should return head element for head property', () => {
         expect(instance.head).toBeInstanceOf(HTMLHeadElement)
         expect(instance.head).toBe(instance.documentElement.childNodes[0])
+      })
+
+      it('should return null for head when head is removed from document', () => {
+        instance.documentElement.removeChild(instance.head)
+        expect(instance.head).toBe(null)
       })
 
       it('should return null for body property', () => {
@@ -297,7 +317,7 @@ describe('Document', () => {
 
       itShouldImplementNodeInterface(() => instance)
 
-      it('should have correct enumerables', () => {
+      it('should have expected enumerables', () => {
         expect(instance).toHaveEnumerables([])
       })
 
@@ -364,7 +384,7 @@ describe('Document', () => {
         it('should throw for symbol data', () => {
           expect(() => {
             instance.createComment(Symbol('foo'))
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should return instance of Comment for undefined data', () => {
@@ -428,7 +448,7 @@ describe('Document', () => {
         it('should throw for symbol data', () => {
           expect(() => {
             instance.createTextNode(Symbol('foo'))
-          }).toThrowError(TypeError)
+          }).toThrow(TypeError)
         })
 
         it('should return instance of Text for undefined data', () => {

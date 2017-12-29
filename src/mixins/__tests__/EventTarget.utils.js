@@ -22,32 +22,32 @@ export function itShouldImplementEventTargetInterface(getInstance) {
     it('should not allow _listeners property to be overwritten', () => {
       expect(() => {
         instance._listeners = 'foobar'
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     describe('addEventListener()', () => {
       it('should throw when listener is a boolean', () => {
         expect(() => {
           instance.addEventListener('click', true)
-        }).toThrowError(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
+        }).toThrow(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
       })
 
       it('should throw when listener is a number', () => {
         expect(() => {
           instance.addEventListener('click', 1)
-        }).toThrowError(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
+        }).toThrow(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
       })
 
       it('should throw when listener is a string', () => {
         expect(() => {
           instance.addEventListener('click', 'foobar')
-        }).toThrowError(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
+        }).toThrow(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
       })
 
       it('should throw when listener is a symbol', () => {
         expect(() => {
           instance.addEventListener('click', Symbol('foobar'))
-        }).toThrowError(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
+        }).toThrow(ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR)
       })
 
       describe('when listener is a function', () => {

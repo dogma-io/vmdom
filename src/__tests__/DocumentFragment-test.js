@@ -3,7 +3,7 @@
  */
 
 import DocumentFragment from '../DocumentFragment'
-import {itShouldImplementNodeInterface} from '../mixins/__tests__/Node.utils'
+import {itShouldImplementNodeInterface} from './Node.utils'
 
 describe('DocumentFragment', () => {
   let instance

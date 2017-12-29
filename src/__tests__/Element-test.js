@@ -14,7 +14,7 @@ describe('Element', () => {
 
   itShouldBeAnElement(() => instance, TAG_NAME)
 
-  it('should hae correct enumerables', () => {
+  it('should hae expected enumerables', () => {
     expect(instance).toHaveEnumerables(ELEMENT_EVENT_HANDLERS)
   })
 })

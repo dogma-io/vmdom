@@ -1,8 +1,5 @@
-import nodeMixin from '../mixins/Node'
+import Node from '../Node'
 import NodeList from '../NodeList'
-
-class Superclass {}
-const NodeClass = nodeMixin(Superclass)
 
 describe('NodeList', () => {
   let instance
@@ -36,7 +33,7 @@ describe('NodeList', () => {
 
   describe('when instantiated with one node', () => {
     beforeEach(() => {
-      instance = new NodeList([new NodeClass()])
+      instance = new NodeList([new Node()])
     })
 
     it('should have expected length and enumerables', () => {
@@ -52,7 +49,7 @@ describe('NodeList', () => {
 
   describe('when instantiated with two nodes', () => {
     beforeEach(() => {
-      instance = new NodeList([new NodeClass(), new NodeClass()])
+      instance = new NodeList([new Node(), new Node()])
     })
 
     it('should have expected length and enumerables', () => {

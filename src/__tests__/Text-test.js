@@ -33,6 +33,6 @@ describe('Text', () => {
   it('should throw when data is a symbol', () => {
     expect(() => {
       new Text(Symbol('foo')) // eslint-disable-line
-    }).toThrowError(TypeError)
+    }).toThrow(TypeError)
   })
 })

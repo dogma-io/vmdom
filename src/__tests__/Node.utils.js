@@ -2,20 +2,9 @@
  * @format
  */
 
-import NodeList from '../../NodeList'
-import nodeMixin from '../Node'
-import {itShouldImplementEventTargetInterface} from './EventTarget.utils'
-
-class SuperclassOne {}
-
-class SuperclassTwo {
-  static destroy() {
-    //
-  }
-}
-
-const NodeClassOne = nodeMixin(SuperclassOne)
-const NodeClassTwo = nodeMixin(SuperclassTwo)
+import Node from '../Node'
+import NodeList from '../NodeList'
+import {itShouldImplementEventTargetInterface} from '../mixins/__tests__/EventTarget.utils'
 
 export function itShouldImplementNodeInterface(getInstance) {
   itShouldImplementEventTargetInterface(getInstance)
@@ -36,7 +25,7 @@ export function itShouldImplementNodeInterface(getInstance) {
     it('should not allow _childNodes property to be overwritten', () => {
       expect(() => {
         instance._childNodes = 'foobar'
-      }).toThrowError(TypeError)
+      }).toThrow(TypeError)
     })
 
     it('should not allow childNodes property to be overwritten', () => {
@@ -46,7 +35,7 @@ export function itShouldImplementNodeInterface(getInstance) {
 
     describe('appendChild()', () => {
       it('should append child to list', () => {
-        const child = new NodeClassOne()
+        const child = new Node()
         expect(instance.appendChild(child)).toBe(child)
         expect(instance._childNodes).toEqual([child])
         expect(instance.childNodes).toHaveLength(1)
@@ -54,24 +43,42 @@ export function itShouldImplementNodeInterface(getInstance) {
     })
 
     it('destroy() should destroy child nodes', () => {
-      jest.spyOn(NodeClassOne, 'destroy')
-      jest.spyOn(NodeClassTwo, 'destroy')
+      jest.spyOn(Node, 'destroy')
 
-      const child1 = new NodeClassOne()
-      const child2 = new NodeClassTwo()
+      const child1 = new Node()
+      const child2 = new Node()
 
       instance._childNodes.push(child1, child2)
 
       instance.constructor.destroy(instance)
 
-      expect(NodeClassOne.destroy).toHaveBeenCalledTimes(1)
-      expect(NodeClassOne.destroy).toHaveBeenCalledWith(child1)
-      expect(NodeClassTwo.destroy).toHaveBeenCalledTimes(1)
-      expect(NodeClassTwo.destroy).toHaveBeenCalledWith(child2)
+      expect(Node.destroy.mock.calls.length).toBeGreaterThanOrEqual(2)
+      expect(Node.destroy).toHaveBeenCalledWith(child1)
+      expect(Node.destroy).toHaveBeenCalledWith(child2)
       expect(instance._childNodes).toHaveLength(0)
 
-      NodeClassOne.destroy.mockRestore()
-      NodeClassTwo.destroy.mockRestore()
+      Node.destroy.mockRestore()
+    })
+
+    describe('removeChild()', () => {
+      it('should throw when child is not a Node', () => {
+        expect(() => {
+          instance.removeChild('foobar')
+        }).toThrow(TypeError)
+      })
+
+      it('should throw when child is not actually a child of node', () => {
+        expect(() => {
+          instance.removeChild(new Node())
+        }).toThrow(/DOMException/)
+      })
+
+      it('should remove child when it is a child of node', () => {
+        const child = new Node()
+        instance._childNodes.push(child)
+        expect(instance.removeChild(child)).toBe(child)
+        expect(instance._childNodes).toHaveLength(0)
+      })
     })
   })
 }
