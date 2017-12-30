@@ -1,6 +1,6 @@
 {
   "name": "vmdom",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Lightweight browser implementation for Node's VM.",
   "main": "lib/index.js",
   "files": [

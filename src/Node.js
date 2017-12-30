@@ -114,7 +114,27 @@ class Node {
 
   // TODO: implement lookupPrefix()
   // TODO: implement lookupNamespaceURI()
-  // TODO: implement normalize()
+
+  normalize() {
+    const {_childNodes: childNodes} = this
+
+    for (let i = childNodes.length - 1; i >= 0; i--) {
+      const node = childNodes[i]
+
+      node.normalize()
+
+      const prevNode = childNodes[i - 1]
+
+      if (node instanceof CharacterData) {
+        if (prevNode instanceof CharacterData) {
+          prevNode.appendData(node.data)
+          childNodes.splice(i, 1)
+        } else if (node.data === '') {
+          childNodes.splice(i, 1)
+        }
+      }
+    }
+  }
 
   removeChild(child: Node) {
     if (!(child instanceof Node)) {
@@ -164,6 +184,70 @@ class Node {
 }
 
 const NodeWithEventTargetMixin = eventTargetMixin(Node)
+
+/**
+ * NOTE: this must live in the same module as the Node class to prevent circular
+ * dependency issues.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/CharacterData
+ */
+export class CharacterData extends NodeWithEventTargetMixin {
+  // TODO: implement NonDocumentTypeChildNode interface
+  _data: string
+  data: string
+  length: number
+
+  constructor(data: *) {
+    super()
+
+    // $FlowFixMe - Flow seems to hate getters/setters over value property
+    Object.defineProperties(this, {
+      _data: {
+        enumerable: false,
+        value: `${data}`,
+        writable: true,
+      },
+      data: {
+        enumerable: false,
+        get() {
+          return this._data
+        },
+        set(newValue) {
+          return newValue
+        },
+      },
+      length: {
+        enumerable: false,
+        get() {
+          return this._data.length
+        },
+        set(newValue) {
+          return newValue
+        },
+      },
+    })
+  }
+
+  appendData(data: *) {
+    this._data = this.data + `${data}`
+  }
+
+  deleteData(start: number, end: number) {
+    this._data = this.data.substr(0, start) + this.data.substr(end)
+  }
+
+  insertData(start: number, data: *) {
+    this._data =
+      this.data.substr(0, start) + `${data}` + this.data.substr(start)
+  }
+
+  replaceData(start: number, end: number, data: *) {
+    this._data = this.data.substr(0, start) + `${data}` + this.data.substr(end)
+  }
+
+  substringData(start: number, end: number) {
+    return this.data.substr(start, end)
+  }
+}
 
 /**
  * NOTE: this must live in the same module as the Node class to prevent circular

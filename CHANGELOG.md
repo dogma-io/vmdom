@@ -1,3 +1,7 @@
+# 0.0.16
+
+*   Implement Node normalize method.
+
 # 0.0.15
 
 *   Implemented more Node methods.

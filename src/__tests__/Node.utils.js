@@ -3,8 +3,10 @@
  */
 
 import DocumentFragment from '../DocumentFragment'
+import HTMLDivElement from '../HTMLDivElement'
 import Node from '../Node'
 import NodeList from '../NodeList'
+import Text from '../Text'
 import {itShouldImplementEventTargetInterface} from '../mixins/__tests__/EventTarget.utils'
 
 export function itShouldImplementNodeInterface(getInstance) {
@@ -169,6 +171,54 @@ export function itShouldImplementNodeInterface(getInstance) {
       it('should return false when different nodes', () => {
         const node = new Node()
         expect(node.isSameNode(node)).toBe(true)
+      })
+    })
+
+    describe('normalize()', () => {
+      it('should merge text nodes into one', () => {
+        instance.appendChild(new HTMLDivElement())
+        instance.appendChild(new Text('foo'))
+        instance.appendChild(new Text('bar'))
+        instance.appendChild(new Text(' baz '))
+        instance.normalize()
+        expect(instance.childNodes).toHaveLength(2)
+        expect(instance.childNodes[0]).toBeInstanceOf(HTMLDivElement)
+        expect(instance.childNodes[1]).toEqual(new Text('foobar baz '))
+      })
+
+      it('should remove empty text nodes', () => {
+        instance.appendChild(new HTMLDivElement())
+        instance.appendChild(new Text(''))
+        instance.appendChild(new HTMLDivElement())
+        instance.normalize()
+        expect(instance.childNodes).toHaveLength(2)
+        expect(instance.childNodes[0]).toBeInstanceOf(HTMLDivElement)
+        expect(instance.childNodes[1]).toBeInstanceOf(HTMLDivElement)
+      })
+
+      it('should remove only node if it is an empty text node', () => {
+        instance.appendChild(new Text(''))
+        instance.normalize()
+        expect(instance.childNodes).toHaveLength(0)
+      })
+
+      it('should normalize children', () => {
+        const childOne = new HTMLDivElement()
+        const childTwo = new HTMLDivElement()
+        childOne.appendChild(new Text('foo'))
+        childOne.appendChild(new Text('bar'))
+        childTwo.appendChild(new Text('baz'))
+        childTwo.appendChild(new Text('spam'))
+        instance.appendChild(childOne)
+        instance.appendChild(childTwo)
+        instance.normalize()
+        expect(instance.childNodes).toHaveLength(2)
+        expect(instance.childNodes[0].childNodes).toHaveLength(1)
+        expect(instance.childNodes[0].childNodes[0]).toEqual(new Text('foobar'))
+        expect(instance.childNodes[1].childNodes).toHaveLength(1)
+        expect(instance.childNodes[1].childNodes[0]).toEqual(
+          new Text('bazspam'),
+        )
       })
     })
 
