@@ -1,3 +1,7 @@
+# 0.0.15
+
+*   Implemented more Node methods.
+
 # 0.0.14
 
 *   Added MutationObserver and MutationRecord.

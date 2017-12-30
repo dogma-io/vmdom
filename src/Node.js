@@ -64,11 +64,54 @@ class Node {
   // TODO: implement compareDocumentPosition()
   // TODO: implement contains()
   // TODO: implement getRootNode()
-  // TODO: implement hasChildNodes()
-  // TODO: implement insertBefore()
+
+  hasChildNodes() {
+    return this._childNodes.length !== 0
+  }
+
+  insertBefore(newNode: Node, referencedNode: Node) {
+    if (!(newNode instanceof Node)) {
+      throw new TypeError(
+        "Failed to execute 'insertBefore' on 'Node': parameter 1 is not of type 'Node'.",
+      )
+    }
+
+    if (referencedNode !== null && !(referencedNode instanceof Node)) {
+      throw new TypeError(
+        "Failed to execute 'insertBefore' on 'Node': parameter 2 is not of type 'Node'.",
+      )
+    }
+
+    const index =
+      referencedNode === null
+        ? this._childNodes.length
+        : this._childNodes.indexOf(referencedNode)
+
+    if (index === -1) {
+      throw new DOMException(
+        "Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.",
+      )
+    }
+
+    // TODO: if newNode is already in document remove it from original location
+
+    if (newNode instanceof DocumentFragment) {
+      const childNodes = newNode._childNodes.splice(0)
+      this._childNodes.splice(index, 0, ...childNodes)
+    } else {
+      this._childNodes.splice(index, 0, newNode)
+    }
+
+    return newNode
+  }
+
   // TODO: implement isDefaultNamespace()
   // TODO: implement isEqualNode()
-  // TODO: implement isSameNode()
+
+  isSameNode(other: Node) {
+    return this === other
+  }
+
   // TODO: implement lookupPrefix()
   // TODO: implement lookupNamespaceURI()
   // TODO: implement normalize()
@@ -93,7 +136,45 @@ class Node {
     return child
   }
 
-  // TODO: implement replaceChild()
+  replaceChild(newChild: Node, oldChild: Node) {
+    if (!(newChild instanceof Node)) {
+      throw new TypeError(
+        "Failed to execute 'replaceChild' on 'Node': parameter 1 is not of type 'Node'.",
+      )
+    }
+
+    if (!(oldChild instanceof Node)) {
+      throw new TypeError(
+        "Failed to execute 'replaceChild' on 'Node': parameter 2 is not of type 'Node'.",
+      )
+    }
+
+    const index = this._childNodes.indexOf(oldChild)
+
+    if (index === -1) {
+      throw new DOMException(
+        "Failed to execute 'replaceChild' on 'Node': The node to be replaced is not a child of this node.",
+      )
+    }
+
+    this._childNodes.splice(index, 1, newChild)
+
+    return oldChild
+  }
 }
 
-export default eventTargetMixin(Node)
+const NodeWithEventTargetMixin = eventTargetMixin(Node)
+
+/**
+ * NOTE: this must live in the same module as the Node class to prevent circular
+ * dependency issues.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment
+ */
+export class DocumentFragment extends NodeWithEventTargetMixin {
+  // TODO: implement ParentNode properties
+  // TODO: implement method querySelector
+  // TODO: implement method querySelectorAll
+  // TODO: implement method getElementsById
+}
+
+export default NodeWithEventTargetMixin

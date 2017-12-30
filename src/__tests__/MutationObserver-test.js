@@ -8,7 +8,9 @@ describe('MutationObserver', () => {
   it('should throw when non-function argument passed in to constructor', () => {
     expect(() => {
       new MutationObserver('foobar') // eslint-disable-line
-    }).toThrow(TypeError)
+    }).toThrow(
+      /Failed to construct 'MutationObserver': The callback provided as parameter 1 is not a function\./,
+    )
   })
 
   describe('when initialized with function argument', () => {

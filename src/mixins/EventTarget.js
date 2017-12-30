@@ -43,8 +43,8 @@ export default (Klass: *) => {
       const listenerType = typeof listener
 
       if (['function', 'object'].indexOf(listenerType) === -1) {
-        throw new Error(
-          "TypeError: Failed to execute 'addEventListener' on 'EventTarget': The callback provided as parameter 2 is not a function.",
+        throw new TypeError(
+          "Failed to execute 'addEventListener' on 'EventTarget': The callback provided as parameter 2 is not a function.",
         )
       }
 

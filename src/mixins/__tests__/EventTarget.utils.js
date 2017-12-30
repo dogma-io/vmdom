@@ -2,8 +2,7 @@
  * @format
  */
 
-const ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR =
-  "TypeError: Failed to execute 'addEventListener' on 'EventTarget': The callback provided as parameter 2 is not a function."
+const ADD_EVENT_LISTENER_LISTENER_TYPE_ERROR = /Failed to execute 'addEventListener' on 'EventTarget': The callback provided as parameter 2 is not a function\./
 
 export function itShouldImplementEventTargetInterface(getInstance) {
   describe('EventTarget interface', () => {
