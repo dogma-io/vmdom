@@ -2,6 +2,9 @@
  * @format
  */
 
+import HTMLDivElement from '../HTMLDivElement'
+import HTMLParagraphElement from '../HTMLParagraphElement'
+import Text from '../Text'
 import {itShouldImplementNodeInterface} from './Node.utils'
 
 export function itShouldBeAnElement(getInstance, tagName) {
@@ -262,6 +265,49 @@ export function itShouldBeAnElement(getInstance, tagName) {
           instance._namespaceAttributes.dogma.undefined = 'bar'
           expect(instance.getAttributeNS('dogma', undefined)).toBe('bar')
         })
+      })
+    })
+
+    describe('getElementsByTagName()', () => {
+      it('should return empty list when no children', () => {
+        expect(instance.getElementsByTagName('div')).toEqual([])
+      })
+
+      it('should return empty list when no children with tag name', () => {
+        instance.appendChild(new HTMLParagraphElement())
+        expect(instance.getElementsByTagName('div')).toEqual([])
+      })
+
+      it('should return expected list when all children have tag name', () => {
+        const childOne = new HTMLDivElement()
+        const childTwo = new HTMLDivElement()
+        instance.appendChild(childOne)
+        instance.appendChild(childTwo)
+        expect(instance.getElementsByTagName('div')).toEqual([
+          childOne,
+          childTwo,
+        ])
+      })
+
+      it('should return expected list when some children have tag name', () => {
+        const childOne = new HTMLDivElement()
+        const childTwo = new Text()
+        const childThree = new HTMLDivElement()
+        instance.appendChild(childOne)
+        instance.appendChild(childTwo)
+        instance.appendChild(childThree)
+        expect(instance.getElementsByTagName('div')).toEqual([
+          childOne,
+          childThree,
+        ])
+      })
+
+      it('should return expected list when nested children have tag name', () => {
+        const childOne = new HTMLParagraphElement()
+        const childTwo = new HTMLDivElement()
+        instance.appendChild(childOne)
+        childOne.appendChild(childTwo)
+        expect(instance.getElementsByTagName('div')).toEqual([childTwo])
       })
     })
 

@@ -1,3 +1,7 @@
+# 0.0.18
+
+*   Implement Element getElementsByTagName method.
+
 # 0.0.17
 
 *   Implement Node contains method.

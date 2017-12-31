@@ -79,6 +79,31 @@ export default class Element extends Node {
   // TODO: implement getClientRects
   // TODO: implement getElementsByClassName
   // TODO: implement getElementsByTagName
+
+  getElementsByTagName(tagName: string) {
+    // TODO: make it so this check doesn't happen a bunch in a deep tree due to
+    // recursive calls to method
+    tagName = tagName.toLowerCase()
+
+    // TODO: use an HTMLCollection instead of an array to make it a live list
+    const elements = []
+
+    for (let i = 0; i < this._childNodes.length; i++) {
+      const childNode = this._childNodes[i]
+
+      if (childNode.tagName === tagName) {
+        elements.push(childNode)
+      }
+
+      if (childNode instanceof Element) {
+        const nestedElements = childNode.getElementsByTagName(tagName)
+        elements.push(...nestedElements)
+      }
+    }
+
+    return elements
+  }
+
   // TODO: implement getElementsByTagNameNS
 
   hasAttribute(name: *) {
