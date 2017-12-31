@@ -15,6 +15,4 @@ export default class HTMLQuoteElement extends HTMLElement {
     super({tagName})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

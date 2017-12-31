@@ -11,6 +11,4 @@ export default class HTMLBaseElement extends HTMLElement {
     super({tagName: 'base'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

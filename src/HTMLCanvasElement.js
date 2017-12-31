@@ -12,5 +12,7 @@ export default class HTMLCanvasElement extends HTMLElement {
     // TODO: implement properties
   }
 
-  // TODO: implement methods
+  // TODO: implement getContext
+  // TODO: implement toBlob
+  // TODO: implement toDataURL
 }

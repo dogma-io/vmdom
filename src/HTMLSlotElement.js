@@ -12,5 +12,5 @@ export default class HTMLSlotElement extends HTMLElement {
     // TODO: implement properties
   }
 
-  // TODO: implement methods
+  // TODO: implement assignedNodes
 }

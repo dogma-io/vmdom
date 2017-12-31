@@ -15,6 +15,4 @@ export default class HTMLTableColElement extends HTMLElement {
     super({tagName})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

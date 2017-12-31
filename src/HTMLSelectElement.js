@@ -12,5 +12,10 @@ export default class HTMLSelectElement extends HTMLElement {
     // TODO: implement properties
   }
 
-  // TODO: implement methods
+  // TODO: implement add
+  // TODO: implement checkValidity
+  // TODO: implement item
+  // TODO: implement namedItem
+  // TODO: implement remove
+  // TODO: implement setCustomValidity
 }

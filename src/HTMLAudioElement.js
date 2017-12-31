@@ -9,8 +9,5 @@ import HTMLMediaElement from './HTMLElement'
 export default class HTMLAudioElement extends HTMLMediaElement {
   constructor() {
     super({tagName: 'audio'})
-    // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

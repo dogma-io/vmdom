@@ -11,6 +11,4 @@ export default class HTMLScriptElement extends HTMLElement {
     super({tagName: 'script'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

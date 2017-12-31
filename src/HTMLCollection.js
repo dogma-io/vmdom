@@ -1,28 +1,29 @@
 /**
- * @flow
  * @format
- * @see https://developer.mozilla.org/en-US/docs/Web/API/NodeList
+ * @flow
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
  */
 
 import {isPropertyNumber} from './utils'
 
-export default class NodeList {
-  constructor(nodes: Array<*>) {
+// TODO: improve class typing with <T>
+export default class HTMLCollection {
+  constructor(items: Array<*>) {
     return new Proxy(this, {
       get(target, property) {
         if (property === 'length') {
-          return nodes.length
+          return items.length
         }
 
         if (isPropertyNumber(property)) {
-          return nodes[parseInt(property)]
+          return items[parseInt(property)]
         }
 
         // $FlowFixMe - Flow doesn't like referencing arbitrary props on target
         return target[property]
       },
       set(target, property, value) {
-        // length and nodes are read-only but the browser silently fails when
+        // length and items are read-only but the browser silently fails when
         // trying to set them, simply returning the attempted new value.
         if (property === 'length' || isPropertyNumber(property)) {
           return value
@@ -33,4 +34,7 @@ export default class NodeList {
       },
     })
   }
+
+  // TODO: implement item
+  // TODO: imlement namedItem
 }

@@ -11,6 +11,4 @@ export default class HTMLLabelElement extends HTMLElement {
     super({tagName: 'label'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

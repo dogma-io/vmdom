@@ -11,6 +11,4 @@ export default class HTMLLinkElement extends HTMLElement {
     super({tagName: 'link'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

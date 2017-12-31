@@ -12,5 +12,7 @@ export default class HTMLDialogElement extends HTMLElement {
     // TODO: implement properties
   }
 
-  // TODO: implement methods
+  // TODO: implement close
+  // TODO: implement show
+  // TODO: implement showModal
 }

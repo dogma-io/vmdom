@@ -16,5 +16,10 @@ export default class HTMLMediaElement extends HTMLElement {
     // TODO: implement properties
   }
 
-  // TODO: implement methods
+  // TODO: implement addTextTrack
+  // TODO: implement canPlayType
+  // TODO: implement fastSeek
+  // TODO: implement load
+  // TODO: implement pause
+  // TODO: implement play
 }

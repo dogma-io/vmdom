@@ -11,6 +11,4 @@ export default class HTMLFontElement extends HTMLElement {
     super({tagName: 'font'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

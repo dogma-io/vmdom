@@ -9,8 +9,5 @@ import HTMLElement from './HTMLElement'
 export default class HTMLTableDataCellElement extends HTMLElement {
   constructor() {
     super({tagName: 'td'})
-    // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

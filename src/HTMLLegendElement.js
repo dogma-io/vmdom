@@ -11,6 +11,4 @@ export default class HTMLLegendElement extends HTMLElement {
     super({tagName: 'legend'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

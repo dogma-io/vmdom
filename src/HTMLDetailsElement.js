@@ -11,6 +11,4 @@ export default class HTMLDetailsElement extends HTMLElement {
     super({tagName: 'details'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

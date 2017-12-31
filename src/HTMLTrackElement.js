@@ -11,6 +11,4 @@ export default class HTMLTrackElement extends HTMLElement {
     super({tagName: 'track'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

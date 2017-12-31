@@ -12,5 +12,6 @@ export default class HTMLTableRowElement extends HTMLElement {
     // TODO: implement properties
   }
 
-  // TODO: implement methods
+  // TODO: implement deleteCell
+  // TODO: implement insertCell
 }

@@ -11,6 +11,4 @@ export default class HTMLTemplateElement extends HTMLElement {
     super({tagName: 'template'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

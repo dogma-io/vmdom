@@ -12,5 +12,12 @@ export default class HTMLTableElement extends HTMLElement {
     // TODO: implement properties
   }
 
-  // TODO: implement methods
+  // TODO: implement createCaption
+  // TODO: implement deleteCaption
+  // TODO: implement deleteRow
+  // TODO: implement createTFoot
+  // TODO: implement deleteTFoot
+  // TODO: implement createTHead
+  // TODO: implement deleteTHead
+  // TODO: implement insertRow
 }

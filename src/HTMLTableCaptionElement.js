@@ -11,6 +11,4 @@ export default class HTMLTableCaptionElement extends HTMLElement {
     super({tagName: 'caption'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

@@ -15,6 +15,4 @@ export default class HTMLModElement extends HTMLElement {
     super({tagName})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

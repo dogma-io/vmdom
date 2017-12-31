@@ -11,6 +11,4 @@ export default class HTMLLIElement extends HTMLElement {
     super({tagName: 'li'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

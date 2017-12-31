@@ -11,6 +11,4 @@ export default class HTMLOListElement extends HTMLElement {
     super({tagName: 'ol'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

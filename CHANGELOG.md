@@ -1,3 +1,7 @@
+# 0.0.19
+
+*   Implement properties and methods for HTMLTableSectionElement.
+
 # 0.0.18
 
 *   Implement Element getElementsByTagName method.

@@ -11,6 +11,4 @@ export default class HTMLProgressElement extends HTMLElement {
     super({tagName: 'progress'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

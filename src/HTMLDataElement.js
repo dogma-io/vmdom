@@ -11,6 +11,4 @@ export default class HTMLDataElement extends HTMLElement {
     super({tagName: 'data'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

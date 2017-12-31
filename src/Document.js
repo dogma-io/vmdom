@@ -224,6 +224,12 @@ export default class Document extends Node {
     // TODO: implement remaining properties
   }
 
+  // TODO: implement adoptNode
+  // TODO: implement close
+  // TODO: implement createAttribute
+  // TODO: implement createAttributeNS
+  // TODO: implement createCDATASection
+
   createComment(data: *) {
     const Comment = require('./Comment').default
     return new Comment(`${data}`)
@@ -251,10 +257,38 @@ export default class Document extends Node {
     }
   }
 
+  // TODO: implement createElementNS
+  // TODO: implement createEvent
+  // TODO: implement createExpression
+  // TODO: implement createNodeIterator
+  // TODO: implement createNSResolver
+
   createTextNode(data: *) {
     const Text = require('./Text').default
     return new Text(`${data}`)
   }
 
-  // TODO: implement remaining methods
+  // TODO: implement createTouchList
+  // TODO: implement createTreeWalker
+  // TODO: implement enableStyleSheetsForSet
+  // TODO: implement evaluate
+  // TODO: implement execCommand
+  // TODO: implement getElementById
+  // TODO: implement getElementsByClassName
+  // TODO: implement getElementsByName
+  // TODO: implement getElementsByTagName
+  // TODO: implement getElementsByTagNameNS
+  // TODO: implement getSelection
+  // TODO: implement hasFocus
+  // TODO: implement importNode
+  // TODO: implement open
+  // TODO: implement queryCommandEnabled
+  // TODO: implement queryCommandIndeterm
+  // TODO: implement queryCommandState
+  // TODO: implement queryCommandSupported
+  // TODO: implement queryCommandValue
+  // TODO: implement querySelector
+  // TODO: implement querySelectorAll
+  // TODO: implement write
+  // TODO: implement writeln
 }

@@ -11,6 +11,4 @@ export default class HTMLOptGroupElement extends HTMLElement {
     super({tagName: 'optgroup'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

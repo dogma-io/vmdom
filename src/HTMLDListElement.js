@@ -9,8 +9,5 @@ import HTMLElement from './HTMLElement'
 export default class HTMLDListElement extends HTMLElement {
   constructor() {
     super({tagName: 'dl'})
-    // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

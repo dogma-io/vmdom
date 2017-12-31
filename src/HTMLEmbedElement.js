@@ -11,6 +11,4 @@ export default class HTMLEmbedElement extends HTMLElement {
     super({tagName: 'embed'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

@@ -11,6 +11,4 @@ export default class HTMLVideoElement extends HTMLMediaElement {
     super({tagName: 'video'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

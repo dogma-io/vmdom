@@ -25,6 +25,10 @@ export function defineEventHandlers(target: *, properties: Array<string>) {
   })
 }
 
+export function isPropertyNumber(property: string): boolean {
+  return typeof property === 'string' && /^(\d+)$/.test(property)
+}
+
 export function lazilyLoadInstanceAsProp(
   target: *,
   property: string,

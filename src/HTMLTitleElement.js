@@ -11,6 +11,4 @@ export default class HTMLTitleElement extends HTMLElement {
     super({tagName: 'title'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

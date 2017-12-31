@@ -11,6 +11,4 @@ export default class HTMLMeterElement extends HTMLElement {
     super({tagName: 'meter'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

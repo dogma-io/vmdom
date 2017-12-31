@@ -9,8 +9,5 @@ import HTMLElement from './HTMLElement'
 export default class HTMLHRElement extends HTMLElement {
   constructor() {
     super({tagName: 'hr'})
-    // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

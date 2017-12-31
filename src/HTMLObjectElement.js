@@ -12,5 +12,6 @@ export default class HTMLObjectElement extends HTMLElement {
     // TODO: implement properties
   }
 
-  // TODO: implement methods
+  // TODO: implement checkValidity
+  // TODO: implement setCustomValidity
 }

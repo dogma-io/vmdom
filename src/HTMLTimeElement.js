@@ -11,6 +11,4 @@ export default class HTMLTimeElement extends HTMLElement {
     super({tagName: 'time'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

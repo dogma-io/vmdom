@@ -11,6 +11,4 @@ export default class HTMLTableHeaderCellElement extends HTMLElement {
     super({tagName: 'th'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

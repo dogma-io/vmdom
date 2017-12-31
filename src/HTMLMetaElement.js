@@ -11,6 +11,4 @@ export default class HTMLMetaElement extends HTMLElement {
     super({tagName: 'meta'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

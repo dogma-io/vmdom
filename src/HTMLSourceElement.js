@@ -11,6 +11,4 @@ export default class HTMLSourceElement extends HTMLElement {
     super({tagName: 'source'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

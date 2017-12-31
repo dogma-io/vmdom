@@ -11,6 +11,4 @@ export default class HTMLMapElement extends HTMLElement {
     super({tagName: 'map'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

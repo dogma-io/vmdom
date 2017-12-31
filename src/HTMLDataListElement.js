@@ -11,6 +11,4 @@ export default class HTMLDataListElement extends HTMLElement {
     super({tagName: 'datalist'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

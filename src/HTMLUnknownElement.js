@@ -13,8 +13,5 @@ type HTMLUnknownElementOptions = {|
 export default class HTMLUnknownElement extends HTMLElement {
   constructor({tagName}: HTMLUnknownElementOptions) {
     super({tagName})
-    // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

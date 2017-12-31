@@ -9,8 +9,5 @@ import HTMLElement from './HTMLElement'
 export default class HTMLSpanElement extends HTMLElement {
   constructor() {
     super({tagName: 'span'})
-    // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

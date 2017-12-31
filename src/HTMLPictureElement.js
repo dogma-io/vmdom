@@ -9,8 +9,5 @@ import HTMLElement from './HTMLElement'
 export default class HTMLPictureElement extends HTMLElement {
   constructor() {
     super({tagName: 'picture'})
-    // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

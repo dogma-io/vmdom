@@ -11,6 +11,4 @@ export default class HTMLStyleElement extends HTMLElement {
     super({tagName: 'style'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

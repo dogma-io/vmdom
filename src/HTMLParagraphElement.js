@@ -11,6 +11,4 @@ export default class HTMLParagraphElement extends HTMLElement {
     super({tagName: 'p'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

@@ -11,6 +11,4 @@ export default class HTMLUListElement extends HTMLElement {
     super({tagName: 'ul'})
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

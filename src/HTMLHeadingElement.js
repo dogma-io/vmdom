@@ -13,8 +13,5 @@ type HTMLHeadingElementOptions = {|
 export default class HTMLHeadingElement extends HTMLElement {
   constructor({tagName}: HTMLHeadingElementOptions) {
     super({tagName})
-    // TODO: implement properties
   }
-
-  // TODO: implement methods
 }
