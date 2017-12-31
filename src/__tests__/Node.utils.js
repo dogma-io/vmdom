@@ -44,6 +44,32 @@ export function itShouldImplementNodeInterface(getInstance) {
       })
     })
 
+    describe('contains()', () => {
+      it('should return true when self', () => {
+        expect(instance.contains(instance)).toBe(true)
+      })
+
+      it('should return true when child node', () => {
+        const child = new Node()
+        instance.appendChild(child)
+        expect(instance.contains(child)).toBe(true)
+      })
+
+      it('should return true when nested child node', () => {
+        const nestedChild = new Node()
+        const child = new Node()
+        child.appendChild(nestedChild)
+        instance.appendChild(child)
+        expect(instance.contains(nestedChild)).toBe(true)
+      })
+
+      it('should return false when not a child node', () => {
+        const child = new Node()
+        instance.appendChild(child)
+        expect(instance.contains(new Node())).toBe(false)
+      })
+    })
+
     it('destroy() should destroy child nodes', () => {
       jest.spyOn(Node, 'destroy')
 

@@ -1,3 +1,7 @@
+# 0.0.17
+
+*   Implement Node contains method.
+
 # 0.0.16
 
 *   Implement Node normalize method.

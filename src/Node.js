@@ -62,7 +62,27 @@ class Node {
 
   // TODO: implement cloneNode()
   // TODO: implement compareDocumentPosition()
-  // TODO: implement contains()
+
+  contains(otherNode: Node) {
+    if (otherNode === this) {
+      return true
+    }
+
+    const {_childNodes: childNodes} = this
+
+    for (let i = childNodes.length - 1; i >= 0; i--) {
+      if (childNodes[i] === otherNode) {
+        return true
+      }
+
+      if (childNodes[i].contains(otherNode)) {
+        return true
+      }
+    }
+
+    return false
+  }
+
   // TODO: implement getRootNode()
 
   hasChildNodes() {
