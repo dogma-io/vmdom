@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import DocumentFragment from '../DocumentFragment'
 import {itShouldImplementNodeInterface} from './Node.utils'
 

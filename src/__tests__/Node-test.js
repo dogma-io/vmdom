@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import Node from '../Node'
 import {itShouldImplementNodeInterface} from './Node.utils'
 

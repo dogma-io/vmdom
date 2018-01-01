@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import Text from '../Text'
 import {toBeCharacterData} from './CharacterData.utils'
 

@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import HTMLDivElement from '../HTMLDivElement'
 import HTMLParagraphElement from '../HTMLParagraphElement'
 import Text from '../Text'

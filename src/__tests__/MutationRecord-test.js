@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import MutationRecord from '../MutationRecord'
 
 describe('MutationRecord', () => {

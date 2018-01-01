@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import MutationObserver from '../MutationObserver'
 
 describe('MutationObserver', () => {

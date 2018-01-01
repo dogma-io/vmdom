@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 export function toBeCharacterData(getInstance, data) {
   describe('CharacterData interface', () => {
     let instance

@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import DocumentFragment from '../DocumentFragment'
 import HTMLDivElement from '../HTMLDivElement'
 import Node from '../Node'

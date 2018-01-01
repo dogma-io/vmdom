@@ -1,3 +1,7 @@
+# 0.0.20
+
+*   Implement properties and methods for HTMLTableRowElement.
+
 # 0.0.19
 
 *   Implement properties and methods for HTMLTableSectionElement.

@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import Comment from '../Comment'
 import {toBeCharacterData} from './CharacterData.utils'
 

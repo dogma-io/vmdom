@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import {itShouldImplementGlobalEventHandlersInterface} from '../mixins/__tests__/GlobalEventHandlers.utils'
 import {itShouldImplementTouchEventHandlersInterface} from '../mixins/__tests__/TouchEventHandlers.utils'
 import {itShouldBeAnElement} from './Element.utils'
