@@ -7,9 +7,9 @@
 import DOMException from '../DOMException'
 import fetch from 'node-fetch'
 
-export default (Klass: *) => {
+export default (Klass: *): * => {
   return class WindowOrWorkerGlobalScope extends Klass {
-    constructor(...args: any) {
+    constructor(...args: *) {
       super(...args)
 
       Object.defineProperties(this, {
@@ -40,11 +40,11 @@ export default (Klass: *) => {
       }
     }
 
-    atob(encodedData: string) {
+    atob(encodedData: string): string {
       return Buffer.from(encodedData, 'base64').toString('binary')
     }
 
-    btoa(value?: *) {
+    btoa(value?: *): string {
       // $FlowFixMe - Flow complains that undefined can't be converted to a string but it can, it becomes "undefined".
       const string: string = `${value}`
 
@@ -59,12 +59,12 @@ export default (Klass: *) => {
       return Buffer.from(string, 'binary').toString('base64')
     }
 
-    clearInterval(intervalId: number) {
+    clearInterval(intervalId: number): void {
       this._intervalIds.delete(intervalId)
       return clearInterval(...arguments)
     }
 
-    clearTimeout(timeoutId: number) {
+    clearTimeout(timeoutId: number): void {
       this._timeoutIds.delete(timeoutId)
       return clearTimeout(...arguments)
     }
@@ -73,17 +73,17 @@ export default (Klass: *) => {
 
     // TODO: come up with way to track incomplete fetch requests that can be
     // cancelled when instance of class is destroyed
-    fetch() {
+    fetch(): Promise<*> {
       return fetch(...arguments)
     }
 
-    setInterval() {
+    setInterval(): number {
       const id = setInterval(...arguments)
       this._intervalIds.add(id)
       return id
     }
 
-    setTimeout() {
+    setTimeout(): number {
       const id = setTimeout(...arguments)
       this._timeoutIds.add(id)
       return id

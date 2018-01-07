@@ -25,7 +25,7 @@ class Node {
       childNodes: {
         enumerable: false,
 
-        get() {
+        get(): NodeList {
           if (!nodeList) {
             nodeList = new NodeList(this._childNodes)
           }
@@ -33,7 +33,7 @@ class Node {
           return nodeList
         },
 
-        set(newValue) {
+        set(newValue: *): * {
           return newValue
         },
       },
@@ -49,7 +49,7 @@ class Node {
     instance._childNodes.splice(0)
   }
 
-  appendChild(child: Node) {
+  appendChild(child: Node): Node {
     // TODO: if child is already in the document tree, remove it from it's
     // current location
 
@@ -63,7 +63,7 @@ class Node {
   // TODO: implement cloneNode()
   // TODO: implement compareDocumentPosition()
 
-  contains(otherNode: Node) {
+  contains(otherNode: Node): boolean {
     if (otherNode === this) {
       return true
     }
@@ -85,11 +85,11 @@ class Node {
 
   // TODO: implement getRootNode()
 
-  hasChildNodes() {
+  hasChildNodes(): boolean {
     return this._childNodes.length !== 0
   }
 
-  insertBefore(newNode: Node, referencedNode: Node) {
+  insertBefore(newNode: Node, referencedNode: Node): Node {
     if (!(newNode instanceof Node)) {
       throw new TypeError(
         "Failed to execute 'insertBefore' on 'Node': parameter 1 is not of type 'Node'.",
@@ -128,7 +128,7 @@ class Node {
   // TODO: implement isDefaultNamespace()
   // TODO: implement isEqualNode()
 
-  isSameNode(other: Node) {
+  isSameNode(other: Node): boolean {
     return this === other
   }
 
@@ -156,7 +156,7 @@ class Node {
     }
   }
 
-  removeChild(child: Node) {
+  removeChild(child: Node): Node {
     if (!(child instanceof Node)) {
       throw new TypeError(
         "Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.",
@@ -176,7 +176,7 @@ class Node {
     return child
   }
 
-  replaceChild(newChild: Node, oldChild: Node) {
+  replaceChild(newChild: Node, oldChild: Node): Node {
     if (!(newChild instanceof Node)) {
       throw new TypeError(
         "Failed to execute 'replaceChild' on 'Node': parameter 1 is not of type 'Node'.",
@@ -228,19 +228,19 @@ export class CharacterData extends NodeWithEventTargetMixin {
       },
       data: {
         enumerable: false,
-        get() {
+        get(): string {
           return this._data
         },
-        set(newValue) {
+        set(newValue: *): * {
           return newValue
         },
       },
       length: {
         enumerable: false,
-        get() {
+        get(): number {
           return this._data.length
         },
-        set(newValue) {
+        set(newValue: *): * {
           return newValue
         },
       },
@@ -264,7 +264,7 @@ export class CharacterData extends NodeWithEventTargetMixin {
     this._data = this.data.substr(0, start) + `${data}` + this.data.substr(end)
   }
 
-  substringData(start: number, end: number) {
+  substringData(start: number, end: number): string {
     return this.data.substr(start, end)
   }
 }

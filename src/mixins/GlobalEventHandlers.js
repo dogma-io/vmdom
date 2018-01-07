@@ -81,9 +81,9 @@ export const GLOBAL_EVENT_HANDLERS = [
   'onwaiting',
 ]
 
-export default (Klass: *) => {
+export default (Klass: *): * => {
   return class GlobalEventHandlers extends Klass {
-    constructor(...args: any) {
+    constructor(...args: *) {
       super(...args)
       defineEventHandlers(this, GLOBAL_EVENT_HANDLERS)
     }

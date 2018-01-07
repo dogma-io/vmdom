@@ -124,7 +124,7 @@ class Window {
     lazilyLoadInstanceAsProp(this, 'navigator', Navigator, [userAgent])
     lazilyLoadInstanceAsProp(this, 'sessionStorage', Storage)
 
-    MODULE_PROPERTIES.forEach(name => {
+    MODULE_PROPERTIES.forEach((name: string) => {
       lazilyLoadModuleAsProp(this, name, join(__dirname, name), require)
     })
   }
@@ -135,7 +135,7 @@ class Window {
     }
   }
 
-  matchMedia(mediaQuery: string) {
+  matchMedia(mediaQuery: string): * {
     const MediaQueryList = require('./MediaQueryList').default
     return new MediaQueryList(mediaQuery)
   }

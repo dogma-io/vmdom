@@ -48,25 +48,24 @@ export default class HTMLTableRowElement extends HTMLElement {
 
     if (index < -1 || index > max || this._cells.length === 0) {
       throw new DOMException(
-        `Failed to execute 'deleteCell' on 'HTMLTableRowElement': The provided index ${
-          index
-        } is outside the range [-1, ${max}].`,
+        `Failed to execute 'deleteCell' on 'HTMLTableRowElement': The provided index ${index} is outside the range [-1, ${max}].`,
       )
     }
 
-    this._cells.splice(index, 1).forEach(node => {
+    this._cells.splice(index, 1).forEach((node: HTMLTableCellElement) => {
       this.removeChild(node)
     })
   }
 
-  insertCell(position?: number) {
+  insertCell(position?: number): HTMLTableDataCellElement {
     const index = isNaN(position) ? -1 : parseInt(position)
 
     if (index < -1 || index > Math.max(0, this._cells.length)) {
       throw new DOMException(
-        `Failed to execute 'insertCell' on 'HTMLTableRowElement': The provided index ${
-          index
-        } is outside the range [-1, ${Math.max(0, this._cells.length - 1)}].`,
+        `Failed to execute 'insertCell' on 'HTMLTableRowElement': The provided index ${index} is outside the range [-1, ${Math.max(
+          0,
+          this._cells.length - 1,
+        )}].`,
       )
     }
 

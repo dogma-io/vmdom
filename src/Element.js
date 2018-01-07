@@ -49,21 +49,27 @@ export default class Element extends Node {
     // TODO: implement standard properties
   }
 
-  getAttribute(name: *) {
+  getAttribute(name: *): ?string {
     const key = encodeURIComponent(name).toLowerCase()
     const value = this._attributes[key]
     return value === undefined ? null : value
   }
 
-  getAttributeNames() {
-    return Object.keys(this._attributes).concat(
-      Object.keys(this._namespaceAttributes).reduce((names, namespace) => {
-        return names.concat(Object.keys(this._namespaceAttributes[namespace]))
-      }, []),
-    )
+  getAttributeNames(): Array<string> {
+    const attributeNames: Array<string> = Object.keys(this._attributes)
+    const namespaces: Array<string> = Object.keys(this._namespaceAttributes)
+
+    namespaces.forEach((namespace: string) => {
+      const namespaceAttributes: Array<string> = Object.keys(
+        this._namespaceAttributes[namespace],
+      )
+      attributeNames.push(...namespaceAttributes)
+    })
+
+    return attributeNames
   }
 
-  getAttributeNS(namespace: *, name: *) {
+  getAttributeNS(namespace: *, name: *): ?string {
     if (!(namespace in this._namespaceAttributes)) {
       return null
     }
@@ -80,7 +86,7 @@ export default class Element extends Node {
   // TODO: implement getElementsByClassName
   // TODO: implement getElementsByTagName
 
-  getElementsByTagName(tagName: string) {
+  getElementsByTagName(tagName: string): Array<*> {
     // TODO: make it so this check doesn't happen a bunch in a deep tree due to
     // recursive calls to method
     tagName = tagName.toLowerCase()
@@ -106,12 +112,12 @@ export default class Element extends Node {
 
   // TODO: implement getElementsByTagNameNS
 
-  hasAttribute(name: *) {
+  hasAttribute(name: *): boolean {
     const key = encodeURIComponent(name).toLowerCase()
     return key in this._attributes
   }
 
-  hasAttributeNS(namespace: *, name: *) {
+  hasAttributeNS(namespace: *, name: *): boolean {
     const key = encodeURIComponent(name).toLowerCase()
 
     if (!(namespace in this._namespaceAttributes)) {
@@ -121,15 +127,17 @@ export default class Element extends Node {
     return key in this._namespaceAttributes[namespace]
   }
 
-  hasAttributes() {
+  hasAttributes(): boolean {
     if (Object.keys(this._attributes).length) {
       return true
     }
 
     return (
-      Object.keys(this._namespaceAttributes).filter(namespace => {
-        return Object.keys(this._namespaceAttributes[namespace]).length !== 0
-      }).length !== 0
+      Object.keys(this._namespaceAttributes).filter(
+        (namespace: string): boolean => {
+          return Object.keys(this._namespaceAttributes[namespace]).length !== 0
+        },
+      ).length !== 0
     )
   }
 

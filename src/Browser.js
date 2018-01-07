@@ -29,7 +29,7 @@ type BrowserOptions = {
   userAgent?: string,
 }
 
-function getVersion() {
+function getVersion(): string {
   const path = join(__dirname, '..', 'package.json')
   const contents = readFileSync(path, 'utf8')
   const data = JSON.parse(contents)
@@ -54,14 +54,14 @@ export default class Browser {
 
     // $FlowFixMe - Flow doesn't like the casting type here
     const sandbox: vm$Context = new Proxy(this, {
-      get(target: Browser, property: string) {
+      get(target: Browser, property: string): * {
         if (['global', 'window'].indexOf(property) !== -1) {
           return target.window
         } else {
           return target.window[property]
         }
       },
-      set(target: Browser, property: string, value: any) {
+      set(target: Browser, property: string, value: *): * {
         if (['global', 'window'].indexOf(property) !== -1) {
           target.window = value
         } else {
@@ -97,7 +97,7 @@ export default class Browser {
     Window.destroy(instance.window)
   }
 
-  eval(script: string | vm$Script) {
+  eval(script: string | vm$Script): * {
     if (script instanceof Script) {
       return script.runInContext(this._sandbox)
     }

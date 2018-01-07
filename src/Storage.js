@@ -19,23 +19,23 @@ export default class Storage {
       },
       length: {
         enumerable: false,
-        get() {
+        get(): number {
           return Object.keys(this._items).length
         },
-        set(newValue) {
+        set(newValue: *): * {
           return newValue
         },
       },
     })
   }
 
-  clear(): void {
-    Object.keys(this._items).forEach(key => {
+  clear() {
+    Object.keys(this._items).forEach((key: string) => {
       delete this._items[key]
     })
   }
 
-  getItem(key: *) {
+  getItem(key: *): ?string {
     return this._items[encodeURIComponent(key)]
   }
 
@@ -44,11 +44,11 @@ export default class Storage {
     return key === undefined ? null : decodeURIComponent(key)
   }
 
-  removeItem(key: *): void {
+  removeItem(key: *) {
     delete this._items[encodeURIComponent(key)]
   }
 
-  setItem(key: *, value: *): void {
+  setItem(key: *, value: *) {
     this._items[encodeURIComponent(key)] = `${value}`
   }
 }

@@ -161,7 +161,7 @@ export default class Document extends Node {
     Object.defineProperties(this, {
       body: {
         enumerable: false,
-        get() {
+        get(): * {
           // TODO: cache result so we don't have to lookup every time and use
           // MutationObserver to determine if/when body is removed from DOM
           // so cached result remains accurate
@@ -184,7 +184,7 @@ export default class Document extends Node {
       },
       documentElement: {
         enumerable: false,
-        get() {
+        get(): HTMLHtmlElement {
           if (!documentElement) {
             documentElement = new HTMLHtmlElement()
 
@@ -202,7 +202,7 @@ export default class Document extends Node {
       },
       head: {
         enumerable: false,
-        get() {
+        get(): ?HTMLHeadElement {
           // TODO: cache result so we don't have to lookup every time and use
           // MutationObserver to determine if/when body is removed from DOM
           // so cached result remains accurate
@@ -230,17 +230,17 @@ export default class Document extends Node {
   // TODO: implement createAttributeNS
   // TODO: implement createCDATASection
 
-  createComment(data: *) {
+  createComment(data: *): * {
     const Comment = require('./Comment').default
     return new Comment(`${data}`)
   }
 
-  createDocumentFragment() {
+  createDocumentFragment(): * {
     const DocumentFragment = require('./DocumentFragment').default
     return new DocumentFragment()
   }
 
-  createElement(tagName: string, options: *) {
+  createElement(tagName: string, options: *): * {
     const definition = TAG_NAME_DEFINITIONS[tagName.toLowerCase()]
 
     switch (typeof definition) {
@@ -263,7 +263,7 @@ export default class Document extends Node {
   // TODO: implement createNodeIterator
   // TODO: implement createNSResolver
 
-  createTextNode(data: *) {
+  createTextNode(data: *): * {
     const Text = require('./Text').default
     return new Text(`${data}`)
   }

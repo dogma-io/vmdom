@@ -8,9 +8,9 @@ import {isPropertyNumber} from './utils'
 
 // TODO: improve class typing with <T>
 export default class HTMLCollection {
-  constructor(items: Array<*>) {
+  constructor(items: Array<*>): * {
     return new Proxy(this, {
-      get(target, property) {
+      get(target: *, property: string): * {
         if (property === 'length') {
           return items.length
         }
@@ -22,7 +22,7 @@ export default class HTMLCollection {
         // $FlowFixMe - Flow doesn't like referencing arbitrary props on target
         return target[property]
       },
-      set(target, property, value) {
+      set(target: *, property: string, value: *): * {
         // length and items are read-only but the browser silently fails when
         // trying to set them, simply returning the attempted new value.
         if (property === 'length' || isPropertyNumber(property)) {

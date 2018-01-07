@@ -15,9 +15,9 @@ export const TOUCH_EVENT_HANDLERS = [
   'ontouchcancel',
 ]
 
-export default (Klass: *) => {
+export default (Klass: *): * => {
   return class TouchEventHandlers extends Klass {
-    constructor(...args: any) {
+    constructor(...args: *) {
       super(...args)
       defineEventHandlers(this, TOUCH_EVENT_HANDLERS)
     }

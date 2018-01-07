@@ -403,9 +403,7 @@ describe('Document', () => {
       describe('createElement()', () => {
         Object.keys(TAG_NAME_DEFINITIONS).forEach(tagName => {
           const className = TAG_NAME_DEFINITIONS[tagName]
-          const desc = `should return instance of ${className} for tag name "${
-            tagName
-          }"`
+          const desc = `should return instance of ${className} for tag name "${tagName}"`
 
           it(desc, () => {
             const Class = require(join(__dirname, '..', className)).default

@@ -1,6 +1,6 @@
 {
   "name": "vmdom",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Lightweight browser implementation for Node's VM.",
   "main": "lib/index.js",
   "files": [
@@ -31,18 +31,18 @@
   },
   "homepage": "https://github.com/dogma-io/vmdom#readme",
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.35",
-    "@babel/plugin-proposal-class-properties": "7.0.0-beta.35",
-    "@babel/plugin-syntax-object-rest-spread": "7.0.0-beta.35",
-    "@babel/preset-env": "7.0.0-beta.35",
-    "@babel/preset-flow": "7.0.0-beta.35",
+    "@babel/core": "7.0.0-beta.36",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.36",
+    "@babel/plugin-syntax-object-rest-spread": "7.0.0-beta.36",
+    "@babel/preset-env": "7.0.0-beta.36",
+    "@babel/preset-flow": "7.0.0-beta.36",
     "babel-core": "^7.0.0-0",
-    "babel-jest": "22.0.2",
+    "babel-jest": "22.0.4",
     "codecov": "3.0.0",
-    "flow-bin": "0.61.0",
-    "jest": "22.0.2",
-    "lintly": "0.0.12",
-    "nodely": "0.0.20"
+    "flow-bin": "0.62.0",
+    "jest": "22.0.4",
+    "lintly": "0.0.15",
+    "nodely": "0.0.21"
   },
   "dependencies": {
     "node-fetch": "^1.7.3"

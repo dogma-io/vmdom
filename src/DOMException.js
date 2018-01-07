@@ -47,33 +47,33 @@ export default class DOMException extends Error {
       code: {
         enumerable: false,
 
-        get() {
+        get(): number {
           return name ? LEGACY_ERROR_NAMES_TO_CODES[name] || 0 : 0
         },
 
-        set(newValue) {
+        set(newValue: *): * {
           return newValue
         },
       },
       message: {
         enumerable: false,
 
-        get() {
+        get(): string | void {
           return message
         },
 
-        set(newValue) {
+        set(newValue: *): * {
           return newValue
         },
       },
       name: {
         enumerable: false,
 
-        get() {
+        get(): string {
           return name || 'Error'
         },
 
-        set(newValue) {
+        set(newValue: *): * {
           return newValue
         },
       },

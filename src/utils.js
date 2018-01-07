@@ -8,13 +8,13 @@
 export function defineEventHandlers(target: *, properties: Array<string>) {
   const eventHandlers: {[key: string]: EventListener} = {}
 
-  properties.forEach(property => {
+  properties.forEach((property: string) => {
     Object.defineProperty(target, property, {
       enumerable: true,
-      get() {
+      get(): ?EventListener {
         return eventHandlers[property] || null
       },
-      set(newValue) {
+      set(newValue: *): * {
         if (typeof newValue === 'function' || newValue === null) {
           eventHandlers[property] = newValue
         }
@@ -37,7 +37,7 @@ export function lazilyLoadInstanceAsProp(
 ) {
   let instance
 
-  const forSureArgs: any = args || []
+  const forSureArgs: Array<*> = args || []
 
   if (!target._isLoaded) {
     Object.defineProperty(target, `_isLoaded`, {
@@ -52,7 +52,7 @@ export function lazilyLoadInstanceAsProp(
   Object.defineProperty(target, property, {
     enumerable: true,
 
-    get() {
+    get(): * {
       if (!instance) {
         instance = new Klass(...forSureArgs)
         target._isLoaded[property] = true
@@ -61,7 +61,7 @@ export function lazilyLoadInstanceAsProp(
       return instance
     },
 
-    set(newValue) {
+    set(newValue: *): * {
       return newValue
     },
   })
@@ -71,15 +71,15 @@ export function lazilyLoadModuleAsProp(
   target: *,
   property: string,
   modulePath: string,
-  require: (modulePath: string) => any,
+  require: (modulePath: string) => *,
 ) {
   Object.defineProperty(target, property, {
-    get() {
+    get(): * {
       // $FlowFixMe - Flow doesn't like dynamic require statements
       return require(modulePath)
     },
 
-    set(newValue) {
+    set(newValue: *): * {
       return newValue
     },
   })

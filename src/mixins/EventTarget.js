@@ -6,11 +6,11 @@
 
 /* global Event, EventListener */
 
-export default (Klass: *) => {
+export default (Klass: *): * => {
   return class EventTarget extends Klass {
     _listeners: {[type: string]: EventListener[]}
 
-    constructor(...args: any) {
+    constructor(...args: *) {
       super(...args)
 
       Object.defineProperty(this, '_listeners', {
@@ -35,7 +35,7 @@ export default (Klass: *) => {
     }
 
     // TODO: add support for options/useCapture argument
-    addEventListener(type: string, listener: EventListener): void {
+    addEventListener(type: string, listener: EventListener) {
       if (!Array.isArray(this._listeners[type])) {
         this._listeners[type] = []
       }
@@ -62,7 +62,7 @@ export default (Klass: *) => {
         return true
       }
 
-      this._listeners[type].forEach(callback => {
+      this._listeners[type].forEach((callback: EventListener) => {
         if (typeof callback === 'function') {
           callback.call(this, event)
         } else {
@@ -74,7 +74,7 @@ export default (Klass: *) => {
     }
 
     // TODO: add support for options/useCapture argument
-    removeEventListener(type: string, listener: EventListener): void {
+    removeEventListener(type: string, listener: EventListener) {
       if (type in this._listeners) {
         const stack = this._listeners[type]
         const index = stack.indexOf(listener)

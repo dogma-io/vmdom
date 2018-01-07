@@ -1,22 +1,27 @@
+# 0.0.21
+
+*   Implemented caption property on HTMLTableElement.
+*   Upgraded dependencies to latest versions.
+
 # 0.0.20
 
-*   Implement properties and methods for HTMLTableRowElement.
+*   Implemented properties and methods for HTMLTableRowElement.
 
 # 0.0.19
 
-*   Implement properties and methods for HTMLTableSectionElement.
+*   Implemented properties and methods for HTMLTableSectionElement.
 
 # 0.0.18
 
-*   Implement Element getElementsByTagName method.
+*   Implemented Element getElementsByTagName method.
 
 # 0.0.17
 
-*   Implement Node contains method.
+*   Implemented Node contains method.
 
 # 0.0.16
 
-*   Implement Node normalize method.
+*   Implemented Node normalize method.
 
 # 0.0.15
 
@@ -34,7 +39,7 @@
 
 # 0.0.12
 
-*   Implement text node.
+*   Implemented text node.
 
 # 0.0.11
 
@@ -42,11 +47,11 @@
 
 # 0.0.10
 
-*   Implement more HTML elements.
+*   Implemented more HTML elements.
 
 # 0.0.9
 
-*   Implement document.createElement().
+*   Implemented document.createElement().
 
 # 0.0.8
 
@@ -58,7 +63,7 @@
 
 # 0.0.6
 
-*   Implement more API including most of Element, HTMLElement, GlobalEventHandlers, and TouchEventHandlers.
+*   Implemented more API including most of Element, HTMLElement, GlobalEventHandlers, and TouchEventHandlers.
 
 # 0.0.5
 
