@@ -1,6 +1,6 @@
 {
   "name": "vmdom",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Lightweight browser implementation for Node's VM.",
   "main": "lib/index.js",
   "files": [
@@ -39,10 +39,10 @@
     "babel-core": "^7.0.0-0",
     "babel-jest": "22.0.4",
     "codecov": "3.0.0",
-    "flow-bin": "0.62.0",
+    "flow-bin": "0.63.1",
     "jest": "22.0.4",
-    "lintly": "0.0.15",
-    "nodely": "0.0.21"
+    "lintly": "0.0.18",
+    "nodely": "0.0.22"
   },
   "dependencies": {
     "node-fetch": "^1.7.3"

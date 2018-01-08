@@ -77,13 +77,13 @@ export default (Klass: *): * => {
       return fetch(...arguments)
     }
 
-    setInterval(): number {
+    setInterval(): IntervalID {
       const id = setInterval(...arguments)
       this._intervalIds.add(id)
       return id
     }
 
-    setTimeout(): number {
+    setTimeout(): TimeoutID {
       const id = setTimeout(...arguments)
       this._timeoutIds.add(id)
       return id

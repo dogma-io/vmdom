@@ -1,3 +1,7 @@
+# 0.0.22
+
+*   Upgrade dependencies and use Babel 7 beta.
+
 # 0.0.21
 
 *   Implemented caption property on HTMLTableElement.
