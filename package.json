@@ -31,18 +31,11 @@
   },
   "homepage": "https://github.com/dogma-io/vmdom#readme",
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.36",
-    "@babel/plugin-proposal-class-properties": "7.0.0-beta.36",
-    "@babel/plugin-syntax-object-rest-spread": "7.0.0-beta.36",
-    "@babel/preset-env": "7.0.0-beta.36",
-    "@babel/preset-flow": "7.0.0-beta.36",
-    "babel-core": "^7.0.0-0",
-    "babel-jest": "22.0.4",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.39",
     "codecov": "3.0.0",
-    "flow-bin": "0.63.1",
-    "jest": "22.0.4",
-    "lintly": "0.0.18",
-    "nodely": "0.0.22"
+    "jest": "22.1.4",
+    "lintly": "0.0.19",
+    "nodely": "0.0.26"
   },
   "dependencies": {
     "node-fetch": "^1.7.3"

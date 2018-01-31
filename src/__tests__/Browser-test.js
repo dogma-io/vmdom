@@ -96,15 +96,13 @@ describe('Browser', () => {
       })
 
       it('should not allow reassignment of global', () => {
-        expect(() => {
-          instance.eval("global = 'foo'")
-        }).toThrow(TypeError)
+        expect(instance.eval("global = 'foo'")).toBe('foo')
+        expect(instance.global).not.toBe('foo')
       })
 
       it('should not allow reassignment of window', () => {
-        expect(() => {
-          instance.eval("window = 'foo'")
-        }).toThrow(TypeError)
+        expect(instance.eval("window = 'foo'")).toBe('foo')
+        expect(instance.window).not.toBe('foo')
       })
 
       it('should allow access of window properties via global reference', () => {
