@@ -62,12 +62,7 @@ export default class Browser {
         }
       },
       set(target: Browser, property: string, value: *): * {
-        if (['global', 'window'].indexOf(property) !== -1) {
-          target.window = value
-        } else {
-          target.window[property] = value
-        }
-
+        target.window[property] = value
         return true
       },
     })
@@ -97,11 +92,17 @@ export default class Browser {
     Window.destroy(instance.window)
   }
 
-  eval(script: string | vm$Script): * {
-    if (script instanceof Script) {
-      return script.runInContext(this._sandbox)
+  eval(script: string | vm$Script, filename?: string): * {
+    const options = {}
+
+    if (filename) {
+      options.filename = filename
     }
 
-    return runInContext(script, this._sandbox)
+    if (script instanceof Script) {
+      return script.runInContext(this._sandbox, options)
+    }
+
+    return runInContext(script, this._sandbox, options)
   }
 }

@@ -79,6 +79,17 @@ describe('Browser', () => {
     })
 
     describe('eval()', () => {
+      it('should include filename in stacktraces when filename passed in', () => {
+        try {
+          instance.eval('throw new Error()', 'foobar.js')
+        } catch (err) {
+          expect(err.stack).toEqual(expect.stringContaining('foobar.js'))
+          return
+        }
+
+        throw new Error('Expected an error to be thrown')
+      })
+
       it('should execute Javascript string against sandbox and return value', () => {
         expect(instance.eval("window.foo = 'bar'")).toBe('bar')
         expect(instance.window.foo).toBe('bar')

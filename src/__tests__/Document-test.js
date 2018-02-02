@@ -406,7 +406,7 @@ describe('Document', () => {
           const desc = `should return instance of ${className} for tag name "${tagName}"`
 
           it(desc, () => {
-            const Class = require(join(__dirname, '..', className)).default
+            const Class = require(`../${className}`).default
             expect(instance.createElement(tagName)).toBeInstanceOf(Class)
           })
         })
