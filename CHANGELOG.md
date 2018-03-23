@@ -1,10 +1,3 @@
-## 0.0.24
-
-*   Upgrade dependencies to latest versions.
-*   Locked down browser environment so no methods can be overwritten.
-*   Removed some lazy requires in favor of stricter Flow types (may add a Babel plugin eventually to convert requires to lazy loads automatically).
-*   Added `DOMImplementation`, `DOMParser`, and `DocumentType` classes.
-
 ## 0.0.23
 
 *   Allow filename to be passed in with scripts being evaluated for better stacktraces.
