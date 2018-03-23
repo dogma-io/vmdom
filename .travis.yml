@@ -21,7 +21,7 @@ before_script:
   - $(npm root -g)/pr-bumper/.travis/maybe-check-scope.sh
 
 script:
-  - $(npm root -g)/pr-bumper/.travis/maybe-test.sh
+  - travis_wait $(npm root -g)/pr-bumper/.travis/maybe-test.sh
   - $(npm root -g)/pr-bumper/.travis/maybe-bump-version.sh
 
 deploy:
