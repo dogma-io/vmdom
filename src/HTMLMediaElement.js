@@ -13,13 +13,12 @@ type HTMLMediaElementOptions = {|
 export default class HTMLMediaElement extends HTMLElement {
   constructor({tagName}: HTMLMediaElementOptions) {
     super({tagName})
+    // TODO: implement addTextTrack
+    // TODO: implement canPlayType
+    // TODO: implement fastSeek
+    // TODO: implement load
+    // TODO: implement pause
+    // TODO: implement play
     // TODO: implement properties
   }
-
-  // TODO: implement addTextTrack
-  // TODO: implement canPlayType
-  // TODO: implement fastSeek
-  // TODO: implement load
-  // TODO: implement pause
-  // TODO: implement play
 }

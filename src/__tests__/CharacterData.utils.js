@@ -22,6 +22,12 @@ export function toBeCharacterData(getInstance, data) {
     })
 
     describe('appendData()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.appendData = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should append boolean data', () => {
         const newValue = `${data}true`
         instance.appendData(true)
@@ -64,14 +70,28 @@ export function toBeCharacterData(getInstance, data) {
       })
     })
 
-    it('deleteData() should delete data', () => {
-      const newValue = data.substr(0, 1) + data.substr(2)
-      instance.deleteData(1, 2)
-      expect(instance.data).toBe(newValue)
-      expect(instance.length).toBe(newValue.length)
+    describe('deleteData()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.deleteData = 'foo'
+        }).toThrow(TypeError)
+      })
+
+      it('should delete data', () => {
+        const newValue = data.substr(0, 1) + data.substr(2)
+        instance.deleteData(1, 2)
+        expect(instance.data).toBe(newValue)
+        expect(instance.length).toBe(newValue.length)
+      })
     })
 
     describe('insertData()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.insertData = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should insert boolean data', () => {
         const newValue = `${data.substr(0, 1)}true${data.substr(1)}`
         instance.insertData(1, true)
@@ -115,6 +135,12 @@ export function toBeCharacterData(getInstance, data) {
     })
 
     describe('replaceData()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.replaceData = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should replace data with boolean', () => {
         const newValue = `${data.substr(0, 1)}true${data.substr(2)}`
         instance.replaceData(1, 2, true)
@@ -157,8 +183,16 @@ export function toBeCharacterData(getInstance, data) {
       })
     })
 
-    it('substringData() should return substring', () => {
-      expect(instance.substringData(0, 1)).toBe(data.substr(0, 1))
+    describe('substringData()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.substringData = 'foo'
+        }).toThrow(TypeError)
+      })
+
+      it('should return substring', () => {
+        expect(instance.substringData(0, 1)).toBe(data.substr(0, 1))
+      })
     })
   })
 }

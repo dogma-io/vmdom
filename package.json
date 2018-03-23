@@ -1,6 +1,6 @@
 {
   "name": "vmdom",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Lightweight browser implementation for Node's VM.",
   "main": "lib/index.js",
   "files": [
@@ -31,14 +31,16 @@
   },
   "homepage": "https://github.com/dogma-io/vmdom#readme",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.0.0-beta.39",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.42",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "23.0.0-alpha.0",
     "codecov": "3.0.0",
-    "jest": "22.1.4",
-    "lintly": "0.0.19",
-    "nodely": "0.0.26"
+    "jest-cli": "23.0.0-alpha.0",
+    "lintly": "0.1.0",
+    "nodely": "0.1.0"
   },
   "dependencies": {
-    "node-fetch": "^1.7.3"
+    "node-fetch": "^2.0.0"
   },
   "jest": {
     "collectCoverage": true,
@@ -52,10 +54,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
+        "branches": 95.31,
+        "functions": 98.29,
+        "lines": 97.15,
+        "statements": 97.15
       }
     },
     "setupTestFrameworkScriptFile": "<rootDir>/jest-setup.js",

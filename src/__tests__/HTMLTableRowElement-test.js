@@ -23,12 +23,6 @@ describe('HTMLTableRowElement', () => {
     )
   })
 
-  it('should not allow _cells to be overwritten', () => {
-    expect(() => {
-      instance._cells = ['test']
-    }).toThrow(TypeError)
-  })
-
   it('should not allow cells to be overwritten', () => {
     expect(() => {
       instance.cells = ['test']
@@ -36,6 +30,12 @@ describe('HTMLTableRowElement', () => {
   })
 
   describe('deleteCell()', () => {
+    it('should not be overwritable', () => {
+      expect(() => {
+        instance.deleteCell = 'foo'
+      }).toThrow(TypeError)
+    })
+
     describe('when no cells present', () => {
       it('should throw when position argument missing', () => {
         expect(() => {
@@ -211,6 +211,12 @@ describe('HTMLTableRowElement', () => {
   })
 
   describe('insertCell()', () => {
+    it('should not be overwritable', () => {
+      expect(() => {
+        instance.insertCell = 'foo'
+      }).toThrow(TypeError)
+    })
+
     describe('when no cells present', () => {
       it('should throw when index is less than -1', () => {
         expect(() => {

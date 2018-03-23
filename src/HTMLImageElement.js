@@ -6,13 +6,12 @@
 
 import HTMLElement from './HTMLElement'
 
-type HTMLImageElementOptions = {}
+type HTMLImageElementOptions = {||}
 
 export default class HTMLImageElement extends HTMLElement {
   constructor(options: HTMLImageElementOptions) {
     super({tagName: 'img'})
+    // TODO: implement methods
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

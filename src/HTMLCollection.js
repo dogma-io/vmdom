@@ -33,8 +33,7 @@ export default class HTMLCollection {
         return (target[property] = value)
       },
     })
+    // TODO: implement item
+    // TODO: imlement namedItem
   }
-
-  // TODO: implement item
-  // TODO: imlement namedItem
 }

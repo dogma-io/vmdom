@@ -10,6 +10,7 @@ import {readFileSync} from 'fs'
 import {join} from 'path'
 import {createContext, runInContext, Script} from 'vm'
 
+// eslint-disable-next-line flowtype/require-exact-type
 type BrowserOptions = {
   /**
    * Whether or not to insert a HTMLHeadElement in document.documentElement

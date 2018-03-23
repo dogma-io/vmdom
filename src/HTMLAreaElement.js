@@ -9,8 +9,7 @@ import HTMLElement from './HTMLElement'
 export default class HTMLAreaElement extends HTMLElement {
   constructor() {
     super({tagName: 'area'})
+    // TODO: implement methods
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

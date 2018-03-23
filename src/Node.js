@@ -9,17 +9,26 @@ import eventTargetMixin from './mixins/EventTarget'
 import NodeList from './NodeList'
 
 class Node {
-  _childNodes: Array<Node>
+  appendChild: (child: Node) => Node
   childNodes: NodeList
+  contains: (otherNode: Node) => boolean
+  hasChildNodes: () => boolean
+  insertBefore: (newNode: Node, referencedNode: Node) => Node
+  isSameNode: (other: Node) => boolean
+  normalize: () => void
+  removeChild: (child: Node) => Node
+  replaceChild: (newChild: Node, oldChild: Node) => Node
 
   constructor() {
     let nodeList
 
+    const childNodes = []
+
     // $FlowFixMe - Flow seems to hate getters/setters over value property
     Object.defineProperties(this, {
-      _childNodes: {
+      appendChild: {
         enumerable: false,
-        value: [],
+        value: appendChild.bind(null, childNodes),
         writable: false,
       },
       childNodes: {
@@ -27,7 +36,7 @@ class Node {
 
         get(): NodeList {
           if (!nodeList) {
-            nodeList = new NodeList(this._childNodes)
+            nodeList = new NodeList(childNodes)
           }
 
           return nodeList
@@ -37,170 +46,211 @@ class Node {
           return newValue
         },
       },
+      // TODO: implement cloneNode()
+      // TODO: implement compareDocumentPosition()
+      contains: {
+        enumerable: false,
+        value: contains.bind(this, childNodes),
+        writable: false,
+      },
+      // TODO: implement getRootNode()
+      hasChildNodes: {
+        enumerable: false,
+        value: hasChildNodes.bind(null, childNodes),
+        writable: false,
+      },
+      insertBefore: {
+        enumerable: false,
+        value: insertBefore.bind(null, childNodes),
+        writable: false,
+      },
+      // TODO: implement isDefaultNamespace()
+      // TODO: implement isEqualNode()
+      isSameNode: {
+        enumerable: false,
+        value: isSameNode.bind(this),
+        writable: false,
+      },
+      // TODO: implement lookupPrefix()
+      // TODO: implement lookupNamespaceURI()
+      normalize: {
+        enumerable: false,
+        value: normalize.bind(null, childNodes),
+        writable: false,
+      },
+      removeChild: {
+        enumerable: false,
+        value: removeChild.bind(null, childNodes),
+        writable: false,
+      },
+      replaceChild: {
+        enumerable: false,
+        value: replaceChild.bind(null, childNodes),
+        writable: false,
+      },
     })
   }
 
   static destroy(instance: *) {
-    for (let i = instance._childNodes.length - 1; i >= 0; i--) {
-      const child = instance._childNodes[i]
+    for (let i = instance.childNodes.length - 1; i >= 0; i--) {
+      const child = instance.childNodes[i]
       child.constructor.destroy(child)
+
+      // TODO: The below isn't very efficient, it'd be better if we could just
+      // splice the array after iterating over it but that would mean we need
+      // access to the childNodes variable defined in the Node's constructor
+      instance.removeChild(child)
     }
+  }
+}
 
-    instance._childNodes.splice(0)
+type ChildNodes = Array<Node>
+
+const appendChild = (childNodes: ChildNodes, child: Node): Node => {
+  // TODO: if child is already in the document tree, remove it from it's
+  // current location
+
+  // TODO: make sure to handle DocumentFragment's properly
+
+  childNodes.push(child)
+
+  return child
+}
+
+function contains(childNodes: ChildNodes, otherNode: Node): boolean {
+  if (otherNode === this) {
+    return true
   }
 
-  appendChild(child: Node): Node {
-    // TODO: if child is already in the document tree, remove it from it's
-    // current location
-
-    // TODO: make sure to handle DocumentFragment's properly
-
-    this._childNodes.push(child)
-
-    return child
-  }
-
-  // TODO: implement cloneNode()
-  // TODO: implement compareDocumentPosition()
-
-  contains(otherNode: Node): boolean {
-    if (otherNode === this) {
+  for (let i = childNodes.length - 1; i >= 0; i--) {
+    if (childNodes[i] === otherNode) {
       return true
     }
 
-    const {_childNodes: childNodes} = this
-
-    for (let i = childNodes.length - 1; i >= 0; i--) {
-      if (childNodes[i] === otherNode) {
-        return true
-      }
-
-      if (childNodes[i].contains(otherNode)) {
-        return true
-      }
+    if (childNodes[i].contains(otherNode)) {
+      return true
     }
-
-    return false
   }
 
-  // TODO: implement getRootNode()
+  return false
+}
 
-  hasChildNodes(): boolean {
-    return this._childNodes.length !== 0
+const hasChildNodes = (childNodes: ChildNodes): boolean => {
+  return childNodes.length !== 0
+}
+
+const insertBefore = (
+  childNodes: ChildNodes,
+  newNode: Node,
+  referencedNode: Node,
+): Node => {
+  if (!(newNode instanceof Node)) {
+    throw new TypeError(
+      "Failed to execute 'insertBefore' on 'Node': parameter 1 is not of type 'Node'.",
+    )
   }
 
-  insertBefore(newNode: Node, referencedNode: Node): Node {
-    if (!(newNode instanceof Node)) {
-      throw new TypeError(
-        "Failed to execute 'insertBefore' on 'Node': parameter 1 is not of type 'Node'.",
-      )
-    }
-
-    if (referencedNode !== null && !(referencedNode instanceof Node)) {
-      throw new TypeError(
-        "Failed to execute 'insertBefore' on 'Node': parameter 2 is not of type 'Node'.",
-      )
-    }
-
-    const index =
-      referencedNode === null
-        ? this._childNodes.length
-        : this._childNodes.indexOf(referencedNode)
-
-    if (index === -1) {
-      throw new DOMException(
-        "Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.",
-      )
-    }
-
-    // TODO: if newNode is already in document remove it from original location
-
-    if (newNode instanceof DocumentFragment) {
-      const childNodes = newNode._childNodes.splice(0)
-      this._childNodes.splice(index, 0, ...childNodes)
-    } else {
-      this._childNodes.splice(index, 0, newNode)
-    }
-
-    return newNode
+  if (referencedNode !== null && !(referencedNode instanceof Node)) {
+    throw new TypeError(
+      "Failed to execute 'insertBefore' on 'Node': parameter 2 is not of type 'Node'.",
+    )
   }
 
-  // TODO: implement isDefaultNamespace()
-  // TODO: implement isEqualNode()
+  const index =
+    referencedNode === null
+      ? childNodes.length
+      : childNodes.indexOf(referencedNode)
 
-  isSameNode(other: Node): boolean {
-    return this === other
+  if (index === -1) {
+    throw new DOMException(
+      "Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.",
+    )
   }
 
-  // TODO: implement lookupPrefix()
-  // TODO: implement lookupNamespaceURI()
+  // TODO: if newNode is already in document remove it from original location
 
-  normalize() {
-    const {_childNodes: childNodes} = this
+  if (newNode instanceof DocumentFragment) {
+    const newChildren = Array.from(newNode.childNodes)
+    childNodes.splice(index, 0, ...newChildren)
+    newChildren.forEach(newNode.removeChild)
+  } else {
+    childNodes.splice(index, 0, newNode)
+  }
 
-    for (let i = childNodes.length - 1; i >= 0; i--) {
-      const node = childNodes[i]
+  return newNode
+}
 
-      node.normalize()
+function isSameNode(other: Node): boolean {
+  return this === other
+}
 
-      const prevNode = childNodes[i - 1]
+const normalize = (childNodes: ChildNodes) => {
+  for (let i = childNodes.length - 1; i >= 0; i--) {
+    const node = childNodes[i]
 
-      if (node instanceof CharacterData) {
-        if (prevNode instanceof CharacterData) {
-          prevNode.appendData(node.data)
-          childNodes.splice(i, 1)
-        } else if (node.data === '') {
-          childNodes.splice(i, 1)
-        }
+    node.normalize()
+
+    const prevNode = childNodes[i - 1]
+
+    if (node instanceof CharacterData) {
+      if (prevNode instanceof CharacterData) {
+        prevNode.appendData(node.data)
+        childNodes.splice(i, 1)
+      } else if (node.data === '') {
+        childNodes.splice(i, 1)
       }
     }
   }
+}
 
-  removeChild(child: Node): Node {
-    if (!(child instanceof Node)) {
-      throw new TypeError(
-        "Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.",
-      )
-    }
-
-    const index = this._childNodes.indexOf(child)
-
-    if (index === -1) {
-      throw new DOMException(
-        "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.",
-      )
-    }
-
-    this._childNodes.splice(index, 1)
-
-    return child
+const removeChild = (childNodes: ChildNodes, child: Node): Node => {
+  if (!(child instanceof Node)) {
+    throw new TypeError(
+      "Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.",
+    )
   }
 
-  replaceChild(newChild: Node, oldChild: Node): Node {
-    if (!(newChild instanceof Node)) {
-      throw new TypeError(
-        "Failed to execute 'replaceChild' on 'Node': parameter 1 is not of type 'Node'.",
-      )
-    }
+  const index = childNodes.indexOf(child)
 
-    if (!(oldChild instanceof Node)) {
-      throw new TypeError(
-        "Failed to execute 'replaceChild' on 'Node': parameter 2 is not of type 'Node'.",
-      )
-    }
-
-    const index = this._childNodes.indexOf(oldChild)
-
-    if (index === -1) {
-      throw new DOMException(
-        "Failed to execute 'replaceChild' on 'Node': The node to be replaced is not a child of this node.",
-      )
-    }
-
-    this._childNodes.splice(index, 1, newChild)
-
-    return oldChild
+  if (index === -1) {
+    throw new DOMException(
+      "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.",
+    )
   }
+
+  childNodes.splice(index, 1)
+
+  return child
+}
+
+const replaceChild = (
+  childNodes: ChildNodes,
+  newChild: Node,
+  oldChild: Node,
+): Node => {
+  if (!(newChild instanceof Node)) {
+    throw new TypeError(
+      "Failed to execute 'replaceChild' on 'Node': parameter 1 is not of type 'Node'.",
+    )
+  }
+
+  if (!(oldChild instanceof Node)) {
+    throw new TypeError(
+      "Failed to execute 'replaceChild' on 'Node': parameter 2 is not of type 'Node'.",
+    )
+  }
+
+  const index = childNodes.indexOf(oldChild)
+
+  if (index === -1) {
+    throw new DOMException(
+      "Failed to execute 'replaceChild' on 'Node': The node to be replaced is not a child of this node.",
+    )
+  }
+
+  childNodes.splice(index, 1, newChild)
+
+  return oldChild
 }
 
 const NodeWithEventTargetMixin = eventTargetMixin(Node)
@@ -212,60 +262,75 @@ const NodeWithEventTargetMixin = eventTargetMixin(Node)
  */
 export class CharacterData extends NodeWithEventTargetMixin {
   // TODO: implement NonDocumentTypeChildNode interface
-  _data: string
+  appendData: (newData: *) => void
   data: string
+  deleteData: (start: number, end: number) => void
+  insertData: (start: number, newData: *) => void
   length: number
+  replaceData: (start: number, end: number, newData: *) => void
+  substringData: (start: number, end: number) => string
 
   constructor(data: *) {
     super()
 
+    data = `${data}`
+
     // $FlowFixMe - Flow seems to hate getters/setters over value property
     Object.defineProperties(this, {
-      _data: {
+      appendData: {
         enumerable: false,
-        value: `${data}`,
-        writable: true,
+        value: (newData: *) => {
+          data = data + `${newData}`
+        },
+        writable: false,
       },
       data: {
         enumerable: false,
         get(): string {
-          return this._data
+          return data
         },
         set(newValue: *): * {
           return newValue
         },
+      },
+      deleteData: {
+        enumerable: false,
+        value: (start: number, end: number) => {
+          data = data.substr(0, start) + data.substr(end)
+        },
+        writable: false,
+      },
+      insertData: {
+        enumerable: false,
+        value: (start: number, newData: *) => {
+          data = data.substr(0, start) + `${newData}` + data.substr(start)
+        },
+        writable: false,
       },
       length: {
         enumerable: false,
         get(): number {
-          return this._data.length
+          return data.length
         },
         set(newValue: *): * {
           return newValue
         },
       },
+      replaceData: {
+        enumerable: false,
+        value: (start: number, end: number, newData: *) => {
+          data = data.substr(0, start) + `${newData}` + data.substr(end)
+        },
+        writable: false,
+      },
+      substringData: {
+        enumerable: false,
+        value: (start: number, end: number): string => {
+          return data.substr(start, end)
+        },
+        writable: false,
+      },
     })
-  }
-
-  appendData(data: *) {
-    this._data = this.data + `${data}`
-  }
-
-  deleteData(start: number, end: number) {
-    this._data = this.data.substr(0, start) + this.data.substr(end)
-  }
-
-  insertData(start: number, data: *) {
-    this._data =
-      this.data.substr(0, start) + `${data}` + this.data.substr(start)
-  }
-
-  replaceData(start: number, end: number, data: *) {
-    this._data = this.data.substr(0, start) + `${data}` + this.data.substr(end)
-  }
-
-  substringData(start: number, end: number): string {
-    return this.data.substr(start, end)
   }
 }
 

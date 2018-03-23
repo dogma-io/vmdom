@@ -9,9 +9,8 @@ import HTMLElement from './HTMLElement'
 export default class HTMLFieldSetElement extends HTMLElement {
   constructor() {
     super({tagName: 'fieldset'})
+    // TODO: implement checkValidity
+    // TODO: implement setCustomValidity
     // TODO: implement properties
   }
-
-  // TODO: implement checkValidity
-  // TODO: implement setCustomValidity
 }

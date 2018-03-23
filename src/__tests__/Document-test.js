@@ -8,7 +8,6 @@ import HTMLHeadElement from '../HTMLHeadElement'
 import HTMLUnknownElement from '../HTMLUnknownElement'
 import Text from '../Text'
 import {itShouldImplementNodeInterface} from './Node.utils'
-import {join} from 'path'
 
 jest.doMock('../HTMLHtmlElement', () => {
   return jest.fn((...args) => {
@@ -357,6 +356,12 @@ describe('Document', () => {
       })
 
       describe('createComment()', () => {
+        it('should not be overwritable', () => {
+          expect(() => {
+            instance.createComment = 'foo'
+          }).toThrow(TypeError)
+        })
+
         it('should return instance of Comment for boolean data', () => {
           const textNode = instance.createComment(true)
           expect(textNode).toBeInstanceOf(Comment)
@@ -394,13 +399,27 @@ describe('Document', () => {
         })
       })
 
-      it('createDocumentFragment() should return a new document fragment', () => {
-        expect(instance.createDocumentFragment()).toBeInstanceOf(
-          DocumentFragment,
-        )
+      describe('createDocumentFragment()', () => {
+        it('should not be overwritable', () => {
+          expect(() => {
+            instance.createDocumentFragment = 'foo'
+          }).toThrow(TypeError)
+        })
+
+        it('should return a new document fragment', () => {
+          expect(instance.createDocumentFragment()).toBeInstanceOf(
+            DocumentFragment,
+          )
+        })
       })
 
       describe('createElement()', () => {
+        it('should not be overwritable', () => {
+          expect(() => {
+            instance.createElement = 'foo'
+          }).toThrow(TypeError)
+        })
+
         Object.keys(TAG_NAME_DEFINITIONS).forEach(tagName => {
           const className = TAG_NAME_DEFINITIONS[tagName]
           const desc = `should return instance of ${className} for tag name "${tagName}"`
@@ -419,6 +438,12 @@ describe('Document', () => {
       })
 
       describe('createTextNode()', () => {
+        it('should not be overwritable', () => {
+          expect(() => {
+            instance.createTextNode = 'foo'
+          }).toThrow(TypeError)
+        })
+
         it('should return instance of Text for boolean data', () => {
           const textNode = instance.createTextNode(true)
           expect(textNode).toBeInstanceOf(Text)

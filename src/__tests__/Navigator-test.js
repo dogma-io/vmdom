@@ -14,13 +14,34 @@ describe('Navigator', () => {
     expect(instance.userAgent).toBe(UA)
   })
 
-  it('getVRDisplays() should resolve with no devices since virtual browser does not have VR devices connected to it', () => {
-    return instance.getVRDisplays().then(result => {
-      expect(result).toEqual([])
+  it('should not allow userAgent to be overwritten', () => {
+    expect((instance.userAgent = 'foo')).toBe('foo')
+    expect(instance.userAgent).toBe(UA)
+  })
+
+  describe('getVRDisplays()', () => {
+    it('should not be overwritable', () => {
+      expect(() => {
+        instance.getVRDisplays = 'foo'
+      }).toThrow(TypeError)
+    })
+
+    it('should resolve with no devices since virtual browser does not have VR devices connected to it', () => {
+      return instance.getVRDisplays().then(result => {
+        expect(result).toEqual([])
+      })
     })
   })
 
-  it('vibrate() should return false since virtual browser has no physical device to vibrate', () => {
-    expect(instance.vibrate(100)).toBe(false)
+  describe('vibrate()', () => {
+    it('should not be overwritable', () => {
+      expect(() => {
+        instance.vibrate = 'foo'
+      }).toThrow(TypeError)
+    })
+
+    it('should return false since virtual browser has no physical device to vibrate', () => {
+      expect(instance.vibrate(100)).toBe(false)
+    })
   })
 })

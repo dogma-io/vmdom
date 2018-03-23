@@ -9,8 +9,7 @@ import HTMLElement from './HTMLElement'
 export default class HTMLInputElement extends HTMLElement {
   constructor() {
     super({tagName: 'input'})
+    // TODO: implement methods
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

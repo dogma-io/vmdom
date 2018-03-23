@@ -15,6 +15,12 @@ export function itShouldBeAnHTMLElement(getInstance, tagName) {
     })
 
     describe('blur()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.blur = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should not throw when onblur event handler is not present', () => {
         expect(() => {
           instance.blur()
@@ -29,6 +35,12 @@ export function itShouldBeAnHTMLElement(getInstance, tagName) {
     })
 
     describe('click()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.click = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should not throw when onclick event handler is not present', () => {
         expect(() => {
           instance.click()
@@ -43,6 +55,12 @@ export function itShouldBeAnHTMLElement(getInstance, tagName) {
     })
 
     describe('focus()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.focus = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should not throw when onfocus event handler is not present', () => {
         expect(() => {
           instance.focus()

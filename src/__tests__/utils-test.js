@@ -64,7 +64,7 @@ describe('utils', () => {
 
         class Foo {
           constructor() {
-            lazilyLoadInstanceAsProp(this, 'bar', Baz, args)
+            lazilyLoadInstanceAsProp(this, 'bar', Baz, {args})
           }
         }
 

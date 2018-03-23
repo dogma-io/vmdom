@@ -9,9 +9,8 @@ import HTMLElement from './HTMLElement'
 export default class HTMLObjectElement extends HTMLElement {
   constructor() {
     super({tagName: 'object'})
+    // TODO: implement checkValidity
+    // TODO: implement setCustomValidity
     // TODO: implement properties
   }
-
-  // TODO: implement checkValidity
-  // TODO: implement setCustomValidity
 }
