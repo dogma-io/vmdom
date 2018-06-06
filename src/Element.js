@@ -111,9 +111,11 @@ const hasAttributes = (
   }
 
   return (
-    Object.keys(namespaceAttributes).filter((namespace: string): boolean => {
-      return Object.keys(namespaceAttributes[namespace]).length !== 0
-    }).length !== 0
+    Object.keys(namespaceAttributes).filter(
+      (namespace: string): boolean => {
+        return Object.keys(namespaceAttributes[namespace]).length !== 0
+      },
+    ).length !== 0
   )
 }
 
