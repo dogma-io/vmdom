@@ -20,18 +20,18 @@ export function itShouldImplementNodeInterface(getInstance) {
       expect(instance.childNodes).toHaveLength(0)
     })
 
-    it('should not allow _childNodes property to be overwritten', () => {
-      expect(() => {
-        instance._childNodes = 'foobar'
-      }).toThrow(TypeError)
-    })
-
     it('should not allow childNodes property to be overwritten', () => {
       expect((instance.childNodes = 'foobar')).toBe('foobar')
       expect(instance.childNodes).not.toBe('foobar')
     })
 
     describe('appendChild()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.appendChild = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should append child to list', () => {
         const child = new Node()
         expect(instance.appendChild(child)).toBe(child)
@@ -41,6 +41,12 @@ export function itShouldImplementNodeInterface(getInstance) {
     })
 
     describe('contains()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.contains = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should return true when self', () => {
         expect(instance.contains(instance)).toBe(true)
       })
@@ -86,6 +92,12 @@ export function itShouldImplementNodeInterface(getInstance) {
     })
 
     describe('hasChildNodes()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.hasChildNodes = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should return false when no child nodes', () => {
         expect(instance.hasChildNodes()).toBe(false)
       })
@@ -103,6 +115,12 @@ export function itShouldImplementNodeInterface(getInstance) {
     })
 
     describe('insertBefore()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.insertBefore = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should throw when first argument is not a Node', () => {
         expect(() => {
           instance.insertBefore({}, new Node())
@@ -185,6 +203,12 @@ export function itShouldImplementNodeInterface(getInstance) {
     })
 
     describe('isSameNode()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.isSameNode = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should return true when same node', () => {
         const node = new Node()
         expect(node.isSameNode(new Node())).toBe(false)
@@ -197,6 +221,12 @@ export function itShouldImplementNodeInterface(getInstance) {
     })
 
     describe('normalize()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.normalize = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should merge text nodes into one', () => {
         instance.appendChild(new HTMLDivElement())
         instance.appendChild(new Text('foo'))
@@ -245,6 +275,12 @@ export function itShouldImplementNodeInterface(getInstance) {
     })
 
     describe('removeChild()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.removeChild = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should throw when child is not a Node', () => {
         expect(() => {
           instance.removeChild('foobar')
@@ -270,6 +306,12 @@ export function itShouldImplementNodeInterface(getInstance) {
     })
 
     describe('replaceChild()', () => {
+      it('should not be overwritable', () => {
+        expect(() => {
+          instance.replaceChild = 'foo'
+        }).toThrow(TypeError)
+      })
+
       it('should throw when first argument is not a Node', () => {
         expect(() => {
           instance.replaceChild({}, new Node())

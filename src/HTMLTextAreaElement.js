@@ -10,7 +10,6 @@ export default class HTMLTextAreaElement extends HTMLElement {
   constructor() {
     super({tagName: 'textarea'})
     // TODO: implement properties
+    // TODO: implement methods
   }
-
-  // TODO: implement methods
 }

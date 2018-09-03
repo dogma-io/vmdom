@@ -5,6 +5,7 @@
  */
 
 import Document from './Document'
+import MediaQueryList from './MediaQueryList'
 import eventTargetMixin from './mixins/EventTarget'
 import windowOrWorkerGlobalScopeMixin from './mixins/WindowOrWorkerGlobalScope'
 import Navigator from './Navigator'
@@ -29,11 +30,42 @@ type WindowOptions = {|
   userAgent: string,
 |}
 
+const GLOBAL_PROPERTIES = [
+  'Array',
+  'Boolean',
+  'Date',
+  'Error',
+  'EvalError',
+  'Function',
+  'isFinite',
+  'isNaN',
+  'JSON',
+  'Map',
+  'Math',
+  'Number',
+  'Object',
+  'parseFloat',
+  'parseInt',
+  'Promise',
+  'RangeError',
+  'ReferenceError',
+  'RegExp',
+  'Set',
+  'String',
+  'Symbol',
+  'SyntaxError',
+  'TypeError',
+  'URIError',
+  'WeakMap',
+  'WeakSet',
+]
+
 // TODO: add missing interfaces from:
 //   https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
 const MODULE_PROPERTIES = [
   'Document',
   'DOMException',
+  'DOMParser',
   'Element',
   'HTMLAnchorElement',
   'HTMLAreaElement',
@@ -108,87 +140,70 @@ const MODULE_PROPERTIES = [
   'Storage',
 ]
 
-function d<T>(
-  value: T,
-): {|
-  enumerable: boolean,
-  value: T,
-  writable: boolean,
-|} {
-  return {
-    enumerable: false,
-    value,
-    writable: false,
-  }
+const matchMedia = (mediaQuery: string): MediaQueryList => {
+  return new MediaQueryList(mediaQuery)
 }
 
 class Window {
   _isLoaded: {[property: string]: boolean} // used by lazilyLoadInstanceAsProp
-  Array: *
-  Boolean: *
-  Date: *
+  Array: typeof Array
+  Boolean: typeof Boolean // eslint-disable-line
+  Date: typeof Date
   document: Document
-  Error: *
-  EvalError: *
-  Function: *
-  JSON: *
+  Error: typeof Error
+  EvalError: typeof EvalError
+  Function: typeof Function // eslint-disable-line
+  JSON: typeof JSON
+  isFinite: (testValue: *) => boolean
+  isNaN: (value: *) => boolean
   localStorage: Storage
-  Map: *
-  Math: *
-  Number: *
+  Map: typeof Map
+  matchMedia: (mediaQuery: string) => MediaQueryList
+  Math: typeof Math
+  Number: typeof Number // eslint-disable-line
   navigator: Navigator
-  Object: *
-  Promise: *
-  RangeError: *
-  ReferenceError: *
-  RegExp: *
+  Object: typeof Object // eslint-disable-line
+  parseFloat: (value: *) => number
+  parseInt: (value: *, radix: number) => number
+  Promise: typeof Promise
+  RangeError: typeof RangeError
+  ReferenceError: typeof ReferenceError
+  RegExp: typeof RegExp
   sessionStorage: Storage
-  Set: *
-  String: *
-  Symbol: *
-  SyntaxError: *
-  TypeError: *
-  URIError: *
-  WeakMap: *
-  WeakSet: *
+  Set: typeof Set
+  String: typeof String // eslint-disable-line
+  Symbol: typeof Symbol
+  SyntaxError: typeof SyntaxError
+  TypeError: typeof TypeError
+  URIError: typeof URIError
+  WeakMap: typeof WeakMap
+  WeakSet: typeof WeakSet
 
   constructor({includeBody, includeHead, userAgent}: WindowOptions) {
-    lazilyLoadInstanceAsProp(this, 'document', Document, [
-      {includeBody, includeHead},
-    ])
+    lazilyLoadInstanceAsProp(this, 'document', Document, {
+      args: [{includeBody, includeHead}],
+    })
 
     lazilyLoadInstanceAsProp(this, 'localStorage', Storage)
-    lazilyLoadInstanceAsProp(this, 'navigator', Navigator, [userAgent])
+    lazilyLoadInstanceAsProp(this, 'navigator', Navigator, {args: [userAgent]})
     lazilyLoadInstanceAsProp(this, 'sessionStorage', Storage)
+
+    GLOBAL_PROPERTIES.forEach((key: string) => {
+      Object.defineProperty(this, key, {
+        enumerable: false,
+        value: global[key],
+        writable: false,
+      })
+    })
 
     MODULE_PROPERTIES.forEach((name: string) => {
       lazilyLoadModuleAsProp(this, name, join(__dirname, name), require)
     })
 
-    Object.defineProperties(this, {
-      Array: d(Array),
-      Boolean: d(Boolean),
-      Date: d(Date),
-      Error: d(Error),
-      EvalError: d(EvalError),
-      Function: d(Function),
-      JSON: d(JSON),
-      Map: d(Map),
-      Math: d(Math),
-      Number: d(Number),
-      Object: d(Object),
-      Promise: d(Promise),
-      RangeError: d(RangeError),
-      ReferenceError: d(ReferenceError),
-      RegExp: d(RegExp),
-      Set: d(Set),
-      String: d(String),
-      Symbol: d(Symbol),
-      SyntaxError: d(SyntaxError),
-      TypeError: d(TypeError),
-      URIError: d(URIError),
-      WeakMap: d(WeakMap),
-      WeakSet: d(WeakSet),
+    Object.defineProperty(this, 'matchMedia', {
+      enumerable: false,
+      value: matchMedia,
+      writable: false,
     })
   }
 
@@ -196,27 +211,6 @@ class Window {
     if (instance._isLoaded.document) {
       Document.destroy(instance.document)
     }
-  }
-
-  isFinite(testValue: *): boolean {
-    return isFinite(testValue)
-  }
-
-  isNaN(value: *): boolean {
-    return isNaN(value)
-  }
-
-  matchMedia(mediaQuery: string): * {
-    const MediaQueryList = require('./MediaQueryList').default
-    return new MediaQueryList(mediaQuery)
-  }
-
-  parseFloat(value: *): number {
-    return parseFloat(value)
-  }
-
-  parseInt(value: *, radix: number): number {
-    return parseInt(value, radix)
   }
 }
 

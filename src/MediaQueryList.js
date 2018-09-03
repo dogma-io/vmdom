@@ -29,6 +29,10 @@ class MediaQueryList {
 
     defineEventHandlers(this, MEDIA_QUERY_LIST_EVENT_HANDLERS)
   }
+
+  static destroy(instance: *) {
+    // Nothing to destroy
+  }
 }
 
 export default eventTargetMixin(MediaQueryList)

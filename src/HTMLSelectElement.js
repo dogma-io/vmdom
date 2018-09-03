@@ -9,13 +9,12 @@ import HTMLElement from './HTMLElement'
 export default class HTMLSelectElement extends HTMLElement {
   constructor() {
     super({tagName: 'select'})
+    // TODO: implement add
+    // TODO: implement checkValidity
+    // TODO: implement item
+    // TODO: implement namedItem
+    // TODO: implement remove
+    // TODO: implement setCustomValidity
     // TODO: implement properties
   }
-
-  // TODO: implement add
-  // TODO: implement checkValidity
-  // TODO: implement item
-  // TODO: implement namedItem
-  // TODO: implement remove
-  // TODO: implement setCustomValidity
 }

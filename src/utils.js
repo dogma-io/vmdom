@@ -6,7 +6,7 @@
 /* global EventListener */
 
 export function defineEventHandlers(target: *, properties: Array<string>) {
-  const eventHandlers: {[key: string]: EventListener} = {}
+  const eventHandlers: {[key: string]: ?EventListener} = {}
 
   properties.forEach((property: string) => {
     Object.defineProperty(target, property, {
@@ -14,7 +14,7 @@ export function defineEventHandlers(target: *, properties: Array<string>) {
       get(): ?EventListener {
         return eventHandlers[property] || null
       },
-      set(newValue: *): * {
+      set(newValue: *): any { // eslint-disable-line
         if (typeof newValue === 'function' || newValue === null) {
           eventHandlers[property] = newValue
         }
@@ -33,11 +33,14 @@ export function lazilyLoadInstanceAsProp(
   target: *,
   property: string,
   Klass: *,
-  args?: Array<*>,
+  options?: {|
+    args?: Array<*>,
+    enumerable?: boolean,
+  |},
 ) {
   let instance
 
-  const forSureArgs: Array<*> = args || []
+  const forSureArgs: Array<*> = (options && options.args) || []
 
   if (!target._isLoaded) {
     Object.defineProperty(target, `_isLoaded`, {
@@ -49,8 +52,14 @@ export function lazilyLoadInstanceAsProp(
 
   target._isLoaded[property] = false
 
+  let enumerable = true
+
+  if (options && 'enumerable' in options) {
+    enumerable = options.enumerable
+  }
+
   Object.defineProperty(target, property, {
-    enumerable: true,
+    enumerable,
 
     get(): * {
       if (!instance) {
@@ -61,7 +70,7 @@ export function lazilyLoadInstanceAsProp(
       return instance
     },
 
-    set(newValue: *): * {
+    set(newValue: *): any { // eslint-disable-line
       return newValue
     },
   })

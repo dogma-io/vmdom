@@ -9,8 +9,7 @@ import HTMLElement from './HTMLElement'
 export default class HTMLSlotElement extends HTMLElement {
   constructor() {
     super({tagName: 'slot'})
+    // TODO: implement assignedNodes
     // TODO: implement properties
   }
-
-  // TODO: implement assignedNodes
 }

@@ -18,6 +18,7 @@ const UA =
 const MODULE_PROPERTIES = [
   'Document',
   'DOMException',
+  'DOMParser',
   'Element',
   'HTMLAnchorElement',
   'HTMLAreaElement',

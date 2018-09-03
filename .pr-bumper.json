@@ -1,0 +1,13 @@
+{
+  "ci": {
+    "gitUser": {
+      "email": "dogmaiobot@gmail.com",
+      "name": "dogma-io-bot"
+    }
+  },
+  "features": {
+    "changelog": {
+      "enabled": true
+    }
+  }
+}

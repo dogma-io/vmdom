@@ -9,8 +9,7 @@ import HTMLElement from './HTMLElement'
 export default class HTMLKeygenElement extends HTMLElement {
   constructor() {
     super({tagName: 'keygen'})
+    // TODO: implement methods
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

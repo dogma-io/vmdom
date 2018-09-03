@@ -9,8 +9,7 @@ import HTMLElement from './HTMLElement'
 export default class HTMLFrameSetElement extends HTMLElement {
   constructor() {
     super({tagName: 'frameset'})
+    // TODO: implement methods
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

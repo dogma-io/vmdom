@@ -21,6 +21,7 @@ export default class MutationObserver {
       )
     }
 
+    // TODO: don't assign callback here as it shouldn't be leaked
     Object.defineProperty(this, '_callback', {
       enumerable: false,
       value: callback,

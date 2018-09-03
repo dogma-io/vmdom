@@ -76,7 +76,7 @@
 
 ## 0.0.5
 
-* Allow referencing window properties via global scope.
+*   Allow referencing window properties via global scope.
 
 ## 0.0.4
 

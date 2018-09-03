@@ -9,8 +9,7 @@ import HTMLElement from './HTMLElement'
 export default class HTMLParamElement extends HTMLElement {
   constructor() {
     super({tagName: 'param'})
+    // TODO: implement methods
     // TODO: implement properties
   }
-
-  // TODO: implement methods
 }

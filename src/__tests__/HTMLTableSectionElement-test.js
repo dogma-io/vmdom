@@ -23,12 +23,6 @@ describe('HTMLTableSectionElement', () => {
     )
   })
 
-  it('should not allow _rows to be overwritten', () => {
-    expect(() => {
-      instance._rows = ['test']
-    }).toThrow(TypeError)
-  })
-
   it('should not allow rows to be overwritten', () => {
     expect(() => {
       instance.rows = ['test']
@@ -36,6 +30,12 @@ describe('HTMLTableSectionElement', () => {
   })
 
   describe('deleteRow()', () => {
+    it('should not be overwritable', () => {
+      expect(() => {
+        instance.deleteRow = 'foo'
+      }).toThrow(TypeError)
+    })
+
     describe('when no rows present', () => {
       it('should throw when position argument missing', () => {
         expect(() => {
@@ -211,6 +211,12 @@ describe('HTMLTableSectionElement', () => {
   })
 
   describe('insertRow()', () => {
+    it('should not be overwritable', () => {
+      expect(() => {
+        instance.insertRow = 'foo'
+      }).toThrow(TypeError)
+    })
+
     describe('when no rows present', () => {
       it('should throw when index is less than -1', () => {
         expect(() => {

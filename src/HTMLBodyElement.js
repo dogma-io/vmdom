@@ -9,7 +9,6 @@ import HTMLElement from './HTMLElement'
 export default class HTMLBodyElement extends HTMLElement {
   constructor() {
     super({tagName: 'body'})
+    // TODO: implement window event handlers
   }
-
-  // TODO: implement window event handlers
 }

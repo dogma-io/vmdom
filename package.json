@@ -7,7 +7,8 @@
     "lib"
   ],
   "scripts": {
-    "build": "nodely -s ./src -o ./lib",
+    "build": "nodely -s ./src -o ./lib && npm run gen-types",
+    "gen-types": "flow-copy-source src -i \".+/__tests__/.+\" lib",
     "postpublish": "codecov",
     "prepublishOnly": "npm run build",
     "test": "lintly src && flow && jest"
@@ -31,34 +32,17 @@
   },
   "homepage": "https://github.com/dogma-io/vmdom#readme",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.0.0-beta.39",
-    "codecov": "3.0.0",
-    "jest": "22.1.4",
-    "lintly": "0.0.19",
-    "nodely": "0.0.26"
+    "@babel/plugin-proposal-class-properties": "7.0.0",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "23.4.2",
+    "babel-preset-nodely": "0.3.0",
+    "codecov": "3.0.4",
+    "flow-copy-source": "2.0.2",
+    "jest": "23.5.0",
+    "lintly": "0.3.0",
+    "nodely": "0.8.0"
   },
   "dependencies": {
-    "node-fetch": "^1.7.3"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/**/__tests__/**/*.js"
-    ],
-    "coverageReporters": [
-      "json-summary",
-      "lcov"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "setupTestFrameworkScriptFile": "<rootDir>/jest-setup.js",
-    "testRegex": "/__tests__/.*-test\\.js$"
+    "node-fetch": "^2.0.0"
   }
 }

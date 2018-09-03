@@ -4,10 +4,17 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Document
  */
 
+import Comment from './Comment'
+import DocumentFragment from './DocumentFragment'
+import DOMImplementation from './DOMImplementation'
+import Element from './Element'
 import HTMLBodyElement from './HTMLBodyElement'
+import HTMLFrameSetElement from './HTMLFrameSetElement'
 import HTMLHtmlElement from './HTMLHtmlElement'
 import HTMLHeadElement from './HTMLHeadElement'
 import Node from './Node'
+import Text from './Text'
+import {lazilyLoadInstanceAsProp} from './utils'
 import {join} from 'path'
 
 type DocumentOptions = {|
@@ -148,9 +155,43 @@ const TAG_NAME_DEFINITIONS = {
   // xmp
 }
 
+const createComment = (data: *): Comment => {
+  return new Comment(`${data}`)
+}
+
+const createDocumentFragment = (): DocumentFragment => {
+  return new DocumentFragment()
+}
+
+const createElement = (tagName: string, options: *): * => {
+  const definition = TAG_NAME_DEFINITIONS[tagName.toLowerCase()]
+
+  switch (typeof definition) {
+    case 'string': {
+      // $FlowFixMe - Flow doesn't like dynamic require statements
+      const ElementClass = require(join(__dirname, definition)).default
+      return new ElementClass(Object.assign({tagName}, options))
+    }
+
+    default: {
+      const HTMLUnknownElement = require('./HTMLUnknownElement').default
+      return new HTMLUnknownElement(Object.assign({tagName}, options))
+    }
+  }
+}
+
+const createTextNode = (data: *): Text => {
+  return new Text(`${data}`)
+}
+
 export default class Document extends Node {
   body: ?HTMLBodyElement
-  documentElement: HTMLHtmlElement
+  createComment: (data: *) => Comment
+  createDocumentFragment: () => DocumentFragment
+  createElement: (tagName: string, options: *) => *
+  createTextNode: (data: *) => Text
+  documentElement: Element
+  head: ?HTMLHeadElement
 
   constructor({includeBody, includeHead}: DocumentOptions) {
     super()
@@ -159,13 +200,13 @@ export default class Document extends Node {
 
     // $FlowFixMe - Flow seems to hate getters/setters over value property
     Object.defineProperties(this, {
+      // TODO: implement adoptNode
       body: {
         enumerable: false,
-        get(): * {
+        get(): HTMLBodyElement | HTMLFrameSetElement | null {
           // TODO: cache result so we don't have to lookup every time and use
           // MutationObserver to determine if/when body is removed from DOM
           // so cached result remains accurate
-          const HTMLFrameSetElement = require('./HTMLFrameSetElement').default
           const {childNodes} = this.documentElement
 
           for (let i = childNodes.length; i >= 0; i--) {
@@ -182,6 +223,37 @@ export default class Document extends Node {
           return null
         },
       },
+      // TODO: implement close
+      // TODO: implement createAttribute
+      // TODO: implement createAttributeNS
+      // TODO: implement createCDATASection
+      createComment: {
+        enumerable: false,
+        value: createComment,
+        writable: false,
+      },
+      createDocumentFragment: {
+        enumerable: false,
+        value: createDocumentFragment,
+        writable: false,
+      },
+      createElement: {
+        enumerable: false,
+        value: createElement,
+        writable: false,
+      },
+      // TODO: implement createElementNS
+      // TODO: implement createEvent
+      // TODO: implement createExpression
+      // TODO: implement createNodeIterator
+      // TODO: implement createNSResolver
+      createTextNode: {
+        enumerable: false,
+        value: createTextNode,
+        writable: false,
+      },
+      // TODO: implement createTouchList
+      // TODO: implement createTreeWalker
       documentElement: {
         enumerable: false,
         get(): HTMLHtmlElement {
@@ -200,6 +272,16 @@ export default class Document extends Node {
           return documentElement
         },
       },
+      // TODO: implement enableStyleSheetsForSet
+      // TODO: implement evaluate
+      // TODO: implement execCommand
+      // TODO: implement getElementById
+      // TODO: implement getElementsByClassName
+      // TODO: implement getElementsByName
+      // TODO: implement getElementsByTagName
+      // TODO: implement getElementsByTagNameNS
+      // TODO: implement getSelection
+      // TODO: implement hasFocus
       head: {
         enumerable: false,
         get(): ?HTMLHeadElement {
@@ -219,76 +301,23 @@ export default class Document extends Node {
           return null
         },
       },
+      // TODO: implement importNode
+      // TODO: implement open
+      // TODO: implement queryCommandEnabled
+      // TODO: implement queryCommandIndeterm
+      // TODO: implement queryCommandState
+      // TODO: implement queryCommandSupported
+      // TODO: implement queryCommandValue
+      // TODO: implement querySelector
+      // TODO: implement querySelectorAll
+      // TODO: implement write
+      // TODO: implement writeln
+    })
+
+    lazilyLoadInstanceAsProp(this, 'implementation', DOMImplementation, {
+      enumerable: false,
     })
 
     // TODO: implement remaining properties
   }
-
-  // TODO: implement adoptNode
-  // TODO: implement close
-  // TODO: implement createAttribute
-  // TODO: implement createAttributeNS
-  // TODO: implement createCDATASection
-
-  createComment(data: *): * {
-    const Comment = require('./Comment').default
-    return new Comment(`${data}`)
-  }
-
-  createDocumentFragment(): * {
-    const DocumentFragment = require('./DocumentFragment').default
-    return new DocumentFragment()
-  }
-
-  createElement(tagName: string, options: *): * {
-    const definition = TAG_NAME_DEFINITIONS[tagName.toLowerCase()]
-
-    switch (typeof definition) {
-      case 'string': {
-        // $FlowFixMe - Flow doesn't like dynamic require statements
-        const ElementClass = require(join(__dirname, definition)).default
-        return new ElementClass(Object.assign({tagName}, options))
-      }
-
-      default: {
-        const HTMLUnknownElement = require('./HTMLUnknownElement').default
-        return new HTMLUnknownElement(Object.assign({tagName}, options))
-      }
-    }
-  }
-
-  // TODO: implement createElementNS
-  // TODO: implement createEvent
-  // TODO: implement createExpression
-  // TODO: implement createNodeIterator
-  // TODO: implement createNSResolver
-
-  createTextNode(data: *): * {
-    const Text = require('./Text').default
-    return new Text(`${data}`)
-  }
-
-  // TODO: implement createTouchList
-  // TODO: implement createTreeWalker
-  // TODO: implement enableStyleSheetsForSet
-  // TODO: implement evaluate
-  // TODO: implement execCommand
-  // TODO: implement getElementById
-  // TODO: implement getElementsByClassName
-  // TODO: implement getElementsByName
-  // TODO: implement getElementsByTagName
-  // TODO: implement getElementsByTagNameNS
-  // TODO: implement getSelection
-  // TODO: implement hasFocus
-  // TODO: implement importNode
-  // TODO: implement open
-  // TODO: implement queryCommandEnabled
-  // TODO: implement queryCommandIndeterm
-  // TODO: implement queryCommandState
-  // TODO: implement queryCommandSupported
-  // TODO: implement queryCommandValue
-  // TODO: implement querySelector
-  // TODO: implement querySelectorAll
-  // TODO: implement write
-  // TODO: implement writeln
 }

@@ -9,10 +9,9 @@ import HTMLElement from './HTMLElement'
 export default class HTMLCanvasElement extends HTMLElement {
   constructor() {
     super({tagName: 'canvas'})
+    // TODO: implement getContext
+    // TODO: implement toBlob
+    // TODO: implement toDataURL
     // TODO: implement properties
   }
-
-  // TODO: implement getContext
-  // TODO: implement toBlob
-  // TODO: implement toDataURL
 }

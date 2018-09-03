@@ -9,10 +9,9 @@ import HTMLElement from './HTMLElement'
 export default class HTMLDialogElement extends HTMLElement {
   constructor() {
     super({tagName: 'dialog'})
+    // TODO: implement close
+    // TODO: implement show
+    // TODO: implement showModal
     // TODO: implement properties
   }
-
-  // TODO: implement close
-  // TODO: implement show
-  // TODO: implement showModal
 }

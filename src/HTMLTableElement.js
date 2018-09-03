@@ -45,16 +45,15 @@ export default class HTMLTableElement extends HTMLElement {
           this.insertBefore(newValue, this.childNodes[0] || null)
         },
       },
+      // TODO: implement createCaption
+      // TODO: implement deleteCaption
+      // TODO: implement deleteRow
+      // TODO: implement createTFoot
+      // TODO: implement deleteTFoot
+      // TODO: implement createTHead
+      // TODO: implement deleteTHead
+      // TODO: implement insertRow
     })
     // TODO: implement properties
   }
-
-  // TODO: implement createCaption
-  // TODO: implement deleteCaption
-  // TODO: implement deleteRow
-  // TODO: implement createTFoot
-  // TODO: implement deleteTFoot
-  // TODO: implement createTHead
-  // TODO: implement deleteTHead
-  // TODO: implement insertRow
 }
